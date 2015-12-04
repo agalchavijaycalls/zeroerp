@@ -1,0 +1,189 @@
+<?php 
+include("conn.php");
+include("controller.php");
+class Update extends Controller
+{
+	public function __construct( )
+	{
+		
+	}
+	public function updateAppoint($val)
+	{
+		$data=json_decode($val);
+		$apId = $data->ap_id;
+		$toilets=$data->ap_toilets;
+		$bedrooms = $data->ap_bedrooms;
+		$kitchens = $data->ap_kitchens;
+		$washdry_areas = $data->ap_washdry_area;
+		$living_room=$data->ap_living_room;
+		$userid=$data->userid; 
+							/* Appointment Personal detail insert */
+		$sql="UPDATE rp_appointments SET name='".$data->ap_name."',phone='".$data->ap_phone."',appointmentStatus='".$data->ap_status."' WHERE appointmentID='".$apId."' and userID='".$userid."'";
+				  mysql_query($sql);
+
+						/* Appointment detail data insert */
+						
+		$sql="select * from rp_app_detail where appointmentID='".$apId."' and userID='".$userid."'";
+		$qry=mysql_query($sql);
+		$count=mysql_num_rows($qry);
+		if($count)
+		{  
+	        
+			$sql = "UPDATE rp_app_detail SET  userID='".$userid."',propertyType='".$data->ap_property_type."',bhkType='".$data->ap_bhk_type."',passessionDate='".$data->ap_possesion_date."',rentAmount='".$data->ap_rent_ammount."',bhkType='".$data->ap_bhk_type."',passessionDate='".$data->ap_possesion_date."',readyToMove='".$data->ap_ready_to_move."', petsAllowed='".$data->ap_pets_allowed."', apointmentFood='".$data->ap_food."', leaseType='".$data->ap_lease_type."',preferredVisitTime='".$data->ap_preferred_visit_time."',advertiserType='".$data->ap_owner_broker."',livesinBuilding='".$data->ap_owner_lives_in_same_building."',name='".$data->ap_name."',phone='".$data->ap_phone."',appointmentAlterPhone='".$data->ap_alternate_phone_no."',appointmentEmail='".$data->ap_email."',ownerType='".$data->ap_owner_type."',developerType='".$data->ap_developer_type."',developerName='".$data->ap_developer_name."',addBuildingNO='".$data->ap_building_no."',buildingName='".$data->ap_building_name."',flatNO='".$data->ap_flate_number."',floorNum='".$data->ap_floor_no."',apointmentWing='".$data->ap_wing."',apponitmentStreet='".$data->ap_street."',locality='".$data->ap_locality."',subLocality='".$data->ap_sub_locality."',pincode='".$data->ap_pincode."',landmark='".$data->ap_landmark."',securityDeposit='".$data->ap_security_deposit."',brokarageFee='".$data->ap_brokerage_fee."',rentNegotiable='".$data->ap_rent_negotiable."',securityNegotiable='".$data->ap_security_negotiable."',maintainenceFee='".$data->ap_maintainance."',noOfFloors='".$data->ap_no_of_floor."',appointmentTarrece='".$data->ap_terrace."',tarreceGarden='".$data->ap_terrace_garden."',numOfLifts='".$data->ap_no_of_lift."',appointmentLiftType='".$data->ap_lift_type."',buildingAge='".$data->ap_age_of_building."',appointmentAreaUom='',builtupArea='".$data->ap_builtup_area."',carpetArea='".$data->ap_carpet_area."',numOfStory='".$data->ap_no_of_storys."',serventRoom='".$data->ap_servant_room."',prayerRoom='".$data->ap_prayer_room."',balcony='".$data->ap_balconey."',terraceAccess='".$data->ap_terrace_access."',privateTerrace='".$data->ap_private_access."',mainEnterenceFacing='".$data->ap_main_entrance_facing."',visitorParkinginside='".$data->ap_residential_visitor_parking_inside."',visitorParkingoutside='".$data->ap_residential_visitor_parking_outside."',parkingcar='".$data->ap_residential_parking_car."',parkingtwowheeler='".$data->ap_residential_parking_two_wheeler."',parkingna='".$data->ap_residential_parking_na."',parkingTypebasement='".$data->ap_residential_parking_type_basement."',parkingTypecovered='".$data->ap_residential_parking_type_covered."',parkingTypestreet='".$data->ap_residential_parkingtype_street_parking."',parkingTypefloor='".$data->ap_residential_parkingtype_individual_floor."',parkingTypelopenair='".$data->ap_residential_parkingtype_individual_open_air."',powerBackup='".$data->ap_power_backup."',wifiInternet='".$data->ap_wifi."',noOfApartOnFloor='".$data->ap_no_of_residential."',waterSupply='".$data->ap_water_supply."',solarWaterHeater='".$data->ap_solar_heater."',gatedCommunity='".$data->ap_societydata_gated_community."',registeredSociety='".$data->ap_societydata_reg_society."',SocietyName='".$data->ap_society_name."',noOfBuilding='".$data->ap_no_of_building."',societyOverheadTank='".$data->ap_societydata_society_overheadtank."',boundryFencingType='".$data->ap_boundary_wall."',cctvSurvelance='".$data->ap_societydata_cctv_servillance."',smokeDetector='".$data->ap_societydata_smoke_detector."',fireHyderantSystem='".$data->ap_societydata_fire_hydrant_system."',security='".$data->ap_societydata_security."',clubHouse='".$data->ap_societydata_club_house."',swimmingPool='".$data->ap_societydata_swiming_pool."',gym='".$data->ap_societydata_zym."',multipurposHall='".$data->ap_societydata_multi_purpose."',badmintonCourt='".$data->ap_batminton."',carom='',basketballCourt='',volleyballCourt='".$data->ap_volleyball."',tennisCourt='".$data->ap_tennis."',billiardsTable='".$data->ap_billiards."',kidsPlayArea='".$data->ap_kids_playarea1."',squashCourt='".$data->ap_squash."',yogaRoom='".$data->ap_yogaroom."',tableTennis='".$data->ap_table_tennis."',gardenLawn='".$data->ap_garden_lawn."',saunaSteam='".$data->ap_saunna_steam."',noofgarden='".$data->ap_no_of_garden."',numofwashdry='".$data->ap_total_washdry."',numOfToilet='".$data->ap_no_of_toilet."', numofKitchens='".$data->ap_total_kitchen."', numOfLivingRooms='".$data->ap_total_livingroom."', numOfBedrooms='".$data->ap_total_bedroom."' WHERE appointmentID=$apId";
+									 mysql_query($sql);
+		}	
+		else
+		{ 
+		$sql = "INSERT INTO rp_app_detail(appointmentID, geoLatitude, geoLongitude, userID, propertyType, bhkType, passessionDate, readyToMove, petsAllowed, apointmentFood, leaseType, preferredVisitTime, advertiserType, livesinBuilding, name, phone, appointmentAlterPhone, appointmentEmail, ownerType, developerType, developerName, addBuildingNO, buildingName, flatNO, floorNum, apointmentWing, apponitmentStreet, locality, subLocality, pincode, landmark, rentAmount, securityDeposit, brokarageFee, rentNegotiable, securityNegotiable, maintainenceFee, noOfFloors, appointmentTarrece, tarreceGarden, numOfLifts, appointmentLiftType, buildingAge, appointmentAreaUom, builtupArea, carpetArea, numOfStory, serventRoom, prayerRoom, balcony, terraceAccess, privateTerrace, mainEnterenceFacing, visitorParkinginside, visitorParkingoutside, parkingcar, parkingtwowheeler, parkingna, parkingTypebasement, parkingTypecovered, parkingTypestreet , parkingTypefloor, parkingTypelopenair, powerBackup, wifiInternet, noOfApartOnFloor, waterSupply, solarWaterHeater, gatedCommunity, registeredSociety, SocietyName, noOfBuilding, societyOverheadTank, boundryFencingType, cctvSurvelance, smokeDetector, fireHyderantSystem, security, clubHouse, swimmingPool, gym, multipurposHall, badmintonCourt, carom, basketballCourt, volleyballCourt, tennisCourt, billiardsTable, kidsPlayArea, squashCourt, yogaRoom, tableTennis, gardenLawn, saunaSteam, noofgarden,numofwashdry,numOfToilet, numofKitchens, numOfLivingRooms, numOfBedrooms
+		)
+		VALUES('".$apId."','2','3','".$userid."','".$data->ap_property_type."','".$data->ap_bhk_type."','".$data->ap_possesion_date."','".$data->ap_ready_to_move."','".$data->ap_pets_allowed."','".$data->ap_food."','".$data->ap_lease_type."','".$data->ap_preferred_visit_time."','".$data->ap_owner_broker."','".$data->ap_owner_lives_in_same_building."','".$data->ap_name."','".$data->ap_phone."','".$data->ap_alternate_phone_no."','".$data->ap_email."','".$data->ap_owner_type."','".$data->ap_developer_type."','".$data->ap_developer_name."','".$data->ap_building_no."','".$data->ap_building_name."','".$data->ap_flate_number."','".$data->ap_floor_no."','".$data->ap_wing."','".$data->ap_street."','".$data->ap_locality."','".$data->ap_sub_locality."','".$data->ap_pincode."','".$data->ap_landmark."','".$data->ap_rent_ammount."','".$data->ap_security_deposit."','".$data->ap_brokerage_fee."','".$data->ap_rent_negotiable."','".$data->ap_security_negotiable."','".$data->ap_maintainance."','".$data->ap_no_of_floor."','".$data->ap_terrace."','".$data->ap_terrace_garden."','".$data->ap_no_of_lift."','".$data->ap_lift_type."','".$data->ap_age_of_building."','44','".$data->ap_builtup_area."','".$data->ap_carpet_area."','".$data->ap_no_of_storys."','".$data->ap_servant_room."','".$data->ap_prayer_room."','".$data->ap_balconey."','".$data->ap_terrace_access."','".$data->ap_private_terrace."','".$data->ap_main_entrance_facing."','".$data->ap_residential_visitor_parking_inside."','".$data->ap_residential_visitor_parking_outside."','".$data->ap_residential_parking_car."','".$data->ap_residential_parking_two_wheeler."','".$data->ap_residential_parking_na."','".$data->ap_residential_parking_type_basement."','".$data->ap_residential_parking_type_covered."','".$data->ap_residential_parkingtype_street_parking."','".$data->ap_residential_parkingtype_individual_floor."','".$data->ap_residential_parkingtype_individual_open_air."','".$data->ap_power_backup."','".$data->ap_wifi."','".$data->ap_no_of_residential."','".$data->ap_water_supply."','".$data->ap_solar_heater."','".$data->ap_societydata_gated_community."','".$data->ap_societydata_reg_society."','".$data->ap_society_name."','".$data->ap_no_of_building."','".$data->ap_societydata_society_overheadtank."','".$data->ap_boundary_wall."','".$data->ap_societydata_cctv_servillance."','".$data->ap_societydata_smoke_detector."','".$data->ap_societydata_fire_hydrant_system."','".$data->ap_societydata_security."','".$data->ap_societydata_club_house."','".$data->ap_societydata_swiming_pool."','".$data->ap_societydata_zym."','".$data->ap_societydata_multi_purpose."','".$data->ap_batminton."','78','79','".$data->ap_volleyball."','".$data->ap_tennis."','".$data->ap_billiards."','".$data->ap_kids_playarea1."','".$data->ap_squash."','".$data->ap_yogaroom."','".$data->ap_table_tennis."','".$data->ap_garden_lawn."','".$data->ap_saunna_steam."','".$data->ap_no_of_garden."','".$data->ap_total_washdry."','".$data->ap_no_of_toilet."','".$data->ap_total_kitchen."','".$data->ap_total_livingroom."','".$data->ap_total_bedroom."')";
+								 mysql_query($sql);	
+		}
+					
+						/* Appointment Living room detail insert and update */
+		foreach($living_room as $living)
+		{
+		$id=$living->id;
+		$qry="select * from rp_app_livingroom where appointmentID='".$apId."' and livingRoomID='".$id."'";
+		$q=mysql_query($qry);
+		$var=mysql_num_rows($q);
+		if($var)
+		{    
+			$sql="UPDATE rp_app_livingroom SET sofa='".$living->sofa."',dinningTable='".$living->dining_table."',ac='".$living->ac."',tv='".$living->tv."',shoeRack='".$living->shoe_rack."',flooringType='".$living->flooring_type."',falseCeiling='".$living->false_ceiling."' WHERE appointmentID='".$apId."' and livingRoomID='".$id."'";
+					 mysql_query($sql);	
+		}
+		else
+		{ 
+			 $query = "INSERT INTO rp_app_livingroom(livingRoomID,appointmentID,sofa,dinningTable,ac,tv,shoeRack,flooringType,falseCeiling)VALUES('".$id."','".$apId."','".$living->sofa."','".$living->dining_table."','".$living->ac."','".$living->tv."','".$living->shoe_rack."','".$living->flooring_type."','".$living->false_ceiling."')";
+					 mysql_query($query);
+		}
+		}	
+
+		/* Appointment toilet detail insert and update */
+		foreach($toilets as $toilet)
+		{
+		$id=$toilet->id;
+		$sql="select * from rp_app_toilets where appointmentID='".$apId."' and toiletID='".$id."'";
+		$qry=mysql_query($sql);
+		$count=mysql_num_rows($qry);
+		if($count)
+		{    
+		 $sql="UPDATE rp_app_toilets SET type='".$toilet->type."',Style='".$toilet->style."',hotWaterSupply='".$toilet->hot_water_supply."',glassPartition='".$toilet->glass_partition."',showerPartition='".$toilet->shower_curtain."',bathTub='".$toilet->bath_tub."',cabinate='".$toilet->cabinet."',window='".$toilet->window."',exhaustFan='".$toilet->exhaust_fan."',flooringType='".$toilet->flooring_type."' WHERE appointmentID='".$apId."' and toiletID='".$id."'";
+					 mysql_query($sql);	
+		}
+		else
+		{ 
+			 $query = "INSERT INTO rp_app_toilets(toiletID,appointmentID,type, Style, hotWaterSupply, glassPartition, showerPartition, bathTub, cabinate,window, exhaustFan, flooringType)VALUES('".$id."','".$apId."','".$toilet->type."','".$toilet->style."','".$toilet->hot_water_supply."','".$toilet->glass_partition."','".$toilet->shower_curtain."','".$toilet->bath_tub."','".$toilet->cabinet."','".$toilet->window."','".$toilet->exhaust_fan."','".$toilet->flooring_type."')"; 
+					 mysql_query($query);
+
+		}
+		}
+			/* Appointment Bedroom detail insert and update */
+		foreach($bedrooms as $bedroom)
+		{
+		$id=$bedroom->id;
+		$sql="select * from rp_app_bedrooms where appointmentID='".$apId."' and bedroomID='".$id."'";
+		$qry=mysql_query($sql);
+		$count=mysql_num_rows($qry);
+		if($count)
+		{    
+		 $sql="UPDATE rp_app_bedrooms SET bed='".$bedroom->bed."',ac='".$bedroom->ac."',tv='".$bedroom->tv."',dressingTable='".$bedroom->dressing_table."',wardrobe='".$bedroom->wardrobe."',window='".$bedroom->window."',attachedBalconey='".$bedroom->attached_balconey."',attachedBathroom='".$bedroom->attached_bathroom."',flooringType='".$bedroom->flooring_type."',falseceiling='".$bedroom->false_ceiling."' WHERE appointmentID='".$apId."' and bedroomID='".$id."'";
+					 mysql_query($sql);	
+		}
+		else
+		{ 
+			 $query = "INSERT INTO rp_app_bedrooms(bedroomID,appointmentID,bed,ac,tv,dressingTable,wardrobe,window,attachedBalconey,attachedBathroom,flooringType,falseceiling)VALUES('".$id."','".$apId."','".$bedroom->bed."','".$bedroom->ac."','".$bedroom->tv."','".$bedroom->dressing_table."','".$bedroom->wardrobe."','".$bedroom->window."','".$bedroom->attached_balconey."','".$bedroom->attached_bathroom."','".$bedroom->flooring_type."','".$bedroom->false_ceiling."')"; 
+					 mysql_query($query);
+		}
+		}
+
+
+		/* Appointment kitchen detail insert and update */
+		foreach($kitchens as $kitchen)
+		{
+		$id=$kitchen->id;
+		$sql="select * from rp_app_kitchens where appointmentID='".$apId."' and kitchenID='".$id."'";
+		$qry=mysql_query($sql);
+		$count=mysql_num_rows($qry);
+		if($count)
+		{    
+		 $sql="UPDATE rp_app_kitchens SET cabinet='".$kitchen->cabinet."',gaspipLine='".$kitchen->gas_pipeline."',refrigerator='".$kitchen->refrigerator."',waterPurifier='".$kitchen->water_purifier."',microwave='".$kitchen->microwave."',loft='".$kitchen->loft."',plateformMaterial='".$kitchen->platform_material."',chimneyExhaust='".$kitchen->chimney_exhaust."' WHERE appointmentID='".$apId."' and kitchenID='".$id."'";
+					 mysql_query($sql);	
+		}
+		else
+		{ 
+			 $query = "INSERT INTO rp_app_kitchens(kitchenID,appointmentID,cabinet,gaspipLine,refrigerator,waterPurifier,microwave,loft,plateformMaterial,chimneyExhaust)VALUES('".$id."','".$apId."','".$kitchen->cabinet."','".$kitchen->gas_pipeline."','".$kitchen->refrigerator."','".$kitchen->water_purifier."','".$kitchen->microwave."','".$kitchen->loft."','".$kitchen->platform_material."','".$kitchen->chimney_exhaust."')"; 
+					 mysql_query($query);
+
+		}
+		}
+
+
+		/* Appointment Washdry Area detail insert and update */
+		foreach($washdry_areas as $washdry_area)
+		{
+		$id=$washdry_area->id;
+		$sql="select * from rp_washdry_area where appointmentID='".$apId."' and washdryID='".$id."'";
+		$qry=mysql_query($sql);
+		$count=mysql_num_rows($qry);
+		if($count)
+		{    
+			$sql="UPDATE rp_washdry_area SET washingMachine='".$washdry_area->washing_machine."',flooringType='".$washdry_area->flooring_type."' WHERE appointmentID='".$apId."' and washdryID='".$id."'";
+						 mysql_query($sql);	
+		}
+		else
+		{ 
+			 $query = "INSERT INTO rp_washdry_area(washdryID,appointmentID,washingMachine,flooringType)VALUES('".$id."','".$apId."','".$washdry_area->washing_machine."','".$washdry_area->flooring_type."')"; 
+					 mysql_query($query);
+		}
+		
+		} 
+		$i=1;
+		 if($i == 1)
+	      {
+		     $msg = array(
+							'status'	=>	'success',
+							'code'		=>	'200',
+							'data'		=>	array(
+													'message'	
+
+												=>	'Appointment updated successfully.'
+												)
+						
+						  );
+               return json_encode($msg);
+	      }
+	      else{
+	      	$msg = array(
+							'status'	=>	'error',
+							'code'		=>	'400',
+							'data'		=>	array(
+													'message'	
+	=>	'error details.'
+												)
+						
+						);
+                         return json_encode($msg);
+			}
+	}	
+}
+$var=$_POST['jsondata'];
+$obj= new Update();
+if($var)
+{
+		$result=$obj->updateAppoint($var);
+		echo $result;
+}
+else{
+	      	$msg = array(
+							'status'	=>	'error',
+							'code'		=>	'400',
+							'data'		=>	array(
+													'message'	
+=>	'error details.'
+												  )
+						
+		);
+                         return json_encode($msg);
+	}
+?>
