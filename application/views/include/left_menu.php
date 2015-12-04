@@ -216,7 +216,7 @@
 				
 				<!--  ul start for sales -->
 				
-				<?php if(empty($_GET['menu']=="sales")!=1){  ?>
+				<?php if(empty($_GET['menu']=="sales")!=2){  ?>
 				<ul id="main-menu" class="main-menu sales">
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
@@ -280,39 +280,39 @@
 				
 				<!--  ul End for sales -->
 				
-				<!--  ul Start for PMS -->
-				if($_GET['menu']=='PMS')
-				{
+				<!--  ul Start for PMS --> 
+				<?php if(empty($_GET['menu']=='pms')!=1) { ?>
+				
 					<ul  class="main-menu crm">
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
 						<li>
-						<a href="<?php echo base_url(); ?>home">
-							<i class="linecons-lightbulb"></i>
-							<span class="title">Dashboard</span>
-						</a>
+							<a href="<?php echo base_url(); ?>home">
+								<i class="linecons-lightbulb"></i>
+								<span class="title">Dashboard</span>
+							</a>
 						</li>
 						<li class="javascript:;">
-								<a href="<?php echo base_url(); ?>employee/application_reg_list?menu=PMS">
-								<i class="linecons-user"></i>
-									<span class="title">Employee List</span>
-								</a>
-							</li>
-							<li class="javascript:;">
-								<a href="<?php echo base_url(); ?>crm/product/manage_product">
-								<i class="linecons-user"></i>
-									<span class="title">Project</span>
-								</a>
-							</li>
-									<li class="javascript:;">
+							<a href="<?php echo base_url(); ?>employee/application_reg_list?menu=pms">
+							<i class="linecons-user"></i>
+								<span class="title">Employee List</span>
+							</a>
+						</li>
+						<li class="javascript:;">
+							<a href="<?php echo base_url(); ?>crm/product/manage_product">
+							<i class="linecons-user"></i>
+								<span class="title">Project</span>
+							</a>
+						</li>
+						<li class="javascript:;">
 								<a href="<?php echo base_url(); ?>crm/crm/customequick">
 								<i class="linecons-user"></i>
 									<span class="title">Task</span>
 								</a>
-							</li>
+						</li>
 							
 					</ul>
-				}
+			<?php } ?>	
 				<!--  ul End for crm -->
 				
 				<!--  ul Start for crm -->
