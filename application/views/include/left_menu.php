@@ -48,6 +48,13 @@
 					
 					</li>
 					<li>
+						<a href="<?php echo base_url(); ?>home?menu=pms"  >
+							<i class="linecons-user"></i>
+							<span id="hr" class="title" title="Human Resource">PMS</span>
+						</a>
+					
+					</li>
+					<li>
 						<a  href="<?php echo base_url(); ?>home?menu=sales" >
 							<i class="linecons-shop"></i>
 							<span id="sales" class="title">Sales</span>
@@ -273,7 +280,42 @@
 				
 				<!--  ul End for sales -->
 				
+				<!--  ul Start for PMS -->
+				if($_GET['menu']=='PMS')
+				{
+					<ul  class="main-menu crm">
+					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
+					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+						<li>
+						<a href="<?php echo base_url(); ?>home">
+							<i class="linecons-lightbulb"></i>
+							<span class="title">Dashboard</span>
+						</a>
+						</li>
+						<li class="javascript:;">
+								<a href="<?php echo base_url(); ?>employee/application_reg_list?menu=PMS">
+								<i class="linecons-user"></i>
+									<span class="title">Employee List</span>
+								</a>
+							</li>
+							<li class="javascript:;">
+								<a href="<?php echo base_url(); ?>crm/product/manage_product">
+								<i class="linecons-user"></i>
+									<span class="title">Project</span>
+								</a>
+							</li>
+									<li class="javascript:;">
+								<a href="<?php echo base_url(); ?>crm/crm/customequick">
+								<i class="linecons-user"></i>
+									<span class="title">Task</span>
+								</a>
+							</li>
+							
+					</ul>
+				}
 				<!--  ul End for crm -->
+				
+				<!--  ul Start for crm -->
 				<?php if(empty($_GET['menu']=="crm")!=1 || $this->uri->segment(2)=="crm"){  ?>
 				<ul  class="main-menu crm">
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
@@ -284,7 +326,7 @@
 							<span class="title">Dashboard</span>
 						</a>
 					
-					</li>
+						</li>
 						<li class="javascript:;">
 								<a href="<?php echo base_url(); ?>crm/crm/customers">
 								<i class="linecons-user"></i>
