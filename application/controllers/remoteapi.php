@@ -54,7 +54,11 @@ class Remoteapi{
 			if($sql) 
 			{
 				$image=move_uploaded_file($_FILES['image_name']['tmp_name'],"project_image/".$_FILES['image_name']['name']); 
-				echo 'Image Successfully Insert';
+				$result=array(
+								'status'=>'success',
+								'image' =>$_FILES['image_name']['name'],
+						     );
+				echo json_decode($result);
 			}
 			else
 			{
@@ -82,6 +86,8 @@ class Remoteapi{
 	function project_update()
 	{
 		$data=json_decode($_POST['projectData']);print_r($data);die;
+		$ProjectId=$data->project_id;
+		
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->db_name);
 		if($CONNECTION)
 		{
