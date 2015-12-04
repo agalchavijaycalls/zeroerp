@@ -263,7 +263,7 @@ class Login extends CI_Controller {
 							);
 							$list_organization =$this->login_model->list_organization('organization',$orgnization);
 							$row=$this->login_model->login_check('users',$data);
-                                                        if($row->role_id=='')
+                         if($row->role_id=='')
 						{
 							$this->session->set_flashdata('category_error','error');
 							$this->session->set_flashdata('message',$this->config->item("user").'Please activate your account with used your registered email');
