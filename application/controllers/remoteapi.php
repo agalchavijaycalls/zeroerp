@@ -96,7 +96,6 @@ class Remoteapi{
 			foreach ($TaskList as $values)
 			{
 				$TaskId= $values->task_id;
-				print_r($values->expense_list);die;
 				foreach ($values->expense_list as $value)
 				{
 					$insert="insert into expenser(project_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."','".$TaskId."','".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
@@ -115,7 +114,7 @@ class Remoteapi{
 								'status'=>'pending',
 						);
 					}
-				}//print_r($expense_list);die;
+				}
 				foreach ($values->receipt_list as $value)
 				{
 					$insert="insert into reciepts(project_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
@@ -135,15 +134,14 @@ class Remoteapi{
 						);
 					}
 				}
-				$array=array(
-							'expense_list'=>$expense_list,
-							'receipt_list'=>$receipt_list,
-							);
-				//$array=array_merge($expense_list,$receipt_list);
-				echo json_encode($array); 
+				
 				
 			}
-			
+			$array=array(
+					'expense_list'=>$expense_list,
+					'receipt_list'=>$receipt_list,
+			);
+			echo json_encode($array);
 		}
 		die;
 		
