@@ -102,7 +102,7 @@ class Remoteapi{
 					$query=mysqli_query($CONNECTION,$insert);
 					if($query)
 					{
-						$expense_list=array(
+						$expense_list[]=array(
 										'key'=>$value->key,
 										'status'=>'success',
 									);
@@ -121,7 +121,7 @@ class Remoteapi{
 					$query=mysqli_query($CONNECTION,$insert);
 					if($query)
 					{
-						$receipt_list=array(
+						$receipt_list[]=array(
 								'key'=>$value->key,
 								'status'=>'success',
 						);
