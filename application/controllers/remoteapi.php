@@ -103,11 +103,17 @@ class Remoteapi{
 					$query=mysqli_query($CONNECTION,$insert);
 					if($query)
 					{
-						$result=array(
+						$expense_list=array(
 										'key'=>$value->key,
 										'status'=>'success',
 									);
-						echo json_encode($result);
+					}
+					else
+					{
+						$expense_list=array(
+								'key'=>$value->key,
+								'status'=>'pending',
+						);
 					}
 				}
 				foreach ($values->receipt_list as $value)
@@ -116,13 +122,22 @@ class Remoteapi{
 					$query=mysqli_query($CONNECTION,$insert);
 					if($query)
 					{
-						$result=array(
+						$receipt_list=array(
 								'key'=>$value->key,
 								'status'=>'success',
 						);
-						echo json_encode($result);
 					}
-				} 
+					else
+					{
+						$receipt_list=array(
+								'key'=>$value->key,
+								'status'=>'pending',
+						);
+					}
+				}
+				$array=$expense_list.$receipt_list;
+				echo json_decode($array); 
+				
 			}
 			
 		}
