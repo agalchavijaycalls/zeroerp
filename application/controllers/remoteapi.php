@@ -92,7 +92,7 @@ class Remoteapi{
 			$ProjectId=$data->project_id;
 			$TaskList=$data->task_list;
 			//echo $TempVar[0]->task_id;die;
-			print_r($TaskList);die;
+			print_r($TaskList->expense_list);die;
 			foreach ($TaskList as $value)
 			{
 				$TaskId= $value->task_id;
