@@ -92,11 +92,11 @@ class Remoteapi{
 			$ProjectId=$data->project_id;
 			$TaskList=$data->task_list;
 			//echo $TempVar[0]->task_id;die;
-			print_r($TaskList->expense_list);die;
+			print_r($TaskList);die;
 			foreach ($TaskList as $value)
 			{
 				$TaskId= $value->task_id;
-				
+				print_r($TaskList->expense_list);die;
 				foreach ($TaskList->expense_list as $value)
 				{
 					$insert="insert into expenser(project_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."','".$TaskId."','".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
