@@ -135,8 +135,11 @@ class Remoteapi{
 						);
 					}
 				}
-				//=$expense_list.$receipt_list;
-				$array=array_merge($expense_list,$receipt_list);
+				$array=array(
+							'expense_list'=>$expense_list,
+							'receipt_list'=>$receipt_list,
+							);
+				//$array=array_merge($expense_list,$receipt_list);
 				echo json_encode($array); 
 				
 			}
