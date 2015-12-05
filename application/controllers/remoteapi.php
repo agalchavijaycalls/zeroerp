@@ -115,7 +115,7 @@ class Remoteapi{
 								'status'=>'pending',
 						);
 					}
-				}
+				}print_r($expense_list);die;
 				foreach ($values->receipt_list as $value)
 				{
 					$insert="insert into reciepts(project_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
@@ -147,8 +147,8 @@ class Remoteapi{
 		}
 		die;
 		
-		//$TaskId=$data->task_list['task_id'];
-		//print_r($data->task_list);die;
+		/*$TaskId=$data->task_list['task_id'];
+		print_r($data->task_list);die;
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->db_name);
 		if($CONNECTION)
 		{
@@ -157,7 +157,7 @@ class Remoteapi{
 				$insert="insert into expenser(task_id,date,amount,type,description) values ('".$value->task_id."','".$value->date."','".$value->amount."','".$value->type."','".$value->description."')";
 				$query=mysqli_query($CONNECTION,$insert);
 			}
-		}
+		}*/
 	}
 		
 }
