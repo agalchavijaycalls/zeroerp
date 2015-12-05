@@ -101,21 +101,30 @@ class Remoteapi{
 				{
 					$insert="insert into expenser(project_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."','".$TaskId."','".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
 					$query=mysqli_query($CONNECTION,$insert);
+					if($query)
+					{
+						$result=array(
+										'key'=>$value->key,
+										'status'=>'success',
+									);
+						echo json_encode($result);
+					}
 				}
 				foreach ($values->receipt_list as $value)
 				{
 					$insert="insert into reciepts(project_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
 					$query=mysqli_query($CONNECTION,$insert);
+					if($query)
+					{
+						$result=array(
+								'key'=>$value->key,
+								'status'=>'success',
+						);
+						echo json_encode($result);
+					}
 				} 
 			}
-			if($query)
-			{
-				echo 'insert successfully';
-			}
-			else 
-			{
-				echo'does not insert';
-			}
+			
 		}
 		die;
 		
