@@ -106,7 +106,7 @@ class Remoteapi{
 				{
 					$insert="insert into expenser(project_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
 					$query=mysqli_query($CONNECTION,$insert);
-				}
+				} 
 			}
 			if($query)
 			{
