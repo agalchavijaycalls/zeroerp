@@ -87,7 +87,8 @@ class Remoteapi{
 	{
 		$data=json_decode($_POST['projectData']);//print_r($data);die;
 		$ProjectId=$data->project_id;
-		echo $data->task_list['task_id'];die;
+		$TempVar=$data->task_list;
+		echo $TempVar->task_id;die;
 		$TaskId=$data->task_list['task_id'];
 		print_r($data->task_list);die;
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->db_name);
