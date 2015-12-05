@@ -135,7 +135,8 @@ class Remoteapi{
 						);
 					}
 				}
-				$array=$expense_list.$receipt_list;
+				//=$expense_list.$receipt_list;
+				$array=array_merge($expense_list,$receipt_list);
 				echo json_decode($array); 
 				
 			}
