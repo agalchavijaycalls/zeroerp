@@ -41,6 +41,60 @@ class Remoteapi{
 		}
 	}
 	
+	
+	/* Function For Retrive Project List*/
+	function project()
+	{
+		$CONNECTION=mysqli_connect("localhost",'root','bitnami','junction_erp');
+		if($CONNECTION!=='')
+		{
+			$query= "select * from project";
+			$sqls=mysqli_query($CONNECTION,$query);
+			$count=mysqli_num_rows($sqls);
+			if(isset($count) && $count > 0)
+			{
+				while($result_project=mysqli_fetch_assoc($sqls))
+				{
+					$project_id=$result_project['project_id'];
+					$project_description= $result_project['project_description'];
+					$status= $result_project['status'];
+					$start_date=$result_project['start_date'];
+					$query= "select * from task where project_id='".$result_project['project_id']."'";
+					$sql=mysqli_query($CONNECTION,$query);
+					$counts=mysqli_num_rows($sql);
+					$task_data	=	array();
+					if(isset($counts) && $counts > 0)
+					{
+						while($result_task=mysqli_fetch_assoc( $sql ))
+						{
+							$task_data[]=$result_task;
+						}
+					}
+					$temp_project_list[]=array('project_id'=>$project_id,
+							'project_description'=>$project_description,
+							'status'=>$status,
+							'start_date'=>$start_date,
+							'list_of_task'=>$task_data,
+					);
+				}
+				$result=array(
+						'project_of_list'=>$temp_project_list,
+				);
+				echo json_encode($result);
+				die;
+			}
+			else
+			{
+				echo 'Project List Found On Server';
+			}
+		}
+		else
+		{
+			echo 'database does not exist';
+		}
+	}
+	
+	
 	/* Function for Image Update For Androide Application */
 	function project_image_update()
 	{
