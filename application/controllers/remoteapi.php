@@ -121,10 +121,11 @@ class Remoteapi{
 					}
 					else
 					{
-						$expense_list[]=array(
-									'key'=>$value->key,
-									'status'=>'Data Already Exist In Database',
-							);
+						$UpdateResult=$query->num_rows;
+						//$expense_list[]=array(
+						//			'key'=>$value->key,
+						//			'status'=>'Data Already Exist In Database',
+						//	);
 					}
 				}
 				foreach ($values->receipt_list as $value)
@@ -152,35 +153,24 @@ class Remoteapi{
 					}
 					else
 					{
-						$receipt_list[]=array(
-								'key'=>$value->key,
-								'status'=>'Data Already Exist In Database',
-						);
+						$UpdateResult=$query->num_rows;
+					//	$receipt_list[]=array(
+					//			'key'=>$value->key,
+					//			'status'=>'Data Already Exist In Database',
+					//	);
 					}
 						
 				}
-				
-				
 			}
+			if(!$UpdateResult=='0'){ $result='Data Insert Successfully'; }else{ $result='Data Insert Already In Database'; }
 			$array=array(
+					'status'=>$result,
 					'expense_list'=>$expense_list,
 					'receipt_list'=>$receipt_list,
 			);
 			echo json_encode($array);
 		}
-		die;
 		
-		/*$TaskId=$data->task_list['task_id'];
-		print_r($data->task_list);die;
-		$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->db_name);
-		if($CONNECTION)
-		{
-			foreach ($data as $value)
-			{
-				$insert="insert into expenser(task_id,date,amount,type,description) values ('".$value->task_id."','".$value->date."','".$value->amount."','".$value->type."','".$value->description."')";
-				$query=mysqli_query($CONNECTION,$insert);
-			}
-		}*/
 	}
 		
 }
