@@ -41,6 +41,37 @@ class Remoteapi{
 		}
 	}
 	
+	/* Function For Moblie Application Registration */
+	function employeeRegister()
+	{
+		$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+		if($CONNECTION!=='')
+		{
+			$data=json_decode($_POST['registration_info']);
+			$query= "select * from registered_application where db_name='".$data->employeeOrganizationName."'";
+			$sql=mysqli_query($CONNECTION,$query);
+			$count=mysqli_num_rows($sql);
+			if(isset($count) && $count > 0 )
+			{
+				$new_connection=mysqli_connect("localhost",'root','bitnami',$data->employeeOrganizationName);
+				$query= "INSERT INTO newregistration (name,number,password,imei,androideapp,status,created_by,created_on,updated_by,updated_on) VALUES('".$data->employeeName."','".$data->employeeMobileNumber."','".$data->employeePassword."','".$data->employeeIMEI."','androide','suspend','".$data->employeeName."','".date('d-m-Y')."','','')"; //echo $query; die;
+				$sql=mysqli_query($new_connection,$query);
+				if($sql)
+				{
+					echo 'Information Registered Successfully';
+				}
+			}
+			else
+			{
+				echo 'Data Base Does Not Exist';
+			}
+		}
+		else
+		{
+			echo 'Connection Not Found Server Error';
+		}
+	
+	}
 	
 	/* Function For Retrive Project List*/
 	function project()
