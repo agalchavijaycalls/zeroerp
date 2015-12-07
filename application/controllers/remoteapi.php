@@ -99,7 +99,7 @@ class Remoteapi{
 				foreach ($values->expense_list as $value)
 				{
 					$FindExpenseKey="select * from expenser where expense_key='".$value->key."'";
-					$query=mysqli_query($CONNECTION,$FindExpenseKey);echo count($query);die;//print_r($query);die;
+					$query=mysqli_query($CONNECTION,$FindExpenseKey);print_r($query);die;//print_r($query);die;
 					if($query)
 					{
 						$insert="insert into expenser(project_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."','".$TaskId."','".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
