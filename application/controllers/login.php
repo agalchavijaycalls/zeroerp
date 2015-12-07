@@ -181,6 +181,7 @@ class Login extends CI_Controller {
 							'code'=>'200',
 							'result'=>'success',
 							'userType'=>$row->role_id,
+							'user_id'=>$row->user_id,
 					);
 					echo json_encode($data);die;
 				}
