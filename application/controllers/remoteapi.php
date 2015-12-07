@@ -98,41 +98,66 @@ class Remoteapi{
 				$TaskId= $values->task_id;
 				foreach ($values->expense_list as $value)
 				{
-					$insert="insert into expenser(project_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."','".$TaskId."','".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
-					$query=mysqli_query($CONNECTION,$insert);
-					if($query)
+					$FindExpenseKey="select * from expenser where expense_key='".$value->key."'";
+					$query=mysqli_query($CONNECTION,$FindExpenseKey);print_r($query);die;
+					if(!$query)
 					{
-						$expense_list[]=array(
-										'key'=>$value->key,
-										'status'=>'success',
-									);
+						$insert="insert into expenser(project_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."','".$TaskId."','".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
+						$query=mysqli_query($CONNECTION,$insert);
+						if($query)
+						{
+							$expense_list[]=array(
+											'key'=>$value->key,
+											'status'=>'success',
+										);
+						}
+						else
+						{
+							$expense_list[]=array(
+									'key'=>$value->key,
+									'status'=>'pending',
+							);
+						}
 					}
 					else
 					{
-						$expense_list=array(
-								'key'=>$value->key,
-								'status'=>'pending',
-						);
+						$expense_list[]=array(
+									'key'=>$value->key,
+									'status'=>'Data Already Exist In Database',
+							);
 					}
 				}
 				foreach ($values->receipt_list as $value)
 				{
-					$insert="insert into reciepts(project_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
-					$query=mysqli_query($CONNECTION,$insert);
-					if($query)
+					$FindRecieptKey="select * from reciepts where reciepts_key='".$value->key."'";
+					$query=mysqli_query($CONNECTION,$FindRecieptKey);
+					if(!$query)
 					{
-						$receipt_list[]=array(
-								'key'=>$value->key,
-								'status'=>'success',
-						);
+						$insert="insert into reciepts(project_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
+						$query=mysqli_query($CONNECTION,$insert);
+						if($query)
+						{
+							$receipt_list[]=array(
+									'key'=>$value->key,
+									'status'=>'success',
+							);
+						}
+						else
+						{
+							$receipt_list[]=array(
+									'key'=>$value->key,
+									'status'=>'pending',
+							);
+						}
 					}
 					else
 					{
-						$receipt_list=array(
+						$receipt_list[]=array(
 								'key'=>$value->key,
-								'status'=>'pending',
+								'status'=>'Data Already Exist In Database',
 						);
 					}
+						
 				}
 				
 				
