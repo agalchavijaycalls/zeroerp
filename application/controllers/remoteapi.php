@@ -121,11 +121,10 @@ class Remoteapi{
 					}
 					else
 					{
-						$UpdateResult=$query->num_rows;
-						//$expense_list[]=array(
-						//			'key'=>$value->key,
-						//			'status'=>'Data Already Exist In Database',
-						//	);
+						$expense_list[]=array(
+									'key'=>$value->key,
+									'status'=>'Data Already Exist In Database',
+						);
 					}
 				}
 				foreach ($values->receipt_list as $value)
@@ -153,23 +152,21 @@ class Remoteapi{
 					}
 					else
 					{
-						$UpdateResult=$query->num_rows;
-					//	$receipt_list[]=array(
-					//			'key'=>$value->key,
-					//			'status'=>'Data Already Exist In Database',
-					//	);
+						$receipt_list[]=array(
+								'key'=>$value->key,
+								'status'=>'Data Already Exist In Database',
+						);
 					}
 						
 				}
 			}
-			if(!$UpdateResult=='0'){ $result='Data Insert Successfully'; }else{ $result='Data Insert Already In Database'; }
 			$array=array(
-					'status'=>$result,
 					'expense_list'=>$expense_list,
 					'receipt_list'=>$receipt_list,
 			);
 			echo json_encode($array);
 		}
+		die;
 		
 	}
 		
