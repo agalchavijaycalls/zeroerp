@@ -113,7 +113,7 @@ class Remoteapi{
 								'status'=>'success',
 								'image' =>$_FILES['image_name']['name'],
 						     );
-				echo json_decode($result);
+				echo json_encode($result);
 			}
 			else
 			{
