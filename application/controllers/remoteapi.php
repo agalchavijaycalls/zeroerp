@@ -303,7 +303,7 @@ class Remoteapi{
 							else
 							{
 								$receipt_list[]=array(
-										'key'=>$value->key,
+										'key'=>$value->key, 
 										'status'=>'pending',
 								);
 							}
