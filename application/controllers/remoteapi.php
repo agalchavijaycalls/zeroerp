@@ -314,14 +314,14 @@ class Remoteapi{
 							$query=mysqli_query($CONNECTION,$Update);
 							if($query)
 							{
-								$expense_list[]=array(
+								$receipt_list[]=array(
 										'key'=>$value->key,
 										'status'=>'success',
 								);
 							}
 							else
 							{
-								$expense_list[]=array(
+								$receipt_list[]=array(
 										'key'=>$value->key,
 										'status'=>'pending',
 								);
