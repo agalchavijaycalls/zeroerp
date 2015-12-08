@@ -162,7 +162,7 @@ class Remoteapi{
 						{
 							$expense_list[]=array(
 									'key'=>$value->key,
-									'status'=>'insert',
+									'status'=>'success',
 							);
 						}
 						else
@@ -181,7 +181,7 @@ class Remoteapi{
 						{
 							$expense_list[]=array(
 									'key'=>$value->key,
-									'status'=>'update',
+									'status'=>'success',
 							);
 						}
 						else
@@ -207,7 +207,7 @@ class Remoteapi{
 						{
 							$receipt_list[]=array(
 									'key'=>$value->key,
-									'status'=>'insert',
+									'status'=>'success',
 							);
 						}
 						else
@@ -226,7 +226,7 @@ class Remoteapi{
 						{
 							$expense_list[]=array(
 									'key'=>$value->key,
-									'status'=>'update',
+									'status'=>'success',
 							);
 						}
 						else
@@ -253,7 +253,7 @@ class Remoteapi{
 							{
 								$expense_list[]=array(
 										'key'=>$value->key,
-										'status'=>'insert',
+										'status'=>'success',
 								);
 							}
 							else
@@ -272,7 +272,7 @@ class Remoteapi{
 							{
 								$expense_list[]=array(
 										'key'=>$value->key,
-										'status'=>'update',
+										'status'=>'success',
 								);
 							}
 							else
@@ -297,7 +297,7 @@ class Remoteapi{
 							{
 								$receipt_list[]=array(
 										'key'=>$value->key,
-										'status'=>'insert',
+										'status'=>'success',
 								);
 							}
 							else
@@ -316,7 +316,7 @@ class Remoteapi{
 							{
 								$receipt_list[]=array(
 										'key'=>$value->key,
-										'status'=>'update',
+										'status'=>'success',
 								);
 							}
 							else
