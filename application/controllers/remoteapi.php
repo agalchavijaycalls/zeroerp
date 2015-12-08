@@ -155,7 +155,8 @@ class Remoteapi{
 					$query=mysqli_query($CONNECTION,$FindExpenseKey);
 					if(!$query->num_rows>0)
 					{
-						$insert="insert into expenser(project_id,user_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."','".$UserId."',NULL,'".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
+						$TaskId=NULL;
+						$insert="insert into expenser(project_id,user_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
 						$query=mysqli_query($CONNECTION,$insert);
 						if($query)
 						{
@@ -184,7 +185,8 @@ class Remoteapi{
 					$query=mysqli_query($CONNECTION,$FindRecieptKey);
 					if(!$query->num_rows>0)
 					{
-						$insert="insert into reciepts(project_id,user_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$UserId."',NULL,'".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
+						$TaskId=NULL;
+						$insert="insert into reciepts(project_id,user_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
 						$query=mysqli_query($CONNECTION,$insert);
 						if($query)
 						{
