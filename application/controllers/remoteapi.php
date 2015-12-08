@@ -146,7 +146,8 @@ class Remoteapi{
 		{
 			$data=json_decode($_POST['projectData']);//print_r($data);die;
 			$UserId=$data->user_id;
-			print_r($data->expense_list);die;
+			$ProjectList=$data->project_List;
+			print_r($ProjectList->expense_list);die;
 			$ProjectId=$data->project_id;
 			$TaskList=$data->task_list;
 			//echo $TempVar[0]->task_id;die;
