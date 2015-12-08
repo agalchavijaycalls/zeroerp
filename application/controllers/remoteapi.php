@@ -148,7 +148,7 @@ class Remoteapi{
 			$UserId=$data->user_id;//print_r($data->project_List);die;
 			foreach($data->project_List as $ProjectList)
 			{
-				print_r($ProjectList->expense_list);die; 
+				print_r($ProjectList->project_id);die; 
 			}
 			$ProjectList=$data->project_List;
 			print_r($ProjectList->expense_list);die;
