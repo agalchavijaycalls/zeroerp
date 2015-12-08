@@ -145,7 +145,7 @@ class Remoteapi{
 		if($CONNECTION)
 		{
 			$data=json_decode($_POST['projectData']);//print_r($data);die;
-			$UserId=$data->user_id;
+			$UserId=$data->user_id;print_r($data->project_List);die;
 			$ProjectList=$data->project_List;
 			print_r($ProjectList->expense_list);die;
 			$ProjectId=$data->project_id;
