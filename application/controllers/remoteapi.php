@@ -151,7 +151,7 @@ class Remoteapi{
 				print_r($ProjectList->project_id);die; 
 			}
 			$ProjectList=$data->project_List;
-			print_r($ProjectList->expense_list);die;
+			print_r($ProjectList->expense_list);die; 
 			$ProjectId=$data->project_id;
 			$TaskList=$data->task_list;
 			//echo $TempVar[0]->task_id;die;
