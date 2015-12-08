@@ -144,7 +144,9 @@ class Remoteapi{
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami','junction_erp');
 		if($CONNECTION)
 		{
-			$data=json_decode($_POST['projectData']);print_r($data->user_id);die;
+			$data=json_decode($_POST['projectData']);//print_r($data);die;
+			$UserId=$data->user_id;
+			print_r($data->user_id);die;
 			$ProjectId=$data->project_id;
 			$TaskList=$data->task_list;
 			//echo $TempVar[0]->task_id;die;
