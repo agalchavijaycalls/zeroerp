@@ -148,11 +148,138 @@ class Remoteapi{
 			$UserId=$data->user_id;//print_r($data->project_List);die;
 			foreach($data->project_List as $ProjectList)
 			{
-				print_r($ProjectList->project_id);die; 
+				$ProjectId=$ProjectList->project_id;
+				foreach ($ProjectList->expense_list as $value)
+				{
+					$FindExpenseKey="select * from expenser where expense_key='".$value->key."'";
+					$query=mysqli_query($CONNECTION,$FindExpenseKey);
+					if(!$query->num_rows>0)
+					{
+						$insert="insert into expenser(project_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."',NULL,'".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
+						$query=mysqli_query($CONNECTION,$insert);
+						if($query)
+						{
+							$expense_list[]=array(
+									'key'=>$value->key,
+									'status'=>'success',
+							);
+						}
+						else
+						{
+							$expense_list[]=array(
+									'key'=>$value->key,
+									'status'=>'pending',
+							);
+						}
+					}
+					else
+					{
+						//update query in this place
+					}
+					
+				}
+				foreach ($ProjectList->expense_list as $value)
+				{
+					$FindRecieptKey="select * from reciepts where reciepts_key='".$value->key."'";
+					$query=mysqli_query($CONNECTION,$FindRecieptKey);
+					if(!$query->num_rows>0)
+					{
+						$insert="insert into reciepts(project_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."',NULL,'".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
+						$query=mysqli_query($CONNECTION,$insert);
+						if($query)
+						{
+							$receipt_list[]=array(
+									'key'=>$value->key,
+									'status'=>'success',
+							);
+						}
+						else
+						{
+							$receipt_list[]=array(
+									'key'=>$value->key,
+									'status'=>'pending',
+							);
+						}
+					}
+					else
+					{
+						//update Query
+					}
+				}
+				foreach($ProjectList->task_list as $TaskList)
+				{
+					$TaskId= $TaskList->task_id;
+					foreach ($TaskList->expense_list as $value)
+					{
+						$FindExpenseKey="select * from expenser where expense_key='".$value->key."'";
+						$query=mysqli_query($CONNECTION,$FindExpenseKey);//echo $query->num_rows;die;//print_r($query);die;
+						if(!$query->num_rows>0)
+						{
+							$insert="insert into expenser(project_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."','".$TaskId."','".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
+							$query=mysqli_query($CONNECTION,$insert);
+							if($query)
+							{
+								$expense_list[]=array(
+										'key'=>$value->key,
+										'status'=>'success',
+								);
+							}
+							else
+							{
+								$expense_list[]=array(
+										'key'=>$value->key,
+										'status'=>'pending',
+								);
+							}
+						}
+						else
+						{
+							//update query
+						}
+					}
+					
+					foreach ($TaskList->receipt_list as $value)
+					{
+						$FindRecieptKey="select * from reciepts where reciepts_key='".$value->key."'";
+						$query=mysqli_query($CONNECTION,$FindRecieptKey);
+						if(!$query->num_rows>0)
+						{
+							$insert="insert into reciepts(project_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
+							$query=mysqli_query($CONNECTION,$insert);
+							if($query)
+							{
+								$receipt_list[]=array(
+										'key'=>$value->key,
+										'status'=>'success',
+								);
+							}
+							else
+							{
+								$receipt_list[]=array(
+										'key'=>$value->key,
+										'status'=>'pending',
+								);
+							}
+						}
+						else
+						{
+							//update query
+						}
+					
+					}
+					
+				}
+				
 			}
-			$ProjectList=$data->project_List;
-			print_r($ProjectList->expense_list);die; 
-			$ProjectId=$data->project_id;
+			$array=array(
+					'expense_list'=>$expense_list,
+					'receipt_list'=>$receipt_list,
+			);
+			echo json_encode($array);
+			die;
+		//	$ProjectList=$data->project_List;
+			//print_r($ProjectList->expense_list);die; 
+			//$ProjectId=$data->project_id;
 			$TaskList=$data->task_list;
 			//echo $TempVar[0]->task_id;die;
 			//print_r($TaskList->expense_list);die;
