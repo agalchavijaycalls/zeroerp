@@ -25,6 +25,7 @@ class Employee_model extends CI_Model {
 	public function insert_employee($table,$data)
 	{
 		$this->db->insert($table,$data);
+		return true;
 	}
 	
 	/*function for employee list*/
@@ -146,12 +147,26 @@ $qry=$this->db->query("select * from tracking where `imei`='".$imei."' and DATE(
 		return $qry->result();
 	}
 	
-	public function application_registration_list()
+	public function GetMultipleData($table)
 	{
 		$this->db->select('*');
-		$qry=$this->db->get('newregistration');
+		$qry=$this->db->get($table);
 		return $qry->result();
 	}
+	
+	public function GetSingleData($table,$filter)
+	{
+		$this->db->select('*');
+		$qry=$this->db->get_where($table,$filter);
+		return $qry->result();
+	}
+	
+	function UpdateSingleData($table=false,$data=false,$filter=false)
+	{
+		$this->db->where($filter);
+		$qry=$this->db->update($table,$data);
+		return true;	
+	} 
 }
 //Model Class for Employee end
 ?>

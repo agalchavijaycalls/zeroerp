@@ -22,7 +22,7 @@ class Employee extends CI_Controller {
 
 				/* manage Employee */
 	public function manage_emp()
-	{
+	{	
 		Authority::is_logged_in();
 		Authority::checkAuthority('manage_emp');
 		$userdata = $this->session->userdata('user_data');
@@ -430,12 +430,95 @@ public function insert_employee($info=false)
 	
 	public function application_reg_list()
 	{
-		$application_registration_list=$this->data['application_registration_list']=$this->employee_model->application_registration_list();
+		$application_registration_list=$this->data['application_registration_list']=$this->employee_model->GetMultipleData('newregistration');
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/left_menu',$this->data);
 		$this->load->view('application_reg',$this->data);
 		$this->parser->parse('include/footer',$this->data);
 	}
+	
+	function ApiEmployeeRegistration($EmployeeId=false)
+	{
+		$EmployeeDetail=$this->data['EmployeeDetail']=$this->employee_model->GetSingleData('newregistration',array('registration_id'=>$EmployeeId));
+		if($EmployeeDetail)
+		{
+			$data=array(
+						'organization_id'=>1,
+						'designation_id'=>NULL,
+						'department_id'=>NULL,
+						'first_name'=>$EmployeeDetail[0]->name,
+						'mobile'=>$EmployeeDetail[0]->number,
+						'imei'=>$EmployeeDetail[0]->imei,
+					   );
+			$InsertEmployee=$this->employee_model->insert_employee('employee',$data);//print_r($InsertEmployee);die;
+			if($InsertEmployee)
+			{
+				$data=array(
+							'role_id'=>'user',
+							'Username'=>$EmployeeDetail[0]->name,
+							'Password'=>md5($EmployeeDetail[0]->password),
+						   );
+				$InsertEmployee=$this->employee_model->insert_employee('user',$data);//print_r($InsertEmployee);die;
+				$data=array('status'=>'active');
+				$UpdateStatus=$this->employee_model->UpdateSingleData('newregistration',$data,array('registration_id'=>$EmployeeId));
+				if($UpdateStatus)
+				{
+					redirect('employee/application_reg_list');
+				}
+			}
+		}
+	}
+	
+	function ApprovalTrack($Imei=false,$Status=false)
+	{
+		$ImeiDetail=$this->data['ImeiDetail']=$this->employee_model->GetSingleData('approval_track',array('imei'=>$Imei));
+		if($ImeiDetail)
+		{
+			if($Status=='Enable')
+			{
+				$Status='Disable';
+			}
+			else 
+			{
+				$Status='Enable';
+			}
+			$data=array(
+					'imei'=>$Imei,
+					'server_key'=>'demoerp',
+					'status'=>$Status,
+			);
+			$UpdateImeiTrackDetail=$this->employee_model->UpdateSingleData('approval_track',$data,array('imei'=>$Imei));//print_r($InsertEmployee);die;
+			if($UpdateImeiTrackDetail)
+			{
+				$UpdateImeiTrackStatus=$this->employee_model->UpdateSingleData('newregistration',array('trackStatus'=>$Status),array('imei'=>$Imei));
+				redirect('employee/application_reg_list');
+				redirect('employee/application_reg_list');
+			}
+		}
+		else
+		{
+			if($Status=='Enable')
+			{
+				$Status='Disable';
+			}
+			else
+			{
+				$Status='Enable';
+			}
+			$data=array(
+					'imei'=>$Imei,
+					'server_key'=>'demoerp',
+					'status'=>$Status,
+			);
+			$InsertImeiTrackDetail=$this->employee_model->insert_employee('approval_track',$data);//print_r($InsertEmployee);die;
+			if($InsertImeiTrackDetail)
+			{
+				$UpdateImeiTrackStatus=$this->employee_model->UpdateSingleData('newregistration',array('trackStatus'=>$Status),array('imei'=>$Imei));
+				redirect('employee/application_reg_list');
+			}
+		}
+	}
+	
 }
 
 /* End of file welcome.php */

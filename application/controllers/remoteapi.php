@@ -358,6 +358,21 @@ class Remoteapi{
 		die;
 		
 	}
+	
+	function organizationKey()
+	{
+		//$CONNECTION=mysqli_connect('localhost','root','','demoerp');
+		//if($CONNECTION)
+		//{
+		//	$OrganizationKey="select * from approval_track where status=Enable";
+		//	$query=mysqli_query($CONNECTION,$OrganizationKey);
+			
+		//	while($result_project=mysqli_fetch_row($query))
+		//	{
+			//	print_r($result_project);	
+		//	}
+		//}
+	}
 		
 }
 /* End of login controller */
