@@ -198,7 +198,7 @@ class Remoteapi{
 						}
 						
 					}
-				}else { echo 'error'; }
+				}
 				if(isset($ProjectList->receipt_list)&& !empty($ProjectList->receipt_list))
 				{	
 					foreach ($ProjectList->receipt_list as $value)
@@ -231,21 +231,21 @@ class Remoteapi{
 							$query=mysqli_query($CONNECTION,$Update);
 							if($query)
 							{
-								$expense_list[]=array(
+								$receipt_list[]=array(
 										'key'=>$value->key,
 										'status'=>'success',
 								);
 							}
 							else
 							{
-								$expense_list[]=array(
+								$receipt_list[]=array(
 										'key'=>$value->key,
 										'status'=>'pending',
 								);
 							}
 						}
 					}
-				}	else { echo 'no data found of recipt'; }
+				}
 				foreach($ProjectList->task_list as $TaskList)
 					{
 						$TaskId= $TaskList->task_id;
@@ -294,7 +294,7 @@ class Remoteapi{
 									}
 								}
 							}
-						} else { echo 'no data found of task list expence'; }
+						}
 						if(isset($TaskList->receipt_list)&&!empty($TaskList->receipt_list))
 						{
 							foreach ($TaskList->receipt_list as $value)
@@ -342,14 +342,22 @@ class Remoteapi{
 							
 							}
 						
-						}else { echo 'no data found of task list recipt'; }
+						}
 					}
-			}
-			$array=array(
-					'expense_list'=>$expense_list,
-					'receipt_list'=>$receipt_list,
-			);
-			echo json_encode($array);
+				}
+				if(!isset($expense_list))
+				{
+					$expense_list='';
+				}
+				if(!isset($receipt_list))
+				{
+					$receipt_list='';
+				}
+				$array=array(
+						'expense_list'=>$expense_list,
+						'receipt_list'=>$receipt_list,
+				);
+				echo json_encode($array);
 			
 		}
 		die;
