@@ -361,17 +361,26 @@ class Remoteapi{
 	
 	function organizationKey()
 	{
-		//$CONNECTION=mysqli_connect('localhost','root','','demoerp');
-		//if($CONNECTION)
-		//{
-		//	$OrganizationKey="select * from approval_track where status=Enable";
-		//	$query=mysqli_query($CONNECTION,$OrganizationKey);
-			
-		//	while($result_project=mysqli_fetch_row($query))
-		//	{
-			//	print_r($result_project);	
-		//	}
-		//}
+		$CONNECTION=mysqli_connect('localhost','root','bitnami','junction_erp');
+		if($CONNECTION)
+		{
+			$query= "select * from approval_track where status=Enable";
+			$sqls=mysqli_query($CONNECTION,$query);
+			$count=mysqli_num_rows($sqls);
+			if(isset($count) && $count > 0)
+			{
+				while($result_project=mysqli_fetch_assoc($sqls))
+				{
+					$imei=$result_project['imei'];
+				}
+				print_r($imei);die;
+				$result=array(
+						'project_of_list'=>$temp_project_list,
+				);
+				echo json_encode($result);
+				die;
+			}
+		}
 	}
 		
 }
