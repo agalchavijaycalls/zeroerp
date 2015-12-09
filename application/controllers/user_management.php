@@ -26,11 +26,11 @@ class User_management extends CI_Controller {
 	
 	function set_user($json_data=false)
 	{
-		$json_data=$_GET['data']; 
-		$var=json_decode($json_data);
+		$json_data=$_GET['data'];
+		$var=json_decode($json_data);print_r($var);die;
 		$data=array(
-					'Username'=>$var->Username,
-					'Password'=>$var->Password,
+					'Username'=>$var->application_admin_username,
+					'Password'=>md5($var->application_admin_password),
 					'role_id'=>'admin'
 				   );
 		$status=$this->user_management_model->set_user($data);
@@ -40,12 +40,16 @@ class User_management extends CI_Controller {
 							'organization_id'=>$var->organization_id,
 							'registration_id'=>$var->registration_id,
 							'organization_name'=>$var->organization_name,
-							'application_admin_email'=>$var->application_admin_email,
 							'organization_admin_email'=>$var->organization_admin_email,
-							'code'=>'200',
+							'organization_admin_UserName'=>$var->organization_admin_UserName,
+							'organization_admin_password'=>$var->organization_admin_password,
+							'organization_admin_mobile'=>$var->organization_admin_mobile,
+							'application_admin_email'=>$var->application_admin_email,
+							'application_admin_username'=>$var->application_admin_username,
+							'application_admin_password'=>$var->application_admin_password,
+							'application_admin_mobile'=>$var->application_admin_mobile,
 							'database_name'=>$var->db_name,
-							'username'=>$var->Username,
-							'Password'=>$var->Password,
+							'code'=>'200',
 						);
 			$database_name=$this->session->userdata('db_name');
 			$this->session->unset_userdata($database_name);
