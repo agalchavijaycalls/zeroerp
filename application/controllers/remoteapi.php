@@ -198,104 +198,16 @@ class Remoteapi{
 						}
 						
 					}
-				}else { echo 'anna ke jaisa chsma lga ke'; }	
-				foreach ($ProjectList->receipt_list as $value)
-				{
-					$FindRecieptKey="select * from reciepts where reciepts_key='".$value->key."'";
-					$query=mysqli_query($CONNECTION,$FindRecieptKey);
-					if(!$query->num_rows>0)
-					{
-						$TaskId=NULL;
-						$insert="insert into reciepts(project_id,user_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
-						$query=mysqli_query($CONNECTION,$insert);
-						if($query)
-						{
-							$receipt_list[]=array(
-									'key'=>$value->key,
-									'status'=>'success',
-							);
-						}
-						else
-						{
-							$receipt_list[]=array(
-									'key'=>$value->key,
-									'status'=>'pending',
-							);
-						}
-					}
-					else
-					{
-						$Update="update reciepts set project_id='".$ProjectId."',user_id='".$UserId."',task_id='".$TaskId."',material='".$value->material."',date='".$value->date."',quantity='".$value->quantity."',rate='".$value->rate."',unit='".$value->unit."' where reciepts_key='".$value->key."'";
-						$query=mysqli_query($CONNECTION,$Update);
-						if($query)
-						{
-							$expense_list[]=array(
-									'key'=>$value->key,
-									'status'=>'success',
-							);
-						}
-						else
-						{
-							$expense_list[]=array(
-									'key'=>$value->key,
-									'status'=>'pending',
-							);
-						}
-					}
-				}
-				foreach($ProjectList->task_list as $TaskList)
-				{
-					$TaskId= $TaskList->task_id;
-					foreach ($TaskList->expense_list as $value)
-					{
-						$FindExpenseKey="select * from expenser where expense_key='".$value->key."'";
-						$query=mysqli_query($CONNECTION,$FindExpenseKey);//echo $query->num_rows;die;//print_r($query);die;
-						if(!$query->num_rows>0)
-						{
-							$insert="insert into expenser(project_id,user_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
-							$query=mysqli_query($CONNECTION,$insert);
-							if($query)
-							{
-								$expense_list[]=array(
-										'key'=>$value->key,
-										'status'=>'success',
-								);
-							}
-							else
-							{
-								$expense_list[]=array(
-										'key'=>$value->key,
-										'status'=>'pending',
-								);
-							}
-						}
-						else
-						{
-							$Update="update expenser set project_id='".$ProjectId."',user_id='".$UserId."',task_id='".$TaskId."',date='".$value->date."',expense_type='".$value->expense_type."',amount='".$value->amount."',type='".$value->type."',description='".$value->description."' where expense_key='".$value->key."'";
-							$query=mysqli_query($CONNECTION,$Update);
-							if($query)
-							{
-								$expense_list[]=array(
-										'key'=>$value->key,
-										'status'=>'success',
-								);
-							}
-							else
-							{
-								$expense_list[]=array(
-										'key'=>$value->key,
-										'status'=>'pending',
-								);
-							}
-						}
-					}
-					
-					foreach ($TaskList->receipt_list as $value)
+				}else { echo 'error'; }
+				if(isset($ProjectList->receipt_list)&& !empty($ProjectList->receipt_list))
+				{	
+					foreach ($ProjectList->receipt_list as $value)
 					{
 						$FindRecieptKey="select * from reciepts where reciepts_key='".$value->key."'";
 						$query=mysqli_query($CONNECTION,$FindRecieptKey);
 						if(!$query->num_rows>0)
 						{
+							$TaskId=NULL;
 							$insert="insert into reciepts(project_id,user_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
 							$query=mysqli_query($CONNECTION,$insert);
 							if($query)
@@ -308,7 +220,7 @@ class Remoteapi{
 							else
 							{
 								$receipt_list[]=array(
-										'key'=>$value->key, 
+										'key'=>$value->key,
 										'status'=>'pending',
 								);
 							}
@@ -319,24 +231,116 @@ class Remoteapi{
 							$query=mysqli_query($CONNECTION,$Update);
 							if($query)
 							{
-								$receipt_list[]=array(
+								$expense_list[]=array(
 										'key'=>$value->key,
 										'status'=>'success',
 								);
 							}
 							else
 							{
-								$receipt_list[]=array(
+								$expense_list[]=array(
 										'key'=>$value->key,
 										'status'=>'pending',
 								);
 							}
 						}
-						
 					}
+				}	else { echo 'no data found of recipt'; }
+				if(isset($ProjectList->task_list)&& !empty($ProjectList->task_list))
+				{
+					foreach($ProjectList->task_list as $TaskList)
+					{
+						$TaskId= $TaskList->task_id;
+						foreach ($TaskList->expense_list as $value)
+						{
+							$FindExpenseKey="select * from expenser where expense_key='".$value->key."'";
+							$query=mysqli_query($CONNECTION,$FindExpenseKey);//echo $query->num_rows;die;//print_r($query);die;
+							if(!$query->num_rows>0)
+							{
+								$insert="insert into expenser(project_id,user_id,task_id,date,expense_key,expense_type,amount,type,description) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->date."','".$value->key."','".$value->expense_type."','".$value->amount."','".$value->type."','".$value->description."')";
+								$query=mysqli_query($CONNECTION,$insert);
+								if($query)
+								{
+									$expense_list[]=array(
+											'key'=>$value->key,
+											'status'=>'success',
+									);
+								}
+								else
+								{
+									$expense_list[]=array(
+											'key'=>$value->key,
+											'status'=>'pending',
+									);
+								}
+							}
+							else
+							{
+								$Update="update expenser set project_id='".$ProjectId."',user_id='".$UserId."',task_id='".$TaskId."',date='".$value->date."',expense_type='".$value->expense_type."',amount='".$value->amount."',type='".$value->type."',description='".$value->description."' where expense_key='".$value->key."'";
+								$query=mysqli_query($CONNECTION,$Update);
+								if($query)
+								{
+									$expense_list[]=array(
+											'key'=>$value->key,
+											'status'=>'success',
+									);
+								}
+								else
+								{
+									$expense_list[]=array(
+											'key'=>$value->key,
+											'status'=>'pending',
+									);
+								}
+							}
+						}
+						foreach ($TaskList->receipt_list as $value)
+						{
+							$FindRecieptKey="select * from reciepts where reciepts_key='".$value->key."'";
+							$query=mysqli_query($CONNECTION,$FindRecieptKey);
+							if(!$query->num_rows>0)
+							{
+								$insert="insert into reciepts(project_id,user_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
+								$query=mysqli_query($CONNECTION,$insert);
+								if($query)
+								{
+									$receipt_list[]=array(
+											'key'=>$value->key,
+											'status'=>'success',
+									);
+								}
+								else
+								{
+									$receipt_list[]=array(
+											'key'=>$value->key, 
+											'status'=>'pending',
+									);
+								}
+							}
+							else
+							{
+								$Update="update reciepts set project_id='".$ProjectId."',user_id='".$UserId."',task_id='".$TaskId."',material='".$value->material."',date='".$value->date."',quantity='".$value->quantity."',rate='".$value->rate."',unit='".$value->unit."' where reciepts_key='".$value->key."'";
+								$query=mysqli_query($CONNECTION,$Update);
+								if($query)
+								{
+									$receipt_list[]=array(
+											'key'=>$value->key,
+											'status'=>'success',
+									);
+								}
+								else
+								{
+									$receipt_list[]=array(
+											'key'=>$value->key,
+											'status'=>'pending',
+									);
+								}
+							}
+						
+						}
 					
-				}
-				
+					}
+				}else { echo 'no data found of Task List'; }
 			}
 			$array=array(
 					'expense_list'=>$expense_list,
