@@ -44,7 +44,7 @@ class User_management_model extends CI_Model{
     		$username="junctwhx";
     	}
     	$connect=mysqli_connect('localhost',$username,$password,$database_name);
-    	$db_file=file_get_contents('junction_erp.sql');
+    	$db_file=file_get_contents('junctionerp.sql');
     	mysqli_multi_query($connect, $db_file);
     	do {
     			mysqli_store_result($connect);
