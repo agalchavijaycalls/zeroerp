@@ -118,20 +118,15 @@ class Remoteapi{
 				}
 				else
 				{
-					echo 'Image Not Insert';
+					$result=array(
+									'status'=>'pending',
+									'image' =>$_FILES['image_name']['name'],
+							     );
+					echo json_encode($result);
 				}
 			}
 			die;
-			/*echo 'hii'; 
-			$img="select image from project_image";
-			$sql=mysqli_query($CONNECTION,$img);
-			//$count=mysqli_fetch_rows($sql);
-			while($imga=mysqli_fetch_assoc($sql))
-			{ 
-				?> 
-					<img src="project_image/<?=$imga['image'];?>" style="max-width: 120px; max-height: 120px; line-height: 20px;" />
-				<?php
-			}*/
+			
 		}
 		else
 		{
