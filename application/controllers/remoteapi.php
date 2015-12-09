@@ -102,22 +102,24 @@ class Remoteapi{
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami','junction_erp');
 		if($CONNECTION)
 		{
-			//$sql="select * from project_image where image='".$_FILES['image_name']['name']."'";
-			//$query=mysqli_query($CONNECTION,$query);
-			$query="insert into project_image(project_id,task_id,image) values ('".$_POST['project_id']."','".$_POST['task_id']."','".$_FILES['image_name']['name']."')";
-			$sql=mysqli_query($CONNECTION,$query);
-			if($sql) 
+			$sql="select * from project_image where image='".$_FILES['image_name']['name']."'";
+			$query=mysqli_query($CONNECTION,$query);
 			{
-				$image=move_uploaded_file($_FILES['image_name']['tmp_name'],"project_image/".$_FILES['image_name']['name']); 
-				$result=array(
-								'status'=>'success',
-								'image' =>$_FILES['image_name']['name'],
-						     );
-				echo json_encode($result);
-			}
-			else
-			{
-				echo 'Image Not Insert';
+				$query="insert into project_image(project_id,task_id,image) values ('".$_POST['project_id']."','".$_POST['task_id']."','".$_FILES['image_name']['name']."')";
+				$sql=mysqli_query($CONNECTION,$query);
+				if($sql) 
+				{
+					$image=move_uploaded_file($_FILES['image_name']['tmp_name'],"project_image/".$_FILES['image_name']['name']); 
+					$result=array(
+									'status'=>'success',
+									'image' =>$_FILES['image_name']['name'],
+							     );
+					echo json_encode($result);
+				}
+				else
+				{
+					echo 'Image Not Insert';
+				}
 			}
 			die;
 			/*echo 'hii'; 
