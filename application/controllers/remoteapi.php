@@ -7,9 +7,10 @@ class Remoteapi{
 	{
 		//error_reporting(0);
 		$data=json_decode($_POST['employeeData']);
+		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
-			$imei=$data->employeeIMEI;//echo $imei;
+			//echo $imei;
 			$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
 			if($TempConnection)
 			{
