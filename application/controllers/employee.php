@@ -325,11 +325,7 @@ public function insert_employee($info=false)
 	
 	public function track_address($info=false,$name=false)
 	{ 
-		//$this->session->unset('db_name');
-		$db=$this->session->userdata('db_name');
-		$this->session->set_userdata('db_name','appmanager');
-		$this->session->userdata('db_name');	
-		$imei=$this->input->post('imei');
+		$TempOrganizationDatabaseName=$this->session->userdata('db_name'); //echo $TempOrganizationDatabaseName;die;
 		$name=$this->input->post('name');
 		$from=$this->input->post('from');
 		$to=$this->input->post('to');
@@ -349,6 +345,9 @@ public function insert_employee($info=false)
 			//echo $latlong;
 			if(!$locations[$latlong])
 			{ 
+				$this->session->unset_userdata('db_name');
+				$this->session->set_userdata('db_name','appmanager');
+				$this->session->userdata('db_name');
 				$local_db=$this->data['local_db']=$this->employee_model->local_db($lat,$long);
 				$newarray=array($local_db->Latitude."-".$local_db->Longitude=>$local_db->address);
 				$locations= array_merge($locations, $newarray);
@@ -360,6 +359,9 @@ public function insert_employee($info=false)
 									'address'=>$address
 										);
 						$q = $this->employee_model->insert_track('physical_address',$data);//echo $address;
+							$this->session->unset_userdata('db_name');
+							$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);
+							$this->session->userdata('db_name');
 							$newlocation=array($lat."-".$long=>$address);
 							$locations= array_merge($locations, $newlocation);
 						}

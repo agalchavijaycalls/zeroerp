@@ -121,11 +121,13 @@ $qry=$this->db->query("select * from tracking where `imei`='".$imei."' and DATE(
 	
 	public function insert_track($table,$data)
 	{
+		$this->load->database('default',TRUE);
 		$this->db->insert($table,$data);
 	}
 	
 	public function local_db($lat,$long)
 	{
+		$this->load->database('default',TRUE);
 		$qry=$this->db->get_where('physical_address',array('Latitude'=>$lat,'Longitude'=>$long));
 		return $qry->row();
 		//print_r($qry);die;
