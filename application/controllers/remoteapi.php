@@ -28,18 +28,30 @@ class Remoteapi{
 							if($list->employeeLocationDate && $list->employeeLocationTime && $list->employeeLocationLatitude && $list->employeeLocationLongitude && $list->employeeLocationProviderName && $list->employeeLocationBatteryLevel)
 							{
 								$GetImeiListData="select * from tracking where imei='".$imei."' and date='".$list->employeeLocationDate." and time='".$list->employeeLocationTime."'";
-								$sql=mysqli_query($CONNECTION, $GetImeiListData); $employee_list=array('key'=>$sql);echo json_encode($employee_list);die;//print_r($sql);die; 
-								//if()
-								$result = "INSERT INTO tracking VALUES('".$imei."','".$list->employeeLocationDate."','".$list->employeeLocationTime."','".$list->employeeLocationLatitude."','".$list->employeeLocationLongitude."','".$list->employeeLocationProviderName."','".$list->employeeLocationBatteryLevel."')";
-								$sql=mysqli_query($CONNECTION,$result);
-								if($sql)
+								$sql=mysqli_query($CONNECTION,$GetImeiListData); //$employee_list=array('key'=>$sql);echo json_encode($employee_list);die;//print_r($sql);die; 
+								$count=mysqli_num_rows($sql);
+								if(isset($count) && !$count > 0)
 								{
-									$employee_list[]=array(
-													'imei'=>$imei,
-													'employeeLocationDate'=>$list->employeeLocationDate,
-													'employeeLocationTime'=>$list->employeeLocationTime,
-													'status'=>'success',
-												 );
+									$result = "INSERT INTO tracking VALUES('".$imei."','".$list->employeeLocationDate."','".$list->employeeLocationTime."','".$list->employeeLocationLatitude."','".$list->employeeLocationLongitude."','".$list->employeeLocationProviderName."','".$list->employeeLocationBatteryLevel."')";
+									$sql=mysqli_query($CONNECTION,$result);
+									if($sql)
+									{
+										$employee_list[]=array(
+														'imei'=>$imei,
+														'employeeLocationDate'=>$list->employeeLocationDate,
+														'employeeLocationTime'=>$list->employeeLocationTime,
+														'status'=>'success',
+													 );
+									}
+									else
+									{
+										$employee_list[]=array(
+												'imei'=>$imei,
+												'date'=>$list->employeeLocationDate,
+												'time'=>$list->employeeLocationTime,
+												'status'=>'pending',
+										);
+									}
 								}
 								else
 								{
@@ -47,7 +59,7 @@ class Remoteapi{
 											'imei'=>$imei,
 											'date'=>$list->employeeLocationDate,
 											'time'=>$list->employeeLocationTime,
-											'status'=>'pending',
+											'status'=>'already insert',
 									);
 								}
 							} 
