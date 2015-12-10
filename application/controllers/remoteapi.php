@@ -10,7 +10,7 @@ class Remoteapi{
 		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
-			echo 'error';die;
+			//echo 'error';die;
 			$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
 			if($TempConnection)
 			{
@@ -70,6 +70,11 @@ class Remoteapi{
 						echo json_encode($employee_list);
 					}
 				}
+				else
+				{
+					$employee_list=array('status'=>'Database Name Not Found ');
+					echo json_encode($employee_list);
+				}
 				
 			}
 			else
@@ -81,7 +86,7 @@ class Remoteapi{
 		}
 		else
 		{
-			echo 'success';die;
+			//echo 'success';die;
 			$employee_list=array('status'=>'Database Name Not Found In Server');
 			echo json_encode($employee_list);
 		}
