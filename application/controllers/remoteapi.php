@@ -6,7 +6,7 @@ class Remoteapi{
 	function locationUpdate()
 	{
 		//error_reporting(0);
-		$data=json_decode($_POST['employeeData']);print_r($data);
+		$data=json_decode($_POST['employeeData']);//print_r($data);
 		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
