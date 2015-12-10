@@ -7,18 +7,18 @@ class Remoteapi{
 	{
 		//error_reporting(0);
 		$data=json_decode($_POST['employeeData']);
-		if(isset($imei) && !empty($imei) && isset($data->database_name) && !empty($data->database_name))
+		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
 			$imei=$data->employeeIMEI;//echo $imei;
 			$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
 			if($TempConnection)
 			{
-				$DatabaseName="select db_name from registered_application where db_name='".$data->database_name."'";
+				$DatabaseName="select db_name from registered_application where db_name='".$data->employeeOrganizationName."'";
 				$sql=mysqli_query($TempConnection, $DatabaseName);//print_r($sql);
 				$count=mysqli_num_rows($sql);
 				if(isset($count) && $count > 0)
 				{
-					$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->database_name);
+					$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->employeeOrganizationName);
 					if($CONNECTION)
 					{
 						
@@ -39,7 +39,7 @@ class Remoteapi{
 								}
 								else
 								{
-									$result[]=array(
+									$empl[]=array(
 											'imei'=>$imei,
 											'date'=>$list->employeeLocationDate,
 											'time'=>$list->employeeLocationTime,
