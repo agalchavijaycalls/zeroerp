@@ -28,7 +28,8 @@ class Remoteapi{
 							if($list->employeeLocationDate && $list->employeeLocationTime && $list->employeeLocationLatitude && $list->employeeLocationLongitude && $list->employeeLocationProviderName && $list->employeeLocationBatteryLevel)
 							{
 								$GetImeiListData="select * from tracking where imei='".$imei."' and date='".$list->employeeLocationDate." and time='".$list->employeeLocationTime."'";
-								$sql=mysqli_query($CONNECTION, $GetImeiListData);
+								$sql=mysqli_query($CONNECTION, $GetImeiListData); echo count($sql);die; 
+								//if()
 								$result = "INSERT INTO tracking VALUES('".$imei."','".$list->employeeLocationDate."','".$list->employeeLocationTime."','".$list->employeeLocationLatitude."','".$list->employeeLocationLongitude."','".$list->employeeLocationProviderName."','".$list->employeeLocationBatteryLevel."')";
 								$sql=mysqli_query($CONNECTION,$result);
 								if($sql)
@@ -51,7 +52,7 @@ class Remoteapi{
 								}
 							} 
 						}
-						echo json_encode($employee_list);die;
+						echo json_encode($employee_list);//die;
 								
 					}
 					else
