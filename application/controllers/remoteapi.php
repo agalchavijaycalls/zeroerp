@@ -37,7 +37,6 @@ class Remoteapi{
 									if($sql)
 									{
 										$employee_list[]=array(
-														'imei'=>$imei,
 														'employeeLocationDate'=>$list->employeeLocationDate,
 														'employeeLocationTime'=>$list->employeeLocationTime,
 														'status'=>'success',
@@ -46,7 +45,6 @@ class Remoteapi{
 									else
 									{
 										$employee_list[]=array(
-												'imei'=>$imei,
 												'date'=>$list->employeeLocationDate,
 												'time'=>$list->employeeLocationTime,
 												'status'=>'pending',
@@ -56,7 +54,6 @@ class Remoteapi{
 								else
 								{
 									$employee_list[]=array(
-											'imei'=>$imei,
 											'date'=>$list->employeeLocationDate,
 											'time'=>$list->employeeLocationTime,
 											'status'=>'already insert',
@@ -64,6 +61,7 @@ class Remoteapi{
 								}
 							} 
 						}
+						$employee_list=array('imei'=>$imei,'employee_list'=>$employee_list);
 						echo json_encode($employee_list);//die;
 								
 					}
