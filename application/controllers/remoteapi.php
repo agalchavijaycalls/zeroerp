@@ -16,7 +16,7 @@ class Remoteapi{
 			{
 				$DatabaseName="select db_name from registered_application where db_name='".$data->employeeOrganizationName."'";
 				$sql=mysqli_query($TempConnection, $DatabaseName);//print_r($sql);
-				$count=mysqli_num_rows($sql); print_r($count);die;
+				$count=mysqli_num_rows($sql); //print_r($count);die;
 				if(isset($count) && $count > 0)
 				{
 					$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->employeeOrganizationName);
