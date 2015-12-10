@@ -6,7 +6,7 @@ class Remoteapi{
 	function locationUpdate()
 	{
 		//error_reporting(0);
-		$data=json_decode($_POST['employeeData']);
+		$data=json_decode($_POST['employeeData']);print_r($data);
 		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
@@ -16,7 +16,7 @@ class Remoteapi{
 			{
 				$DatabaseName="select db_name from registered_application where db_name='".$data->employeeOrganizationName."'";
 				$sql=mysqli_query($TempConnection, $DatabaseName);//print_r($sql);
-				$count=mysqli_num_rows($sql);
+				$count=mysqli_num_rows($sql); print_r($count);die;
 				if(isset($count) && $count > 0)
 				{
 					$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->employeeOrganizationName);
