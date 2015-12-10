@@ -31,7 +31,7 @@ class Remoteapi{
 								$sql=mysqli_query($CONNECTION,$result);
 								if($sql)
 								{
-									$result[]=array(
+									$employee_list[]=array(
 													'imei'=>$imei,
 													'employeeLocationDate'=>$list->employeeLocationDate,
 													'employeeLocationTime'=>$list->employeeLocationTime,
@@ -40,7 +40,7 @@ class Remoteapi{
 								}
 								else
 								{
-									$empl[]=array(
+									$employee_list[]=array(
 											'imei'=>$imei,
 											'date'=>$list->employeeLocationDate,
 											'time'=>$list->employeeLocationTime,
@@ -49,7 +49,7 @@ class Remoteapi{
 								}
 							} 
 						}
-						echo json_encode($result);die;
+						echo json_encode($employee_list);die;
 								
 					}
 					else
