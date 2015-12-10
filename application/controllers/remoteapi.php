@@ -27,6 +27,8 @@ class Remoteapi{
 						{
 							if($list->employeeLocationDate && $list->employeeLocationTime && $list->employeeLocationLatitude && $list->employeeLocationLongitude && $list->employeeLocationProviderName && $list->employeeLocationBatteryLevel)
 							{
+								$GetImeiListData="select * from tracking where imei='".$imei."' and date='".$list->employeeLocationDate." and time='".$list->employeeLocationTime."'";
+								$sql=mysqli_query($CONNECTION, $GetImeiListData);
 								$result = "INSERT INTO tracking VALUES('".$imei."','".$list->employeeLocationDate."','".$list->employeeLocationTime."','".$list->employeeLocationLatitude."','".$list->employeeLocationLongitude."','".$list->employeeLocationProviderName."','".$list->employeeLocationBatteryLevel."')";
 								$sql=mysqli_query($CONNECTION,$result);
 								if($sql)
@@ -54,20 +56,20 @@ class Remoteapi{
 					}
 					else
 					{
-						echo 'Server Error Connection Not Found';
+						echo json_encode($employee_list=array('status'=>'Server Error Connection Not Found'));
 					}
 				}
 				
 			}
 			else
 			{
-				echo 'Temprory Server Error Connection Not Found';
+				echo json_encode($employee_list=array('status'=>'Temprory Server Error Connection Not Found'));
 			} 
 			
 		}
 		else
 		{
-			echo 'IMEI Not Found In Server';
+			echo json_encode($employee_list=array('status'=>'IMEI Not Found In Server'));
 		}
 	}
 	
