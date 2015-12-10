@@ -61,26 +61,29 @@ class Remoteapi{
 								}
 							} 
 						}
-						$employee_list=array('imei'=>$imei,'employee_list'=>$employee_list);
-						echo json_encode($employee_list);//die;
+						$employee_list=array('status'=>'success','imei'=>$imei,'employee_list'=>$employee_list);
+						echo json_encode($employee_list);
 								
 					}
 					else
 					{
-						echo json_encode($employee_list=array('status'=>'Server Error Connection Not Found'));
+						$employee_list=array('status'=>'Server Error Connection Not Found');
+						echo json_encode($employee_list);
 					}
 				}
 				
 			}
 			else
 			{
-				echo json_encode($employee_list=array('status'=>'Temprory Server Error Connection Not Found'));
+				$employee_list=array('status'=>'Temprory Server Error Connection Not Found');
+				echo json_encode($employee_list);
 			} 
 			
 		}
 		else
 		{
-			echo json_encode($employee_list=array('status'=>'IMEI Not Found In Server'));
+			$employee_list=array('status'=>'Database Name Not Found In Server');
+			echo json_encode($employee_list);
 		}
 	}
 	
