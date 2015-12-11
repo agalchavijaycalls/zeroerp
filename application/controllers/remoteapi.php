@@ -24,7 +24,7 @@ class Remoteapi{
 					{
 						foreach ($data->employeeLocationList as $list)
 						{
-							if($list->employeeLocationDate && $list->employeeLocationTime && $list->employeeLocationLatitude && $list->employeeLocationLongitude && $list->employeeLocationProviderName && $list->employeeLocationBatteryLevel)
+							if(isset($list->employeeLocationDate) && isset($list->employeeLocationTime) && isset($list->employeeLocationLatitude) && isset($list->employeeLocationLongitude))
 							{
 								$GetImeiListData="select * from tracking where imei='".$imei."' and date='".$list->employeeLocationDate."' and time='".$list->employeeLocationTime."'";
 								$sql=mysqli_query($CONNECTION,$GetImeiListData); //$employee_list=array('key'=>$sql);echo json_encode($employee_list);die;//print_r($sql);die; 

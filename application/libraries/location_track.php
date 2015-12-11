@@ -2,8 +2,7 @@
 Class Location_track
 {
 	public static function track_address($lat,$long)
-	{
-		echo location;
+	{     //echo 'google api track';
 		$url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($lat).','.trim($long).'&sensor=false';
 		$json= @file_get_contents($url);
 		$data= json_decode($json);

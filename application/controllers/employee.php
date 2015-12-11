@@ -326,10 +326,11 @@ public function insert_employee($info=false)
 	public function track_address($info=false,$name=false)
 	{ 
 		$TempOrganizationDatabaseName=$this->session->userdata('db_name'); //echo $TempOrganizationDatabaseName;die;
+		$imei=$this->input->post('imei');
 		$name=$this->input->post('name');
 		$from=$this->input->post('from');
 		$to=$this->input->post('to');
-		$sheat=$this->input->post('sheat');
+		$sheat=$this->input->post('sheat');//echo $TempOrganizationDatabaseName; echo $name; echo $from; echo $to;die;
 		$user_id= $info;
 		$action_array = $this->employee_model->tracking_detail($imei,$from,$to);
 		if(!empty($action_array)){
@@ -541,6 +542,7 @@ public function insert_employee($info=false)
 					'device'=>$this->input->post('device'),
 					'created_by'=>$this->input->post('name'),
 					'created_on'=>date('Y-m-d'),
+					'status'=>'suspend',
 				   	);
 		$SetRegistration=$this->employee_model->insert_employee('newregistration',$data);
 		if($SetRegistration)
