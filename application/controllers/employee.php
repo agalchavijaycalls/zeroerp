@@ -461,6 +461,7 @@ public function insert_employee($info=false)
 							'role_id'=>'admin',
 							'Username'=>$EmployeeDetail[0]->name,
 							'Password'=>md5($EmployeeDetail[0]->password),
+							'organization_id'=>$session['organization_id'],
 						   );
 				$InsertEmployee=$this->employee_model->insert_employee('user',$data);//print_r($InsertEmployee);die;
 				$data=array('status'=>'active');
