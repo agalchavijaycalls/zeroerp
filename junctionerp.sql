@@ -519,7 +519,7 @@ CREATE TABLE IF NOT EXISTS `newregistration` (
   `number` varchar(15) NOT NULL,
   `password` varchar(250) NOT NULL,
   `imei` varchar(30) NOT NULL,
-  `androideapp` varchar(10) NOT NULL,
+  `device` varchar(10) NOT NULL,
   `status` varchar(30) NOT NULL,
   `created_by` varchar(30) NOT NULL,
   `created_on` varchar(30) NOT NULL,
@@ -748,7 +748,9 @@ CREATE TABLE IF NOT EXISTS `tracking` (
   `date` varchar(30) NOT NULL,
   `time` varchar(30) NOT NULL,
   `Latitude` varchar(70) NOT NULL,
-  `Longitude` varchar(70) NOT NULL
+  `Longitude` varchar(70) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `bettry_leavel` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
