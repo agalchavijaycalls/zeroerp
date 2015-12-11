@@ -72,7 +72,7 @@ class Remoteapi{
 				}
 				else
 				{
-					$employee_list=array('status'=>'Database Name Not Found ');
+					$employee_list=array('status'=>'Database Name Not Found');
 					echo json_encode($employee_list);
 				}
 				
@@ -105,7 +105,7 @@ class Remoteapi{
 			if(isset($count) && $count > 0 )
 			{
 				$new_connection=mysqli_connect("localhost",'root','bitnami',$data->employeeOrganizationName);
-				$query= "INSERT INTO newregistration (name,number,password,imei,androideapp,status,created_by,created_on,updated_by,updated_on) VALUES('".$data->employeeName."','".$data->employeeMobileNumber."','".$data->employeePassword."','".$data->employeeIMEI."','androide','suspend','".$data->employeeName."','".date('d-m-Y')."','','')"; //echo $query; die;
+				$query= "INSERT INTO newregistration (name,number,password,imei,device,status,created_by,created_on,updated_by,updated_on) VALUES('".$data->employeeName."','".$data->employeeMobileNumber."','".$data->employeePassword."','".$data->employeeIMEI."','androide','suspend','".$data->employeeName."','".date('d-m-Y')."','','')"; //echo $query; die;
 				$sql=mysqli_query($new_connection,$query);
 				if($sql)
 				{

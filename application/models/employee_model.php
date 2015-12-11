@@ -24,8 +24,9 @@ class Employee_model extends CI_Model {
 		/* Function for insert employee */
 	public function insert_employee($table,$data)
 	{
-		$this->db->insert($table,$data);
-		return true;
+		$qry=$this->db->insert($table,$data);
+		return $qry;
+		
 	}
 	
 	/*function for employee list*/
@@ -167,8 +168,15 @@ $qry=$this->db->query("select * from tracking where `imei`='".$imei."' and DATE(
 	{
 		$this->db->where($filter);
 		$qry=$this->db->update($table,$data);
-		return true;	
-	} 
+		return $qry;	
+	}
+
+	function DeleteSingleData($table=false,$filter=false)
+	{
+		$this->db->where($filter);
+		$qry=$this->db->delete($table);
+		return $qry;
+	}
 }
 //Model Class for Employee end
 ?>

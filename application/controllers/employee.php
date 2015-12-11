@@ -521,6 +521,44 @@ public function insert_employee($info=false)
 		}
 	}
 	
+	public function NewRegistration()
+	{
+		//echo $this->session->userdata('db_name');die;
+		//$application_registration_list=$this->data['application_registration_list']=$this->employee_model->GetMultipleData('newregistration');
+		$this->parser->parse('include/header',$this->data);
+		$this->parser->parse('include/left_menu',$this->data);
+		$this->load->view('NewRegistration',$this->data);
+		$this->parser->parse('include/footer',$this->data);
+	}
+	
+	function SetNewRegistration()
+	{
+		$data=array(
+					'name'=>$this->input->post('name'),
+					'number'=>$this->input->post('number'),
+					'password'=>$this->input->post('password'),
+					'imei'=>$this->input->post('imei'),
+					'device'=>$this->input->post('device'),
+					'created_by'=>$this->input->post('name'),
+					'created_on'=>date('Y-m-d'),
+				   	);
+		$SetRegistration=$this->employee_model->insert_employee('newregistration',$data);
+		if($SetRegistration)
+		{
+			$this->session->set_flashdata('success','Registration Successfully');
+			redirect('employee/application_reg_list?menu=pms');
+		}
+	}
+	
+	function DeleteSingleData($id=false)
+	{
+		$DeleteSingleData=$this->employee_model->DeleteSingleData('newregistration',array('registration_id'=>$id));
+		if($DeleteSingleData)
+		{
+			$this->session->set_flashdata('success','Delete Successfully');
+			redirect('employee/application_reg_list?menu=pms');
+		}
+	}
 }
 
 /* End of file welcome.php */

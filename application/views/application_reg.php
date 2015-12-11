@@ -20,22 +20,22 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<?php  if($this->session->flashdata('category_success')) { ?>
+			<?php  if($this->session->flashdata('success')) { ?>
 				<div class="row-fluid">
 					<div class="alert alert-success">
-						<strong><?=$this->session->flashdata('message')?></strong> 
+						<strong><?=$this->session->flashdata('success')?></strong> 
 					</div>
 				</div>
   			<?php } ?>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Manage Registration</h3>
-					<!--  <div class="panel-options">
-							<a href="<?php echo base_url(); ?>master/add_organization"><button class="btn btn-theme btn-info btn-icon btn-sm">
+					  <div class="panel-options">
+							<a href="<?php echo base_url(); ?>employee/NewRegistration?menu=pms"><button class="btn btn-theme btn-info btn-icon btn-sm">
 							<i class="fa-plus"></i>
-							<span>Add Organization</span>
+							<span>Add</span>
 						</button></a>
-					</div>	-->
+					</div>	
 				</div>
 				<div class="panel-body">
 					<script type="text/javascript">
@@ -80,15 +80,15 @@
 									<td><?php echo $list->imei;?></td>
 									<td><?php echo $list->status;?></td>
 									<td>
-										<a href="<?php echo base_url(); ?>employeecvxc/delete_organization/<?=$list->registration_id; ?>" onClick="return confirm('Are you sure to delete this organization ? This will delete all the related records on this organization as well.')" class="btn btn-danger btn-sm btn-icon icon-left">
+										<a href="<?php echo base_url(); ?>employee/DeleteSingleData/<?=$list->registration_id; ?>" onClick="return confirm('Are you sure to delete this Employee Data ? This will delete all the related records on this organization as well.')" class="btn btn-danger btn-sm btn-icon icon-left">
 												Delete
 										</a>
 										<a href="<?php echo base_url(); ?>employee/ApiEmployeeRegistration/<?=$list->registration_id ?>" title="<?=$list->status;?>" class="btn btn-secondary btn-sm btn-icon icon-left">
 												Create Employee
 										</a>
-										<a href="<?php echo base_url(); ?>employee/ApprovalTrack/<?=$list->imei;?>/<?=$list->trackStatus;?>"  class="btn btn-danger btn-sm btn-icon icon-left">
+										<!--  <a href="<?php echo base_url(); ?>employee/ApprovalTrack/<?=$list->imei;?>/<?=$list->trackStatus;?>"  class="btn btn-danger btn-sm btn-icon icon-left">
 												<?php echo $list->trackStatus; ?>
-										</a>
+										</a>-->
 									</td>
 								</tr>
 							<?php $i++; } ?>
