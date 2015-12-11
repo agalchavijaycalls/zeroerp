@@ -442,11 +442,12 @@ public function insert_employee($info=false)
 	
 	function ApiEmployeeRegistration($EmployeeId=false)
 	{
+		$session=$this->session->userdata('user_data');//echo $session['organization_id'];
 		$EmployeeDetail=$this->data['EmployeeDetail']=$this->employee_model->GetSingleData('newregistration',array('registration_id'=>$EmployeeId));
 		if($EmployeeDetail)
 		{
 			$data=array(
-						'organization_id'=>1,
+						'organization_id'=>$session['organization_id'],
 						'designation_id'=>NULL,
 						'department_id'=>NULL,
 						'first_name'=>$EmployeeDetail[0]->name,
@@ -457,7 +458,7 @@ public function insert_employee($info=false)
 			if($InsertEmployee)
 			{
 				$data=array(
-							'role_id'=>'user',
+							'role_id'=>'admin',
 							'Username'=>$EmployeeDetail[0]->name,
 							'Password'=>md5($EmployeeDetail[0]->password),
 						   );
@@ -524,6 +525,7 @@ public function insert_employee($info=false)
 	
 	public function NewRegistration()
 	{
+		//$session=$this->session->userdata('user_data');echo $session['organization_id'];die;
 		//echo $this->session->userdata('db_name');die;
 		//$application_registration_list=$this->data['application_registration_list']=$this->employee_model->GetMultipleData('newregistration');
 		$this->parser->parse('include/header',$this->data);
