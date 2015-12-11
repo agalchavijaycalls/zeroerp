@@ -34,7 +34,7 @@
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary"  onclick="callAjax();">Genrate</button>
-				<button type="button" onclick="window.location.href='<?php echo base_url();?>employee/manage_emp'" class="btn btn-white" data-dismiss="modal">Close</button>
+				<button type="button" onclick="window.location.href='<?=base_url();?>employee/manage_emp'" class="btn btn-white" data-dismiss="modal">Close</button>
 			</div>
 		</form>
 	</div>

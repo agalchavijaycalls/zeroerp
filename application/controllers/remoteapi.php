@@ -24,7 +24,7 @@ class Remoteapi{
 					{
 						foreach ($data->employeeLocationList as $list)
 						{
-							if(isset($list->employeeLocationDate) && isset($list->employeeLocationTime) && isset($list->employeeLocationLatitude) && isset($list->employeeLocationLongitude))
+							if(isset($list->employeeLocationDate)&&isset($list->employeeLocationTime)&&isset($list->employeeLocationLatitude)&&isset($list->employeeLocationLongitude)&&!empty($list->employeeLocationLatitude)&&!empty($list->employeeLocationLongitude)&&!empty($list->employeeLocationDate)&&!empty($list->employeeLocationTime) )
 							{
 								$GetImeiListData="select * from tracking where imei='".$imei."' and date='".$list->employeeLocationDate."' and time='".$list->employeeLocationTime."'";
 								$sql=mysqli_query($CONNECTION,$GetImeiListData); //$employee_list=array('key'=>$sql);echo json_encode($employee_list);die;//print_r($sql);die; 
@@ -55,9 +55,18 @@ class Remoteapi{
 									$employee_list[]=array(
 											'date'=>$list->employeeLocationDate,
 											'time'=>$list->employeeLocationTime,
-											'status'=>'already insert',
+											'status'=>'success',
+											'report'=>'already insert',
 									);
 								}
+							}
+							else
+							{
+								$employee_list[]=array(
+										'date'=>$list->employeeLocationDate,
+										'time'=>$list->employeeLocationTime,
+										'status'=>'Key Not Found',
+								);
 							} 
 						}
 						$employee_list=array('status'=>'success','imei'=>$imei,'employee_list'=>$employee_list);

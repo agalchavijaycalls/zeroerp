@@ -401,7 +401,7 @@ var public_vars = public_vars || {};
 		    }).on('changeDate', function(event) {
 		        $('#txtCheckOut').removeAttr('disabled');
 		        var newDate = new Date(event.date)
-		        newDate.setDate(newDate.getDate() + 6)
+		        newDate.setDate(newDate.getDate() + 30)
 		        checkout.datepicker("setStartDate", event.date);
 		        checkout.datepicker("setEndDate", newDate);
 		        checkin.datepicker('hide');
