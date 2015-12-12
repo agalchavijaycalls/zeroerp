@@ -1,8 +1,14 @@
 <?php 
 
 /* Controller for login Functionality */
-class Remoteapi{
+class Remoteapi extends CI_Controller{
 	
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->helper('url');
+		//$this->load->model('AppmanagerGateway_model');
+	}
 	function locationUpdate()
 	{
 		//error_reporting(0);
@@ -488,6 +494,7 @@ class Remoteapi{
 			echo $result;die;
 		}
 		 $value= $_POST['json']; //die;
+		 redirect('http://junctiondev.cloudapp.net/appmanager/AppmanagerGateway/CheckAuthonticate/'.$value);die;
 		header('location:http://junctiondev.cloudapp.net/appmanager/AppmanagerGateway/CheckAuthonticate/'.$value); 
 		//echo $result;  
 	} 
