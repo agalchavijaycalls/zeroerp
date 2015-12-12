@@ -480,6 +480,17 @@ class Remoteapi{
 			}
 		}
 	}
+	
+	function test()//http://junctiondev.cloudapp.net/appmanager/
+	{
+		if(isset($_GET['result']) && $_GET['result']!=='')
+		{
+			echo $result;die;
+		}
+		 echo $json; die;
+		header('location:http://junctiondev.cloudapp.net/appmanager/AppmanagerGateway/CheckAuthonticate/'.$data->value); 
+		//echo $result;  
+	} 
 		
 }
 /* End of login controller */
