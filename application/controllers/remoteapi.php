@@ -487,8 +487,8 @@ class Remoteapi{
 		{
 			echo $result;die;
 		}
-		 echo $_POST['json']; die;
-		header('location:http://junctiondev.cloudapp.net/appmanager/AppmanagerGateway/CheckAuthonticate/'.$data->value); 
+		 $value= $_POST['json']; //die;
+		header('location:http://junctiondev.cloudapp.net/appmanager/AppmanagerGateway/CheckAuthonticate/'.$value); 
 		//echo $result;  
 	} 
 		
