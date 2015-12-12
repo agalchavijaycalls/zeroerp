@@ -493,7 +493,7 @@ class Remoteapi extends CI_Controller{
 		{
 			echo $result;die;
 		}
-		 $value= $_POST['json']; echo $value;//die;
+		 $value= $_POST['json']; echo $value;die;//die;
 		 redirect('http://junctiondev.cloudapp.net/appmanager/AppmanagerGateway/CheckAuthonticate/'.$value);die;
 		header('location:http://junctiondev.cloudapp.net/appmanager/AppmanagerGateway/CheckAuthonticate/'.$value); 
 		//echo $result;  
