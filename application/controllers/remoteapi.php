@@ -13,8 +13,8 @@ class Remoteapi extends CI_Controller{
 	{
 		//error_reporting(0);
 		
-		$data=json_decode($_POST['employeeData']);print_r($data);die;
-		$imei=$data->employeeIMEI;
+		$data=json_decode($_POST['employeeData']);//print_r($data);die;
+		$imei=$data->employeeIMEI;echo $imei;die;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
 			//if(!isset($_GET['result']) && empty($_GET['result']))
