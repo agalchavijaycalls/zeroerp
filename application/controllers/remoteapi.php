@@ -19,9 +19,9 @@ class Remoteapi extends CI_Controller{
 		{
 			//if(!isset($_GET['result']) && empty($_GET['result']))
 			//{
-				$data=array('DatabaseName'=>$data->employeeOrganizationName,'data'=>$data);
-				$json=json_encode($data);
-				redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate?data='.$json);die;
+				//$data=array('DatabaseName'=>$data->employeeOrganizationName,'data'=>$data);
+				//$json=json_encode($data);
+				redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate?filter='.$data->employeeOrganizationName.'&&'.$data);die;
 			//}	
 			if(!empty($_GET['result'])&& $_GET['result']=='success')
 				{
