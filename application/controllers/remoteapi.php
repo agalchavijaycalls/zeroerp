@@ -12,18 +12,17 @@ class Remoteapi extends CI_Controller{
 	function locationUpdate()
 	{
 		//error_reporting(0);
-		//if(isset($_GET['result']) && $_GET['result']!=='')
-		//{
-		//	echo $_GET['result'];die;
-		//}
+		
 		$data=json_decode($_POST['employeeData']);
 		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
-			if(!isset($_GET['result']) && empty($_GET['result']))
-			{
-				redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$data->employeeOrganizationName);die;
-			}	
+			//if(!isset($_GET['result']) && empty($_GET['result']))
+			//{
+				$data=array('DatabaseName'=>$data->employeeOrganizationName,'data'=>$_POST['employeeData']);
+				$json=json_encode($data);
+				redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate?json='.$json);die;
+			//}	
 			if(!empty($_GET['result'])&& $_GET['result']=='success')
 				{
 				//$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
