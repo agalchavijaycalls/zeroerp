@@ -14,11 +14,111 @@ class Remoteapi extends CI_Controller{
 		//error_reporting(0);
 		if(isset($_GET['json']))
 		{
-			print_r($_GET['json']);die;
+			//print_r($_GET['json']);die;
+			$value=json_decode($_GET['json']);
+			$data=json_decode($value->data);
+			$imei=$data->employeeIMEI;echo $imei;die;
+			if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
+			{
+				//if(!isset($_GET['result']) && empty($_GET['result']))
+				//{
+				//$data=array('DatabaseName'=>$data->employeeOrganizationName,'data'=>$data);
+				//$json=json_encode($data);
+				redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$data->employeeOrganizationName);die;
+				//}
+				if(!empty($_GET['result'])&& $_GET['result']=='success')
+				{
+					//$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
+					//if($TempConnection)
+					//{
+					//	$DatabaseName="select db_name from registered_application where db_name='".$data->employeeOrganizationName."'";
+					//	$sql=mysqli_query($TempConnection, $DatabaseName);//print_r($sql);
+					//	$count=mysqli_num_rows($sql); //print_r($count);die;
+					//	if(isset($count) && $count > 0)
+					//	{
+					$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->employeeOrganizationName);
+					if($CONNECTION)
+					{
+						foreach ($data->employeeLocationList as $list)
+						{
+							if(isset($list->employeeLocationDate)&&isset($list->employeeLocationTime)&&isset($list->employeeLocationLatitude)&&isset($list->employeeLocationLongitude)&&!empty($list->employeeLocationLatitude)&&!empty($list->employeeLocationLongitude)&&!empty($list->employeeLocationDate)&&!empty($list->employeeLocationTime) )
+							{
+								$GetImeiListData="select * from tracking where imei='".$imei."' and date='".$list->employeeLocationDate."' and time='".$list->employeeLocationTime."'";
+								$sql=mysqli_query($CONNECTION,$GetImeiListData); //$employee_list=array('key'=>$sql);echo json_encode($employee_list);die;//print_r($sql);die;
+								//$count=mysqli_num_rows($sql);
+								if(!$sql->num_rows>0)
+								{
+									$result = "INSERT INTO tracking VALUES('".$imei."','".$list->employeeLocationDate."','".$list->employeeLocationTime."','".$list->employeeLocationLatitude."','".$list->employeeLocationLongitude."','".$list->employeeLocationProviderName."','".$list->employeeLocationBatteryLevel."')";
+									$sql=mysqli_query($CONNECTION,$result);
+									if($sql)
+									{
+										$employee_list[]=array(
+												'employeeLocationDate'=>$list->employeeLocationDate,
+												'employeeLocationTime'=>$list->employeeLocationTime,
+												'status'=>'success',
+										);
+									}
+									else
+									{
+										$employee_list[]=array(
+												'date'=>$list->employeeLocationDate,
+												'time'=>$list->employeeLocationTime,
+												'status'=>'pending',
+										);
+									}
+								}
+								else
+								{
+									$employee_list[]=array(
+											'date'=>$list->employeeLocationDate,
+											'time'=>$list->employeeLocationTime,
+											'status'=>'success',
+											'report'=>'already insert',
+									);
+								}
+							}
+							else
+							{
+								$employee_list[]=array(
+										'date'=>$list->employeeLocationDate,
+										'time'=>$list->employeeLocationTime,
+										'status'=>'Key Not Found',
+								);
+							}
+						}
+						$employee_list=array('status'=>'success','imei'=>$imei,'employee_list'=>$employee_list);
+						echo json_encode($employee_list);
+							
+					}
+					else
+					{
+						$employee_list=array('status'=>'Server Error Connection Not Found');
+						echo json_encode($employee_list);
+					}
+					//}
+					//else
+					//{
+					//	$employee_list=array('status'=>'Database Name Not Found');
+					//	echo json_encode($employee_list);
+					//}
+						
+				}
+				else
+				{
+					$employee_list=array('status'=>$_GET['result']);
+					echo json_encode($employee_list);
+				}
+			}
+			else
+			{
+				//echo 'success';die;
+				$employee_list=array('status'=>'Database Name Not Found In Server');
+				echo json_encode($employee_list);
+			}
 		}
-		$data=json_decode($_POST['employeeData']);//print_r($data);die;
-		redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate?json='.$_POST['employeeData']);die;
-		$imei=$data->employeeIMEI;//echo $imei;die;
+		//$data=json_decode($_POST['employeeData']);//print_r($data);die;
+		//redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate?json='.$_POST['employeeData']);die;
+		/*$imei=$data->employeeIMEI;//echo $imei;die;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
 			//if(!isset($_GET['result']) && empty($_GET['result']))
@@ -115,7 +215,7 @@ class Remoteapi extends CI_Controller{
 				//echo 'success';die;
 				$employee_list=array('status'=>'Database Name Not Found In Server');
 				echo json_encode($employee_list);
-			}
+			}*/
 		
 	}
 	
