@@ -20,7 +20,7 @@ class Remoteapi extends CI_Controller{
 		if(isset($_GET['json']))
 		{
 			//print_r($_GET['json']);die;
-			$value=json_decode($_GET['json']);//print_r($value);die;
+			$value=json_decode($_GET['json']);print_r($value);die;
 			$data=json_decode($value->data);
 			$imei=$data->employeeIMEI;echo $imei;die;
 			if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
