@@ -24,7 +24,7 @@ class Remoteapi extends CI_Controller{
 			{
 				redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$data->employeeOrganizationName);die;
 			}	
-			if(isset($_GET['result'])&&!empty($_GET['result'])&& $_GET['result']=='success')
+			if(!empty($_GET['result'])&& $_GET['result']=='success')
 				{
 				//$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
 				//if($TempConnection)
