@@ -12,10 +12,10 @@ class Remoteapi extends CI_Controller{
 	function locationUpdate()
 	{
 		//error_reporting(0);
-		if(isset($_GET['result']) && $_GET['result']!=='')
-		{
-			echo $_GET['result'];die;
-		}
+		//if(isset($_GET['result']) && $_GET['result']!=='')
+		//{
+		//	echo $_GET['result'];die;
+		//}
 		$data=json_decode($_POST['employeeData']);
 		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
