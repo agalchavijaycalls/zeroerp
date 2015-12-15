@@ -12,11 +12,16 @@ class Remoteapi extends CI_Controller{
 	function locationUpdate()
 	{
 		//error_reporting(0);
+		if(isset($_GET['result']) && $_GET['result']!=='')
+		{
+			echo $_GET['result'];die;
+		}
 		$data=json_decode($_POST['employeeData']);//print_r($data);
 		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
-			echo $data->employeeOrganizationName;die;
+			redirect('http://localhost/appmanager/Appmanagergateway/CheckAuthonticate/'.$data->employeeOrganizationName);die;
+			//echo $data->employeeOrganizationName;die;
 			$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
 			if($TempConnection)
 			{
