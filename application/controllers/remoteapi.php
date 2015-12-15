@@ -20,7 +20,7 @@ class Remoteapi extends CI_Controller{
 		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
-			redirect('http://localhost/appmanager/Appmanagergateway/CheckAuthonticate/'.$data->employeeOrganizationName);die;
+			redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$data->employeeOrganizationName);die;
 			//echo $data->employeeOrganizationName;die;
 			$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
 			if($TempConnection)
