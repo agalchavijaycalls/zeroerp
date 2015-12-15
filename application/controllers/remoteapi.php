@@ -12,10 +12,15 @@ class Remoteapi extends CI_Controller{
 	function locationUpdate()
 	{
 		//error_reporting(0);
+		if(!isset($_GET['json']))
+			{
+				$data=json_decode($_POST['employeeData']);
+				redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$data->employeeOrganizationName);die;
+			}
 		if(isset($_GET['json']))
 		{
-			print_r($_GET['json']);die;
-			$value=json_decode($_GET['json']);print_r($value);die;
+			//print_r($_GET['json']);die;
+			$value=json_decode($_GET['json']);//print_r($value);die;
 			$data=json_decode($value->data);
 			$imei=$data->employeeIMEI;echo $imei;die;
 			if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
