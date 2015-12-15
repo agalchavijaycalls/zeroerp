@@ -20,7 +20,7 @@ class Remoteapi extends CI_Controller{
 		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
-			if(isset($_GET['result']) && empty($_GET['result']) && $_GET['result']=='')
+			if(!isset($_GET['result']) && empty($_GET['result']))
 			{
 				redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$data->employeeOrganizationName);die;
 			}	
