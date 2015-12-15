@@ -16,7 +16,7 @@ class Remoteapi extends CI_Controller{
 		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{
-			//echo 'error';die;
+			echo $data->employeeOrganizationName;die;
 			$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
 			if($TempConnection)
 			{
