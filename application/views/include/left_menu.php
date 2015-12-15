@@ -276,7 +276,7 @@
 						</ul>
 					</li>
 				</ul>
-				<?php }?>
+				<?php } ?>
 				
 				<!--  ul End for sales -->
 				
@@ -293,19 +293,19 @@
 							</a>
 						</li>
 						<li class="javascript:;">
-							<a href="<?php echo base_url(); ?>employee/application_reg_list?menu=pms">
+							<a href="<?php echo base_url(); ?>pms/pms/application_reg_list?menu=pms">
 							<i class="linecons-user"></i>
 								<span class="title">Employee List</span>
 							</a>
 						</li>
 						<li class="javascript:;">
-							<a href="<?php echo base_url(); ?>Pms/project?menu=pms">
+							<a href="<?php echo base_url(); ?>pms/Pms/project?menu=pms">
 							<i class="linecons-user"></i>
 								<span class="title">Project</span>
 							</a>
 						</li>
 						<li class="javascript:;">
-								<a href="<?php echo base_url(); ?>Pms/task?menu=pms">
+								<a href="<?php echo base_url(); ?>pms/Pms/task?menu=pms">
 								<i class="linecons-user"></i>
 									<span class="title">Task</span>
 								</a>

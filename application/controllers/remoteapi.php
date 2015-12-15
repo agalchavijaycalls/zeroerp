@@ -120,7 +120,7 @@ class Remoteapi extends CI_Controller{
 			if(isset($count) && $count > 0 )
 			{
 				$new_connection=mysqli_connect("localhost",'root','bitnami',$data->employeeOrganizationName);
-				$query= "INSERT INTO newregistration (name,number,password,imei,device,status,created_by,created_on,updated_by,updated_on) VALUES('".$data->employeeName."','".$data->employeeMobileNumber."','".$data->employeePassword."','".$data->employeeIMEI."','androide','suspend','".$data->employeeName."','".date('d-m-Y')."','','')"; //echo $query; die;
+				$query= "INSERT INTO newregistration (name,number,password,imei,device,status,created_by,created_on,updated_by,updated_on) VALUES('".$data->employeeName."','".$data->employeeMobileNumber."','".$data->employeePassword."','".$data->employeeIMEI."','androide','request','".$data->employeeName."','".date('d-m-Y')."','','')"; //echo $query; die;
 				$sql=mysqli_query($new_connection,$query);
 				if($sql)
 				{
@@ -493,8 +493,8 @@ class Remoteapi extends CI_Controller{
 		{
 			echo $_GET['result'];die;
 		}
-		 $value= $_POST['json']; //echo $value;die;//die;
-		 redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$value);die;
+		 $value= $_POST['json']; //url is http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$value
+		 redirect('http://localhost/appmanager/Appmanagergateway/CheckAuthonticate/demoerp');die;
 		//header('location:http://junctiondev.cloudapp.net/appmanager/AppmanagerGateway/CheckAuthonticate/'.$value); 
 		//echo $result;  
 	} 

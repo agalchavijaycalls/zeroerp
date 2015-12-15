@@ -431,48 +431,6 @@ public function insert_employee($info=false)
 		$this->parser->parse('include/footer',$this->data);
 	}
 	
-	public function application_reg_list()
-	{
-		$application_registration_list=$this->data['application_registration_list']=$this->employee_model->GetMultipleData('newregistration');
-		$this->parser->parse('include/header',$this->data);
-		$this->parser->parse('include/left_menu',$this->data);
-		$this->load->view('application_reg',$this->data);
-		$this->parser->parse('include/footer',$this->data);
-	}
-	
-	function ApiEmployeeRegistration($EmployeeId=false)
-	{
-		$session=$this->session->userdata('user_data');//echo $session['organization_id'];
-		$EmployeeDetail=$this->data['EmployeeDetail']=$this->employee_model->GetSingleData('newregistration',array('registration_id'=>$EmployeeId));
-		if($EmployeeDetail)
-		{
-			$data=array(
-						'organization_id'=>$session['organization_id'],
-						'designation_id'=>NULL,
-						'department_id'=>NULL,
-						'first_name'=>$EmployeeDetail[0]->name,
-						'mobile'=>$EmployeeDetail[0]->number,
-						'imei'=>$EmployeeDetail[0]->imei,
-					   );
-			$InsertEmployee=$this->employee_model->insert_employee('employee',$data);//print_r($InsertEmployee);die;
-			if($InsertEmployee)
-			{
-				$data=array(
-							'role_id'=>'admin',
-							'Username'=>$EmployeeDetail[0]->name,
-							'Password'=>md5($EmployeeDetail[0]->password),
-							'organization_id'=>$session['organization_id'],
-						   );
-				$InsertEmployee=$this->employee_model->insert_employee('user',$data);//print_r($InsertEmployee);die;
-				$data=array('status'=>'active');
-				$UpdateStatus=$this->employee_model->UpdateSingleData('newregistration',$data,array('registration_id'=>$EmployeeId));
-				if($UpdateStatus)
-				{
-					redirect('employee/application_reg_list');
-				}
-			}
-		}
-	}
 	
 	function ApprovalTrack($Imei=false,$Status=false)
 	{
@@ -519,51 +477,11 @@ public function insert_employee($info=false)
 			if($InsertImeiTrackDetail)
 			{
 				$UpdateImeiTrackStatus=$this->employee_model->UpdateSingleData('newregistration',array('trackStatus'=>$Status),array('imei'=>$Imei));
-				redirect('employee/application_reg_list');
+				redirect('employee/application_reg_list?menu=pms');
 			}
 		}
 	}
 	
-	public function NewRegistration()
-	{
-		//$session=$this->session->userdata('user_data');echo $session['organization_id'];die;
-		//echo $this->session->userdata('db_name');die;
-		//$application_registration_list=$this->data['application_registration_list']=$this->employee_model->GetMultipleData('newregistration');
-		$this->parser->parse('include/header',$this->data);
-		$this->parser->parse('include/left_menu',$this->data);
-		$this->load->view('NewRegistration',$this->data);
-		$this->parser->parse('include/footer',$this->data);
-	}
-	
-	function SetNewRegistration()
-	{
-		$data=array(
-					'name'=>$this->input->post('name'),
-					'number'=>$this->input->post('number'),
-					'password'=>$this->input->post('password'),
-					'imei'=>$this->input->post('imei'),
-					'device'=>$this->input->post('device'),
-					'created_by'=>$this->input->post('name'),
-					'created_on'=>date('Y-m-d'),
-					'status'=>'suspend',
-				   	);
-		$SetRegistration=$this->employee_model->insert_employee('newregistration',$data);
-		if($SetRegistration)
-		{
-			$this->session->set_flashdata('success','Registration Successfully');
-			redirect('employee/application_reg_list?menu=pms');
-		}
-	}
-	
-	function DeleteSingleData($id=false)
-	{
-		$DeleteSingleData=$this->employee_model->DeleteSingleData('newregistration',array('registration_id'=>$id));
-		if($DeleteSingleData)
-		{
-			$this->session->set_flashdata('success','Delete Successfully');
-			redirect('employee/application_reg_list?menu=pms');
-		}
-	}
 }
 
 /* End of file welcome.php */

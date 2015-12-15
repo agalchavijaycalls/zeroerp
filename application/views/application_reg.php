@@ -31,10 +31,8 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Manage Registration</h3>
 					  <div class="panel-options">
-							<a href="<?php echo base_url(); ?>employee/NewRegistration?menu=pms"><button class="btn btn-theme btn-info btn-icon btn-sm">
-							<i class="fa-plus"></i>
-							<span>Add</span>
-						</button></a>
+						<a href="<?php echo base_url(); ?>pms/pms/NewRegistration?menu=pms"><button class="btn btn-theme btn-info btn-icon btn-sm"><i class="fa-plus"></i><span>Add</span></button></a>
+						<!-- <a href="<?php echo base_url(); ?>pms/pms/NewRegistration?menu=pms/track"><button class="btn btn-theme btn-info btn-icon btn-sm"><i class="fa-plus"></i><span>Show Notification</span></button></a> -->
 					</div>	
 				</div>
 				<div class="panel-body">
@@ -48,11 +46,12 @@
 							});
 						});
 					</script>
-					<div class="table-responsive"  data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">	
+					  <div class="table-responsive"  data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">	
 						<table id="example-1"  cellspacing="0" class="table table-small-font table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>S. no</th>
+									<th>S. Nunmber</th>
+									<th>Employee Id</th>
 									<th>Name</th>
 									<th>Number</th>
 									<th>Mobile IMEI</th>
@@ -62,7 +61,8 @@
 							</thead>
 							<tfoot>
 								<tr>
-									<th>S. no.</th>
+									<th>S. Nunmber</th>
+									<th>Employee Id</th>
 									<th>Name</th>
 									<th>Number</th>
 									<th>Mobile IMEI</th>
@@ -71,21 +71,29 @@
 									
 								</tr>
 							</tfoot>
-							<?php $i=1; foreach($application_registration_list as $list){ ?>
 							<tbody>
+							<?php $i=1; foreach($ApplicationRegistrationList as $list){ ?>
 								<tr>
 									<td><?=$i;?></td>
+									<th><?php echo $list->employee_id;?></th>
 									<td><?php echo $list->name;?></td>
 									<td><?php echo $list->number;?></td>
 									<td><?php echo $list->imei;?></td>
 									<td><?php echo $list->status;?></td>
 									<td>
-										<a href="<?php echo base_url(); ?>employee/DeleteSingleData/<?=$list->registration_id; ?>" onClick="return confirm('Are you sure to delete this Employee Data ? This will delete all the related records on this organization as well.')" class="btn btn-danger btn-sm btn-icon icon-left">
-												Delete
-										</a>
-										<a href="<?php echo base_url(); ?>employee/ApiEmployeeRegistration/<?=$list->registration_id ?>" title="<?=$list->status;?>" class="btn btn-secondary btn-sm btn-icon icon-left">
-												Create Employee
-										</a>
+										<?php if($list->status=='new') { ?>
+											<a href="<?php echo base_url(); ?>pms/pms/ApiEmployeeRegistration/<?=$list->registration_id ?>"  data-toggle="tooltip" title="Create Employee" class="btn btn-secondary btn-sm btn-icon icon-left" ><i class="fa-plus"></i></a>
+										<?php } if($list->status=='Disable') { ?>
+											<a href="<?php echo base_url(); ?>pms/pms/EmployeeTrackStatus/<?=$list->registration_id ?>"  data-toggle="tooltip" title="Enable Employee Track" class="btn btn-secondary btn-sm btn-icon icon-left" ><i class="fa-check"></i></a>
+										<?php } if($list->status=='Enable') { ?>
+											<a href="<?php echo base_url(); ?>pms/pms/EmployeeTrackStatus/<?=$list->registration_id ?>"  data-toggle="tooltip" title="Disable Employee Track" onClick="return confirm('Are you sure You Want To Disable Tracking For This Employee.')" class="btn btn-secondary btn-sm btn-icon icon-left" ><i class="fa-close"></i></a>
+										<?php } ?>
+										<a href="<?php echo base_url(); ?>pms/pms/NewRegistration/<?=$list->registration_id ?>" data-toggle="tooltip" title="Edit Employee" class="btn btn-danger btn-sm btn-icon icon-left" ><i class="fa-pencil" ></i> </a>
+										<a href="<?php echo base_url(); ?>pms/pms/DeleteSingleData/<?=$list->registration_id ?>" data-toggle="tooltip" title="Delete Employee" onClick="return confirm('Are you sure to delete this Employee Data ? This will delete all the related records on this organization as well.')" title="<?=$list->status;?>" class="btn btn-secondary btn-sm btn-icon icon-left"><i class="fa-trash"></i></a>
+										<?php if($list->status!=='new') { ?>
+										<a href="<?php echo base_url(); ?>pms/pms/DeleteSingleData/<?=$list->registration_id ?>" data-toggle="tooltip" title="Genrate Tracksheat"  class="btn btn-danger btn-sm btn-icon icon-left"><i class="fa-download"></i></a>
+										<a href="<?php echo base_url(); ?>pms/pms/DeleteSingleData/<?=$list->registration_id ?>" data-toggle="tooltip" title="Last Location" class="btn btn-secondary btn-sm btn-icon icon-left"><i class="fa-map-marker"></i></a>
+										<?php } ?>
 										<!--  <a href="<?php echo base_url(); ?>employee/ApprovalTrack/<?=$list->imei;?>/<?=$list->trackStatus;?>"  class="btn btn-danger btn-sm btn-icon icon-left">
 												<?php echo $list->trackStatus; ?>
 										</a>-->
@@ -94,7 +102,7 @@
 							<?php $i++; } ?>
 							</tbody>
 						</table>
-					</div>		
+					  </div>	
 				</div>
 			</div>
 		</div>
