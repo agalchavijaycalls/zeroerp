@@ -222,7 +222,7 @@ class Pms extends CI_Controller
 	
 	public function location_map($imei=false)
 	{
-		$last_location=$this->data['last_location']=$this->pms_model->last_location($imei);
+		$last_location=$this->data['last_location']=$this->pms_model->GetSingleData('tracking',array('imei'=>$imei));
 		$a=count($last_location)-1;
 		$lat=$last_location[$a]->Latitude;
 		$lng=$last_location[$a]->Longitude;
