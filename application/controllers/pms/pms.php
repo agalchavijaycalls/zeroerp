@@ -32,7 +32,7 @@ class Pms extends CI_Controller
 			}//echo 'byeee';die;
 			$data=array(
 					'role_id'=>'admin',
-					'Username'=>$RegistrationDetail[0]->name,
+					'Username'=>str_replace(' ', '_', $RegistrationDetail[0]->name),
 					'Password'=>md5($RegistrationDetail[0]->password),
 					'organization_id'=>$session['organization_id'],
 			);

@@ -15,7 +15,7 @@
         var mapCanvas = document.getElementById('map-canvas');
         var mapOptions = {
           center: new google.maps.LatLng(a, b),
-          zoom: 17,
+          zoom: 19,
           mapTypeId: google.maps.MapTypeId.HYBRID
         }
          map = new google.maps.Map(mapCanvas, mapOptions);
@@ -23,7 +23,7 @@
         var marker = new google.maps.Marker({
             position: latlng,
             map: map,
-            title: '<?php echo $EmployeeName;?>'
+            title: '<?php echo ucwords(str_replace('_', ' ', $EmployeeName));?>'
         });
       }
       google.maps.event.addDomListener(window, 'load', initialize);
