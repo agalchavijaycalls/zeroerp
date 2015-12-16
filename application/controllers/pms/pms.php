@@ -93,7 +93,7 @@ class Pms extends CI_Controller
 					'status'=>'Enable',
 			);
 		}
-		$UpdateStatus=$this->Pms_model->UpdateSingleData('newregistration',$data,array('registration_id'=>$filter));
+		$UpdateStatus=$this->pms_model->UpdateSingleData('newregistration',$data,array('registration_id'=>$filter));
 		if($UpdateStatus)
 		{
 			$EmployeeDetail=$this->data['EmployeeDetail']=$this->pms_model->GetSingleData('newregistration',array('registration_id'=>$filter));
