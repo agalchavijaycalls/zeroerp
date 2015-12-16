@@ -13,10 +13,10 @@ class Remoteapi extends CI_Controller{
 	{
 	//error_reporting(0);
 	
-		$data=json_decode($_POST['employeeData']);print_r($data);die;
+		$data=json_decode($_POST['employeeData']);//print_r($data);die;
 		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
-		{
+		{   print_r($data);die;
 			redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate?json='.$_POST['employeeData']);
 			//echo 'error';die;
 			$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
