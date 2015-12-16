@@ -1,5 +1,5 @@
 <?php
-class pms_model extends CI_Model
+class Pms_model extends CI_Model
 {
 	function __construct()
 	{
