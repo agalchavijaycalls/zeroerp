@@ -6,12 +6,12 @@ class Pms extends CI_Controller
 		parent::__construct();
 		$this->data[]="";
 		$this->data['url']=base_url();
-		$this->load->model('pms/Pms_model');
+		$this->load->model('pms/pms_model');
 	}
 	
 	public function application_reg_list($id=false)
 	{
-		$ApplicationRegistrationList=$this->data['ApplicationRegistrationList']=$this->Pms_model->GetMultipleData('newregistration');//print_r($application_registration_list);die;
+		$ApplicationRegistrationList=$this->data['ApplicationRegistrationList']=$this->pms_model->GetMultipleData('newregistration');//print_r($application_registration_list);die;
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/left_menu',$this->data);
 		$this->load->view('application_reg',$this->data);
