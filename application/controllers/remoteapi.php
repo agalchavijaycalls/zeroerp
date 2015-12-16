@@ -32,7 +32,7 @@ class Remoteapi extends CI_Controller{
 						{
 							if(isset($list->employeeLocationDate)&&isset($list->employeeLocationTime)&&isset($list->employeeLocationLatitude)&&isset($list->employeeLocationLongitude)&&!empty($list->employeeLocationLatitude)&&!empty($list->employeeLocationLongitude)&&!empty($list->employeeLocationDate)&&!empty($list->employeeLocationTime) )
 							{
-								$CheckImeiStatus="select * from newregistration where imei='".$imei."' and status='".Enable."'";
+								$CheckImeiStatus="select * from newregistration where imei='".$imei."' and status='Enable'";
 								$sql=mysqli_query($CONNECTION,$CheckImeiStatus);
 								if($sql->num_rows>0)
 								{
