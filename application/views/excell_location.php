@@ -5,7 +5,7 @@
 		<h4 class="modal-title">Location Report</h4>
 	</div>
 	<div class="modal-body">
-		<form role="form" method="POST"  id="ajaxcontent" class="" action="<?=base_url();?>employee/track_address" style="border:#d1d1d1 1px solid;  padding: 25px;">
+		<form role="form" method="POST"  id="ajaxcontent" class="" action="<?=base_url();?>pms/pms/track_address" style="border:#d1d1d1 1px solid;  padding: 25px;">
 			<input type="hidden" name="imei" value="<?=$imei?>" >
 			<input type="hidden" name="name" value="<?=$name?>" >
 			<div class="row">
