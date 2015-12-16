@@ -158,7 +158,7 @@ class Pms extends CI_Controller
 		$name=$this->input->post('name');
 		$from=$this->input->post('from');
 		$to=$this->input->post('to');
-		$sheat=$this->input->post('sheat');//echo $TempOrganizationDatabaseName; //echo $imei; echo $name; echo $from; echo $to;die;
+		$sheat=$this->input->post('sheat');//echo $TempOrganizationDatabaseName; echo $imei; echo $name; echo $from; echo $to;die;
 		$user_id= $info;
 		$action_array = $this->pms_model->tracking_detail($imei,$from,$to);
 		if(!empty($action_array)){
@@ -213,9 +213,9 @@ class Pms extends CI_Controller
 			}
 			fclose($out);
 		}else{
-			$this->session->set_flashdata('category_error', 'success');
-			$this->session->set_flashdata('message', 'There is no record to export.');
-			redirect('employee/manage_emp');
+			//$this->session->set_flashdata('category_error', 'success');
+			//$this->session->set_flashdata('message', 'There is no record to export.');
+			redirect('pms/pms/application_reg_list?menu=pms');
 		}
 	}
 	
