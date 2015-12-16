@@ -73,8 +73,8 @@ class Remoteapi extends CI_Controller{
 								else
 								{
 									$employee_list[]=array(
-											'date'=>$list->employeeLocationDate,
-											'time'=>$list->employeeLocationTime,
+											//'date'=>$list->employeeLocationDate,
+											//'time'=>$list->employeeLocationTime,
 											'status'=>'Imei Disable',
 									);
 									echo json_encode($employee_list);die;
