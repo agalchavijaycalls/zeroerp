@@ -26,7 +26,7 @@
     </script>
   </head>
   <body>
- <button type="button" onclick="window.location.href='<?php echo base_url();?>pms/pms/application_reg?menu=pms'" class="btn btn-white" data-dismiss="modal">Close</button>
+ <button type="button" onclick="window.location.href='<?php echo base_url();?>pms/pms/application_reg_list?menu=pms'" class="btn btn-white" data-dismiss="modal">Close</button>
     <div id="map-canvas"></div>
   </body>
 </html>

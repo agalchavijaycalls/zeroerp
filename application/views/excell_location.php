@@ -34,7 +34,7 @@
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary"  onclick="callAjax();">Genrate</button>
-				<button type="button" onclick="window.location.href='<?=base_url();?>pms/pms/application_reg?menu=pms'" class="btn btn-white" data-dismiss="modal">Close</button>
+				<button type="button" onclick="window.location.href='<?=base_url();?>pms/pms/application_reg_list?menu=pms'" class="btn btn-white" data-dismiss="modal">Close</button>
 			</div>
 		</form>
 	</div>
