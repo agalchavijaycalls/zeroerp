@@ -7,7 +7,7 @@ class Pms_model extends CI_Model
 		$this->load->database();
 	}
 	
-	public function SetData($table,$data)
+	 function SetData($table,$data)
 	{
 		$qry=$this->db->insert($table,$data);
 		$last_id = $this->db->insert_id();
@@ -22,7 +22,7 @@ class Pms_model extends CI_Model
 		return $qry->result();
 	}
 	
-	public function GetSingleData($table,$filter)
+	function GetSingleData($table,$filter)
 	{
 		$this->db->select('*');
 		$qry=$this->db->get_where($table,$filter);
@@ -43,7 +43,7 @@ class Pms_model extends CI_Model
 		return $qry;
 	}
 
-	public function tracking_detail($imei=false,$from=false,$to=false)
+	 function tracking_detail($imei=false,$from=false,$to=false)
 	{
 		$this->load->database('default',TRUE);
 		$qry=$this->db->query("select * from tracking where `imei`='".$imei."' and DATE(date) between '".$from."' and '".$to."' ");
@@ -51,14 +51,14 @@ class Pms_model extends CI_Model
 	
 	}
 	
-	public function local_db($lat,$long)
+	function local_db($lat,$long)
 	{
 		$this->load->database('default',TRUE);
 		$qry=$this->db->get_where('physical_address',array('Latitude'=>$lat,'Longitude'=>$long));
 		return $qry->row();
 	}
 	
-	public function insert_track($table,$data)
+	function insert_track($table,$data)
 	{
 		$this->load->database('default',TRUE);
 		$this->db->insert($table,$data);

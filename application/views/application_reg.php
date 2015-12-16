@@ -92,7 +92,7 @@
 										<a href="<?php echo base_url(); ?>pms/pms/DeleteSingleData/<?=$list->registration_id ?>" data-toggle="tooltip" title="Delete Employee" onClick="return confirm('Are you sure to delete this Employee Data ? This will delete all the related records on this organization as well.')" title="<?=$list->status;?>" class="btn btn-secondary btn-sm btn-icon icon-left"><i class="fa-trash"></i></a>
 										<?php if($list->status!=='new') { $name=str_replace(' ', '_',$list->name);?>
 										<a href="<?php echo base_url(); ?>pms/pms/excell_location/<?=$list->imei ?>/<?php echo $name;?>"  title="Genrate Tracksheat" data-toggle="modal" data-target="#modal-8" class="btn btn-danger btn-sm btn-icon icon-left"><i class="fa-download"></i></a>
-										<a href="<?php echo base_url(); ?>pms/pms/location_map/<?=$list->imei ?>" data-toggle="tooltip" title="Last Location" class="btn btn-secondary btn-sm btn-icon icon-left"><i class="fa-map-marker"></i></a>
+										<a href="<?php echo base_url(); ?>pms/pms/location_map/<?=$list->imei ?>/<?php echo $name;?>" data-toggle="tooltip" title="Last Location" class="btn btn-secondary btn-sm btn-icon icon-left"><i class="fa-map-marker"></i></a>
 										<?php } ?>
 										<!--  <a href="<?php echo base_url(); ?>employee/ApprovalTrack/<?=$list->imei;?>/<?=$list->trackStatus;?>"  class="btn btn-danger btn-sm btn-icon icon-left">
 												<?php echo $list->trackStatus; ?>

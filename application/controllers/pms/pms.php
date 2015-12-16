@@ -9,8 +9,9 @@ class Pms extends CI_Controller
 		$this->load->model('pms/pms_model');
 	}
 	
-	public function application_reg_list($id=false)
+	 function application_reg_list($id=false)
 	{ //echo'hii';die;
+		//echo $this->session->userdata('db_name'); die;
 		$ApplicationRegistrationList=$this->data['ApplicationRegistrationList']=$this->pms_model->GetMultipleData('newregistration');//print_r($application_registration_list);die;
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/left_menu',$this->data);
@@ -102,7 +103,7 @@ class Pms extends CI_Controller
 		}
 	}
 	
-	public function NewRegistration($filter=false)
+	 function NewRegistration($filter=false)
 	{
 		$ApplicationRegistrationList=$this->data['ApplicationRegistrationList']=$this->pms_model->GetSingleData('newregistration',array('registration_id'=>$filter));//print_r($ApplicationRegistrationList);die;
 		$this->parser->parse('include/header',$this->data);
@@ -151,7 +152,7 @@ class Pms extends CI_Controller
 		$this->load->view('excell_location',$this->data);
 	}
 	
-	public function track_address($info=false,$name=false)
+	 function track_address($info=false,$name=false)
 	{
 		$TempOrganizationDatabaseName=$this->session->userdata('db_name'); //echo $TempOrganizationDatabaseName;die;
 		$imei=$this->input->post('imei');
@@ -188,9 +189,6 @@ class Pms extends CI_Controller
 									'address'=>$address
 							);
 							$q = $this->pms_model->insert_track('physical_address',$data);//echo $address;
-							$this->session->unset_userdata('db_name');
-							$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);
-							$this->session->userdata('db_name');
 							$newlocation=array($lat."-".$long=>$address);
 							$locations= array_merge($locations, $newlocation);
 						}
@@ -199,7 +197,8 @@ class Pms extends CI_Controller
 				$array2=array($key+1,$a->date,$a->time,$locations[$latlong],$a->status,$a->bettry_leavel);
 				array_push($array,$array2);
 			}
-			$this->session->set_userdata('db_name',$db);
+			$this->session->unset_userdata('db_name');
+			$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);
 			$this->session->userdata('db_name');
 			$filename=$name.'.xls';
 			header('Content-Disposition: attachment;filename="'.$filename.'"');
@@ -220,12 +219,13 @@ class Pms extends CI_Controller
 	}
 	
 	
-	public function location_map($imei=false)
+	 function location_map($imei=false,$name=false)
 	{
 		$last_location=$this->data['last_location']=$this->pms_model->GetSingleData('tracking',array('imei'=>$imei));
-		$a=count($last_location)-1;
-		$lat=$last_location[$a]->Latitude;
-		$lng=$last_location[$a]->Longitude;
+		//$a=count($last_location)-1;
+		$lat=$last_location[0]->Latitude;
+		$lng=$last_location[0]->Longitude;
+		$this->data['EmployeeName']= $name; //echo $EmployeeName;die;
 		$this->data['lat']=$lat;
 		$this->data['lng']=$lng;
 		$this->parser->parse('include/header',$this->data);
