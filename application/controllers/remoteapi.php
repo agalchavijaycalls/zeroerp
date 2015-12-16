@@ -11,13 +11,11 @@ class Remoteapi extends CI_Controller{
 	}
 	function locationUpdate()
 	{
-	//error_reporting(0);
-		//redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate?json=demoerp');
-		$data=json_decode($_POST['employeeData']);//print_r($data);die;
+		$data=json_decode($_POST['employeeData']);
 		$imei=$data->employeeIMEI;
 		if(isset($imei) && !empty($imei) && isset($data->employeeOrganizationName) && !empty($data->employeeOrganizationName))
 		{   //print_r($_POST['employeeData']);die;
-			redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$_POST['employeeData']);
+			//	redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$_POST['employeeData']);
 			//echo 'error';die;
 			$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
 			if($TempConnection)
@@ -34,27 +32,41 @@ class Remoteapi extends CI_Controller{
 						{
 							if(isset($list->employeeLocationDate)&&isset($list->employeeLocationTime)&&isset($list->employeeLocationLatitude)&&isset($list->employeeLocationLongitude)&&!empty($list->employeeLocationLatitude)&&!empty($list->employeeLocationLongitude)&&!empty($list->employeeLocationDate)&&!empty($list->employeeLocationTime) )
 							{
-								$GetImeiListData="select * from tracking where imei='".$imei."' and date='".$list->employeeLocationDate."' and time='".$list->employeeLocationTime."'";
-								$sql=mysqli_query($CONNECTION,$GetImeiListData); //$employee_list=array('key'=>$sql);echo json_encode($employee_list);die;//print_r($sql);die; 
-								//$count=mysqli_num_rows($sql);
-								if(!$sql->num_rows>0)
+								$CheckImeiStatus="select * from newregistration where imei='".$imei."' and status='".Enable."'";
+								$sql=mysqli_query($CONNECTION,$CheckImeiStatus);
+								if($sql->num_rows>0)
 								{
-									$result = "INSERT INTO tracking VALUES('".$imei."','".$list->employeeLocationDate."','".$list->employeeLocationTime."','".$list->employeeLocationLatitude."','".$list->employeeLocationLongitude."','".$list->employeeLocationProviderName."','".$list->employeeLocationBatteryLevel."')";
-									$sql=mysqli_query($CONNECTION,$result);
-									if($sql)
+									$GetImeiListData="select * from tracking where imei='".$imei."' and date='".$list->employeeLocationDate."' and time='".$list->employeeLocationTime."'";
+									$sql=mysqli_query($CONNECTION,$GetImeiListData); 
+									//$count=mysqli_num_rows($sql);
+									if(!$sql->num_rows>0)
 									{
-										$employee_list[]=array(
-														'employeeLocationDate'=>$list->employeeLocationDate,
-														'employeeLocationTime'=>$list->employeeLocationTime,
-														'status'=>'success',
-													 );
+										$result = "INSERT INTO tracking VALUES('".$imei."','".$list->employeeLocationDate."','".$list->employeeLocationTime."','".$list->employeeLocationLatitude."','".$list->employeeLocationLongitude."','".$list->employeeLocationProviderName."','".$list->employeeLocationBatteryLevel."')";
+										$sql=mysqli_query($CONNECTION,$result);
+										if($sql)
+										{
+											$employee_list[]=array(
+															'employeeLocationDate'=>$list->employeeLocationDate,
+															'employeeLocationTime'=>$list->employeeLocationTime,
+															'status'=>'success',
+														 );
+										}
+										else
+										{
+											$employee_list[]=array(
+													'date'=>$list->employeeLocationDate,
+													'time'=>$list->employeeLocationTime,
+													'status'=>'pending',
+											);
+										}
 									}
 									else
 									{
 										$employee_list[]=array(
 												'date'=>$list->employeeLocationDate,
 												'time'=>$list->employeeLocationTime,
-												'status'=>'pending',
+												'status'=>'success',
+												'report'=>'already insert',
 										);
 									}
 								}
@@ -63,8 +75,7 @@ class Remoteapi extends CI_Controller{
 									$employee_list[]=array(
 											'date'=>$list->employeeLocationDate,
 											'time'=>$list->employeeLocationTime,
-											'status'=>'success',
-											'report'=>'already insert',
+											'status'=>'Imei Disable',
 									);
 								}
 							}
