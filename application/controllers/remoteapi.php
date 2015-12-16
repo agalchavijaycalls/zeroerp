@@ -77,6 +77,7 @@ class Remoteapi extends CI_Controller{
 											'time'=>$list->employeeLocationTime,
 											'status'=>'Imei Disable',
 									);
+									echo json_encode($employee_list);die;
 								}
 							}
 							else
