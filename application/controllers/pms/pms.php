@@ -144,6 +144,96 @@ class Pms extends CI_Controller
 		}
 	}
 	
+	public function excell_location($imei=false,$name=false)
+	{
+		$this->data['imei']=$imei;
+		$this->data['name']=$name;
+		$this->load->view('excell_location',$this->data);
+	}
+	
+	public function track_address($info=false,$name=false)
+	{
+		$TempOrganizationDatabaseName=$this->session->userdata('db_name'); //echo $TempOrganizationDatabaseName;die;
+		$imei=$this->input->post('imei');
+		$name=$this->input->post('name');
+		$from=$this->input->post('from');
+		$to=$this->input->post('to');
+		$sheat=$this->input->post('sheat');//echo $TempOrganizationDatabaseName; echo $name; echo $from; echo $to;die;
+		$user_id= $info;
+		$action_array = $this->pms_model->tracking_detail($imei,$from,$to);
+		if(!empty($action_array)){
+			$array=array(0=>array(0=>'',1=>'IMEI NUMBER:-',2=>$action_array[0]->imei),1=>array(0=>'Serial number',1=>'Date',2=>'Time',3=>'Locations',4=>'Status',5=>'Battery Level'),2=>array(0=>'',1=>'',2=>'',3=>'',4=>'',5=>''));
+				
+			$locations=array();
+			foreach($action_array as $key=>$a)
+			{
+				error_reporting(0);
+				$lat=$a->Latitude;
+				$long=$a->Longitude;
+				$latlong = $lat."-".$long;
+				//echo $latlong;
+				if(!$locations[$latlong])
+				{
+					$this->session->unset_userdata('db_name');
+					$this->session->set_userdata('db_name','appmanager');
+					$this->session->userdata('db_name');
+					$local_db=$this->data['local_db']=$this->pms_model->local_db($lat,$long);
+					$newarray=array($local_db->Latitude."-".$local_db->Longitude=>$local_db->address);
+					$locations= array_merge($locations, $newarray);
+					if(!$local_db){
+						if($address=Location_track::track_address($lat, $long)){
+							$data=array(
+									'Latitude'=>$lat,
+									'Longitude'=>$long,
+									'address'=>$address
+							);
+							$q = $this->pms_model->insert_track('physical_address',$data);//echo $address;
+							$this->session->unset_userdata('db_name');
+							$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);
+							$this->session->userdata('db_name');
+							$newlocation=array($lat."-".$long=>$address);
+							$locations= array_merge($locations, $newlocation);
+						}
+					}
+				}
+				$array2=array($key+1,$a->date,$a->time,$locations[$latlong],$a->status,$a->bettry_leavel);
+				array_push($array,$array2);
+			}
+			$this->session->set_userdata('db_name',$db);
+			$this->session->userdata('db_name');
+			$filename=$name.'.xls';
+			header('Content-Disposition: attachment;filename="'.$filename.'"');
+			header('Content-Type: application/vnd.ms-excel');
+			header("Pragma: no-cache");
+			header("Expires: 0");
+			$out = fopen("php://output", 'w');
+			foreach ($array as $data)
+			{
+				fputcsv($out, $data,"\t");
+			}
+			fclose($out);
+		}else{
+			$this->session->set_flashdata('category_error', 'success');
+			$this->session->set_flashdata('message', 'There is no record to export.');
+			redirect('employee/manage_emp');
+		}
+	}
+	
+	
+	public function location_map($imei=false)
+	{
+		$last_location=$this->data['last_location']=$this->pms_model->last_location($imei);
+		$a=count($last_location)-1;
+		$lat=$last_location[$a]->Latitude;
+		$lng=$last_location[$a]->Longitude;
+		$this->data['lat']=$lat;
+		$this->data['lng']=$lng;
+		$this->parser->parse('include/header',$this->data);
+		$this->parser->parse('include/left_menu',$this->data);
+		$this->load->view('location_map',$this->data);
+		$this->parser->parse('include/footer',$this->data);
+	}
+	
 	function project()
 	{
 		echo 'project'; die;
