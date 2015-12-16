@@ -135,7 +135,7 @@ class Remoteapi extends CI_Controller{
 			if(isset($count) && $count > 0 )
 			{
 				$new_connection=mysqli_connect("localhost",'root','bitnami',$data->employeeOrganizationName);
-				$query= "INSERT INTO newregistration (name,number,password,imei,device,status,created_by,created_on,updated_by,updated_on) VALUES('".$data->employeeName."','".$data->employeeMobileNumber."','".$data->employeePassword."','".$data->employeeIMEI."','androide','request','".$data->employeeName."','".date('d-m-Y')."','','')"; //echo $query; die;
+				$query= "INSERT INTO newregistration (name,number,password,imei,device,status,created_by,created_on,updated_by,updated_on) VALUES('".$data->employeeName."','".$data->employeeMobileNumber."','".$data->employeePassword."','".$data->employeeIMEI."','androide','new','".$data->employeeName."','".date('d+1-m-Y')."','','')"; //echo $query; die;
 				$sql=mysqli_query($new_connection,$query);
 				if($sql)
 				{
