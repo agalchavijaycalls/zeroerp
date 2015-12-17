@@ -198,8 +198,9 @@ class Pms extends CI_Controller
 				$array2=array($key+1,$a->date,$a->time,$locations[$latlong],$a->status,$a->bettry_leavel);
 				array_push($array,$array2);
 			}
+			//echo'hiii';
 			$this->session->unset_userdata('db_name');
-			$this->session->set_userdata('db_name','demoerp');
+			$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);//echo $this->session->userdata('db_name');die;
 			$filename=$name.'.xls';
 			header('Content-Disposition: attachment;filename="'.$filename.'"');
 			header('Content-Type: application/vnd.ms-excel');

@@ -15,7 +15,8 @@ class Pms_model extends CI_Model
 	}
 	
 	function GetMultipleData($table=false)
-	{	//echo $table;die;
+	{	
+		$this->load->database('default',TRUE);
 		$this->db->select('*');
 		$qry=$this->db->get($table);//print_r($qry);die;
 		return $qry->result();
