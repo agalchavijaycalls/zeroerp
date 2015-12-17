@@ -346,7 +346,7 @@ public function insert_employee($info=false)
 			//echo $latlong;
 			if(!$locations[$latlong])
 			{ 
-				$this->session->unset_userdata('db_name');
+				//$this->session->unset_userdata('db_name');
 				$this->session->set_userdata('db_name','appmanager');
 				$this->session->userdata('db_name');
 				$local_db=$this->data['local_db']=$this->employee_model->local_db($lat,$long);
@@ -360,9 +360,9 @@ public function insert_employee($info=false)
 									'address'=>$address
 										);
 						$q = $this->employee_model->insert_track('physical_address',$data);//echo $address;
-							$this->session->unset_userdata('db_name');
-							$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);
-							$this->session->userdata('db_name');
+							//$this->session->unset_userdata('db_name');
+							//$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);
+							//$this->session->userdata('db_name');
 							$newlocation=array($lat."-".$long=>$address);
 							$locations= array_merge($locations, $newlocation);
 						}
@@ -371,6 +371,8 @@ public function insert_employee($info=false)
 				$array2=array($key+1,$a->date,$a->time,$locations[$latlong],$a->status,$a->bettry_leavel);
 				array_push($array,$array2);
 			}
+			$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);
+			$this->session->userdata('db_name');
 			$filename=$name.'.xls';
 			header('Content-Disposition: attachment;filename="'.$filename.'"');
 			header('Content-Type: application/vnd.ms-excel');
