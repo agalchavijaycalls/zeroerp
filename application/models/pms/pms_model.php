@@ -55,7 +55,7 @@ class Pms_model extends CI_Model
 	{
 		$this->load->database('default',TRUE);
 		$qry=$this->db->get_where('physical_address',array('Latitude'=>$lat,'Longitude'=>$long));
-		return $qry->row();
+		return $qry->result();
 	}
 	
 	function insert_track($table,$data)
