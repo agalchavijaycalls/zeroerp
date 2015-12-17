@@ -199,7 +199,7 @@ class Pms extends CI_Controller
 				array_push($array,$array2);
 			}
 			$this->session->unset_userdata('db_name');
-			$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);
+			$this->session->set_userdata('db_name','demoerp');
 			$filename=$name.'.xls';
 			header('Content-Disposition: attachment;filename="'.$filename.'"');
 			header('Content-Type: application/vnd.ms-excel');
