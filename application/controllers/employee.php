@@ -371,8 +371,6 @@ public function insert_employee($info=false)
 				$array2=array($key+1,$a->date,$a->time,$locations[$latlong],$a->status,$a->bettry_leavel);
 				array_push($array,$array2);
 			}
-			$this->session->set_userdata('db_name',$db);
-			$this->session->userdata('db_name');
 			$filename=$name.'.xls';
 			header('Content-Disposition: attachment;filename="'.$filename.'"');
 			header('Content-Type: application/vnd.ms-excel');
