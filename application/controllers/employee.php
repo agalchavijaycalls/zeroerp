@@ -387,7 +387,7 @@ public function insert_employee($info=false)
 		}else{
 			$this->session->set_flashdata('category_error', 'success');
 			$this->session->set_flashdata('message', 'There is no record to export.');
-			redirect('employee/manage_emp');
+			redirect('pms/pms/application_reg_list?menu=pms');
 		}
 	}
 	
