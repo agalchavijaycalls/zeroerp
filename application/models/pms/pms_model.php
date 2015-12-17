@@ -61,7 +61,7 @@ class Pms_model extends CI_Model
 	function insert_track($table,$data)
 	{
 		$this->load->database('default',TRUE);
-		$qry=$this->db->insert($table,$data);print_r($qry);
+		$qry=$this->db->insert($table,$data);//print_r($qry);
 		return $qry->result();
 	}
 	

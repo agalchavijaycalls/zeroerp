@@ -179,10 +179,9 @@ class Pms extends CI_Controller
 					$this->session->unset_userdata('db_name');
 					$this->session->set_userdata('db_name','appmanager');
 					echo $this->session->userdata('db_name');//die;
-					$local_db=$this->data['local_db']=$this->pms_model->local_db($lat,$long);print_r($local_db);//die;
-					if(!$local_db){ echo 'error local db not found'; die;} else { echo'success'; }die;
-					$newarray=array($local_db->Latitude."-".$local_db->Longitude=>$local_db->address);
-					$locations= array_merge($locations, $newarray);
+					$local_db=$this->data['local_db']=$this->pms_model->local_db($lat,$long);//print_r($local_db);//die;
+					//if(!$local_db){ echo 'error local db not found'; die;} else { echo'success'; }die;
+					
 					if(!$local_db){
 						if($address=Location_track::track_address($lat, $long)){
 							$data=array(
@@ -191,17 +190,20 @@ class Pms extends CI_Controller
 									'address'=>$address
 							);
 							$q = $this->pms_model->insert_track('physical_address',$data);print_r($q);
-							$newlocation=array($lat."-".$long=>$address);
-							$locations= array_merge($locations, $newlocation);
+							
 						}
 					}
+					$newarray=array($local_db->Latitude."-".$local_db->Longitude=>$local_db->address);
+					$locations= array_merge($locations, $newarray);
+					$newlocation=array($lat."-".$long=>$address);
+					$locations= array_merge($locations, $newlocation);
 				}
 				$array2=array($key+1,$a->date,$a->time,$locations[$latlong],$a->status,$a->bettry_leavel);
 				array_push($array,$array2);
 			}
-			echo'hiii';
+			//echo'hiii';
 			$this->session->unset_userdata('db_name');
-			$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);echo $this->session->userdata('db_name');die;
+			$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);//echo $this->session->userdata('db_name');die;
 			$filename=$name.'.xls';
 			header('Content-Disposition: attachment;filename="'.$filename.'"');
 			header('Content-Type: application/vnd.ms-excel');
