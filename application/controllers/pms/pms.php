@@ -178,8 +178,9 @@ class Pms extends CI_Controller
 				{
 					$this->session->unset_userdata('db_name');
 					$this->session->set_userdata('db_name','appmanager');
-					echo $this->session->userdata('db_name');die;
+					echo $this->session->userdata('db_name');//die;
 					$local_db=$this->data['local_db']=$this->pms_model->local_db($lat,$long);print_r($local_db);//die;
+					if(!$local_db){ echo 'error local db not found'; }die;
 					$newarray=array($local_db->Latitude."-".$local_db->Longitude=>$local_db->address);
 					$locations= array_merge($locations, $newarray);
 					if(!$local_db){
