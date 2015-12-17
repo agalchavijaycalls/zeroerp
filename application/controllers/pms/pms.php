@@ -162,7 +162,7 @@ class Pms extends CI_Controller
 		$to=$this->input->post('to');
 		$sheat=$this->input->post('sheat');//echo $TempOrganizationDatabaseName; echo $imei; echo $name; echo $from; echo $to;die;
 	//	$user_id= $info;
-		$action_array = $this->pms_model->tracking_detail($imei,$from,$to);//print_r($action_array);die;
+		$action_array = $this->pms_model->tracking_detail($imei,$from,$to);print_r($action_array);die;
 		if(!empty($action_array)){
 			$array=array(0=>array(0=>'',1=>'IMEI NUMBER:-',2=>$action_array[0]->imei),1=>array(0=>'Serial number',1=>'Date',2=>'Time',3=>'Locations',4=>'Status',5=>'Battery Level'),2=>array(0=>'',1=>'',2=>'',3=>'',4=>'',5=>''));
 				
