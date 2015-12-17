@@ -215,7 +215,7 @@ class Remoteapi extends CI_Controller{
 		if($CONNECTION)
 		{
 			$sql="select * from project_image where image='".$_FILES['image_name']['name']."'";
-			$query=mysqli_query($CONNECTION,$query);
+			$query=mysqli_query($CONNECTION,$sql);
 			{
 				$query="insert into project_image(project_id,task_id,image) values ('".$_POST['project_id']."','".$_POST['task_id']."','".$_FILES['image_name']['name']."')";
 				$sql=mysqli_query($CONNECTION,$query);
