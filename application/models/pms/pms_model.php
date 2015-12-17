@@ -12,13 +12,12 @@ class Pms_model extends CI_Model
 		$qry=$this->db->insert($table,$data);
 		$last_id = $this->db->insert_id();
 		return $last_id;
-	
 	}
 	
-	function GetMultipleData($table)
-	{
+	function GetMultipleData($table=false)
+	{	//echo $table;die;
 		$this->db->select('*');
-		$qry=$this->db->get($table);
+		$qry=$this->db->get($table);//print_r($qry);die;
 		return $qry->result();
 	}
 	
@@ -61,7 +60,8 @@ class Pms_model extends CI_Model
 	function insert_track($table,$data)
 	{
 		$this->load->database('default',TRUE);
-		$this->db->insert($table,$data);
+		$qry=$this->db->insert($table,$data);print_r($qry);
+		return $qry->result();
 	}
 	
 }

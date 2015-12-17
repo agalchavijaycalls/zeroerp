@@ -27,6 +27,13 @@
 					</div>
 				</div>
   			<?php } ?>
+  			<?php  if($this->session->flashdata('error')) { ?>
+				<div class="row-fluid">
+					<div class="alert alert-danger">
+						<strong><?=$this->session->flashdata('error')?></strong> 
+					</div>
+				</div>
+  			<?php } ?>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Manage Registration</h3>

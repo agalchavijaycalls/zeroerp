@@ -11,6 +11,7 @@ class Pms extends CI_Controller
 	
 	 function application_reg_list($id=false)
 	{ //echo'hii';die;
+		//$this->session->set_userdata('db_name','demoerp');
 		//echo $this->session->userdata('db_name'); die;
 		$ApplicationRegistrationList=$this->data['ApplicationRegistrationList']=$this->pms_model->GetMultipleData('newregistration');//print_r($application_registration_list);die;
 		$this->parser->parse('include/header',$this->data);
@@ -153,15 +154,15 @@ class Pms extends CI_Controller
 	}
 	
 	 function track_address($info=false,$name=false)
-	{
+	{ 
 		$TempOrganizationDatabaseName=$this->session->userdata('db_name'); //echo $TempOrganizationDatabaseName;die;
 		$imei=$this->input->post('imei');
 		$name=$this->input->post('name');
 		$from=$this->input->post('from');
 		$to=$this->input->post('to');
 		$sheat=$this->input->post('sheat');//echo $TempOrganizationDatabaseName; echo $imei; echo $name; echo $from; echo $to;die;
-		$user_id= $info;
-		$action_array = $this->pms_model->tracking_detail($imei,$from,$to);
+	//	$user_id= $info;
+		$action_array = $this->pms_model->tracking_detail($imei,$from,$to);//print_r($action_array);die;
 		if(!empty($action_array)){
 			$array=array(0=>array(0=>'',1=>'IMEI NUMBER:-',2=>$action_array[0]->imei),1=>array(0=>'Serial number',1=>'Date',2=>'Time',3=>'Locations',4=>'Status',5=>'Battery Level'),2=>array(0=>'',1=>'',2=>'',3=>'',4=>'',5=>''));
 				
@@ -178,7 +179,7 @@ class Pms extends CI_Controller
 					$this->session->unset_userdata('db_name');
 					$this->session->set_userdata('db_name','appmanager');
 					$this->session->userdata('db_name');
-					$local_db=$this->data['local_db']=$this->pms_model->local_db($lat,$long);
+					$local_db=$this->data['local_db']=$this->pms_model->local_db($lat,$long);//print_r($local_db);//die;
 					$newarray=array($local_db->Latitude."-".$local_db->Longitude=>$local_db->address);
 					$locations= array_merge($locations, $newarray);
 					if(!$local_db){
@@ -188,7 +189,7 @@ class Pms extends CI_Controller
 									'Longitude'=>$long,
 									'address'=>$address
 							);
-							$q = $this->pms_model->insert_track('physical_address',$data);//echo $address;
+							$q = $this->pms_model->insert_track('physical_address',$data);
 							$newlocation=array($lat."-".$long=>$address);
 							$locations= array_merge($locations, $newlocation);
 						}
@@ -199,7 +200,6 @@ class Pms extends CI_Controller
 			}
 			$this->session->unset_userdata('db_name');
 			$this->session->set_userdata('db_name',$TempOrganizationDatabaseName);
-			$this->session->userdata('db_name');
 			$filename=$name.'.xls';
 			header('Content-Disposition: attachment;filename="'.$filename.'"');
 			header('Content-Type: application/vnd.ms-excel');
@@ -212,7 +212,7 @@ class Pms extends CI_Controller
 			}
 			fclose($out);
 		}else{
-			//$this->session->set_flashdata('category_error', 'success');
+			$this->session->set_flashdata('error', 'There is no record to export');
 			//$this->session->set_flashdata('message', 'There is no record to export.');
 			redirect('pms/pms/application_reg_list?menu=pms');
 		}
