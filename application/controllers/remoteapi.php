@@ -54,8 +54,8 @@ class Remoteapi extends CI_Controller{
 										else
 										{
 											$employee_list[]=array(
-													'date'=>$list->employeeLocationDate,
-													'time'=>$list->employeeLocationTime,
+													'employeeLocationDate'=>$list->employeeLocationDate,
+													'employeeLocationTime'=>$list->employeeLocationTime,
 													'status'=>'pending',
 											);
 										}
@@ -63,8 +63,8 @@ class Remoteapi extends CI_Controller{
 									else
 									{
 										$employee_list[]=array(
-												'date'=>$list->employeeLocationDate,
-												'time'=>$list->employeeLocationTime,
+												'employeeLocationDate'=>$list->employeeLocationDate,
+												'employeeLocationTime'=>$list->employeeLocationTime,
 												'status'=>'success',
 												'report'=>'already insert',
 										);
@@ -83,8 +83,8 @@ class Remoteapi extends CI_Controller{
 							else
 							{
 								$employee_list[]=array(
-										'date'=>$list->employeeLocationDate,
-										'time'=>$list->employeeLocationTime,
+										'employeeLocationDate'=>$list->employeeLocationDate,
+										'employeeLocationTime'=>$list->employeeLocationTime,
 										'status'=>'Key Not Found',
 								);
 							} 

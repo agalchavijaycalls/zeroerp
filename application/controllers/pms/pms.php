@@ -13,7 +13,7 @@ class Pms extends CI_Controller
 	{ //echo'hii';die;
 		//$this->session->set_userdata('db_name','demoerp');
 		//echo $this->session->userdata('db_name'); die;
-		$ApplicationRegistrationList=$this->data['ApplicationRegistrationList']=$this->pms_model->GetMultipleData('newregistration');//print_r($application_registration_list);die;
+		$ApplicationRegistrationList=$this->data['ApplicationRegistrationList']=$this->pms_model->GetMultipleData('newregistration');
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/left_menu',$this->data);
 		$this->load->view('application_reg',$this->data);
@@ -238,16 +238,140 @@ class Pms extends CI_Controller
 	}
 	
 	function project()
-	{
-		echo 'project'; die;
+	{	
+		$ApplicationProjectList=$this->data['ApplicationProjectList']=$this->pms_model->GetMultipleData('project');
+		$ApplicationEmployeeList=$this->data['ApplicationEmployeeList']=$this->pms_model->GetMultipleDataJoin('project','employee','employee_id');//print_r($ApplicationEmployeeList);die;
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/left_menu',$this->data);
 		$this->load->view('project',$this->data);
 		$this->parser->parse('include/footer',$this->data);
 	}
 	
-	function task()
+	function AddProject($filter=false)
 	{
-		echo 'task';
+		$ApplicationEmployeeList=$this->data['ApplicationEmployeeList']=$this->pms_model->GetMultipleData('employee');
+		$ApplicationProjectList=$this->data['ApplicationProjectList']=$this->pms_model->GetSingleData('project',array('project_id'=>$filter));//print_r($ApplicationRegistrationList);die;
+		$this->parser->parse('include/header',$this->data);
+		$this->parser->parse('include/left_menu',$this->data);
+		$this->load->view('add_project',$this->data);
+		$this->parser->parse('include/footer',$this->data);
 	}
+	
+	function SetProject()
+	{
+		$data=$this->session->userdata('user_data');
+		$data=array(
+				'project_description'=>$this->input->post('project_description'),
+				'employee_id'=>$this->input->post('employee_id'),
+				'estimate_cost'=>$this->input->post('estimate_cost'),
+				'estimate_effort'=>$this->input->post('estimate_effort'),
+				'start_date'=>$this->input->post('start_date'),
+				'completion_date'=>$this->input->post('completion_date'),
+				'status'=>'new',
+				'created_by'=>$data['usermailid'],
+				'created_on'=>date('Y-m-d'),
+		);
+		if(!empty($this->input->post('project_id'))){ $SetRegistration=$this->pms_model->UpdateSingleData('project',$data,array('project_id'=>$this->input->post('project_id'))); }
+		else{ $SetRegistration=$this->pms_model->SetData('project',$data); }
+		if($SetRegistration)
+		{
+			$this->session->set_flashdata('success','Project Add Successfully');
+			redirect('pms/pms/project?menu=pms');
+		}
+	}
+	
+	function DeleteSingleDataProject($filter=false)
+	{
+		$DeleteSingleData=$this->pms_model->DeleteSingleData('project',array('project_id'=>$filter));
+		if($DeleteSingleData)
+		{
+			$this->session->set_flashdata('success','Delete Successfully');
+			redirect('pms/pms/project?menu=pms');
+		}
+	}
+	
+	function TaskList($ProjectId=false,$ProjectName=false)
+	{
+		$this->data['ProjectId']=$ProjectId;
+		$this->data['ProjectName']=$ProjectName;
+		$ApplicationProjectDependTaskList=$this->data['ApplicationProjectDependTaskList']=$this->pms_model->GetSingleData('task',array('project_id'=>$ProjectId));//print_r($ApplicationProjectDependTaskList);die;
+		$ApplicationTaskEmployeeList=$this->data['ApplicationTaskEmployeeList']=$this->pms_model->GetMultipleDataJoin('task','employee','employee_id');
+		$this->parser->parse('include/header',$this->data);
+		$this->parser->parse('include/left_menu',$this->data);
+		$this->load->view('TaskList',$this->data);
+		$this->parser->parse('include/footer',$this->data);
+	}
+	/*temprary  function*/
+	function task($ProjectId=false,$ProjectName=false)
+	{
+		if(!empty($ProjectId)&&!empty($ProjectName)&&$ProjectName!==''&&$ProjectId!=='')
+		{
+			$this->data['ProjectId']=$ProjectId;
+			$this->data['ProjectName']=$ProjectName;
+			$ApplicationProjectDependTaskList=$this->data['ApplicationProjectDependTaskList']=$this->pms_model->GetSingleData('task',array('project_id'=>$ProjectId));print_r($ApplicationProjectDependTaskList);die;
+		}
+		else
+		{
+			$ApplicationTaskList=$this->data['ApplicationTaskList']=$this->pms_model->GetMultipleData('task');
+			$ApplicationTaskProjectList=$this->data['ApplicationTaskProjectList']=$this->pms_model->GetMultipleDataJoin('task','project','project_id');
+			$ApplicationTaskEmployeeList=$this->data['ApplicationTaskEmployeeList']=$this->pms_model->GetMultipleDataJoin('task','employee','employee_id');
+		}
+		$this->parser->parse('include/header',$this->data);
+		$this->parser->parse('include/left_menu',$this->data);
+		$this->load->view('task',$this->data);
+		$this->parser->parse('include/footer',$this->data);
+	}
+	
+	function AddTask($taskId=false,$ProjectId=false)
+	{	
+		if(!empty($ProjectId)&&$ProjectId!=='')
+		{ 
+			$this->data['ProjectId']=$ProjectId;
+			$ApplicationProjectId=$this->data['ApplicationProjectId']=$this->pms_model->GetSingleData('project',array('project_id'=>$ProjectId));
+		}
+		$ApplicationEmployeeList=$this->data['ApplicationEmployeeList']=$this->pms_model->GetMultipleData('employee');
+		$ApplicationTaskList=$this->data['ApplicationTaskList']=$this->pms_model->GetSingleData('task',array('task_id'=>$taskId));
+		$ApplicationProjectList=$this->data['ApplicationProjectList']=$this->pms_model->GetMultipleData('project');
+		$this->parser->parse('include/header',$this->data);
+		$this->parser->parse('include/left_menu',$this->data);
+		$this->load->view('add_task',$this->data);
+		$this->parser->parse('include/footer',$this->data);
+	}
+	
+	function SetTask()
+	{
+		$data=$this->session->userdata('user_data');
+		$data=array(
+				'project_id'=>$this->input->post('project_id'),
+				'task_description'=>$this->input->post('task_description'),
+				'employee_id'=>$this->input->post('employee_id'),
+				'estimate_cost'=>$this->input->post('estimate_cost'),
+				'estimate_effort'=>$this->input->post('estimate_effort'),
+				'actual_cost'=>$this->input->post('actual_cost'),
+				'actual_effort'=>$this->input->post('actual_effort'),
+				'estimate_start_date'=>$this->input->post('estimate_start_date'),
+				'actual_start_date'=>$this->input->post('actual_start_date'),
+				'status'=>'new',
+				'created_by'=>$data['usermailid'],
+				'created_on'=>date('Y-m-d'),
+		);//print_r($data);die;
+		if(!empty($this->input->post('task_id'))){ $SetRegistration=$this->pms_model->UpdateSingleData('task',$data,array('task_id'=>$this->input->post('task_id'))); }
+		else{ $SetRegistration=$this->pms_model->SetData('task',$data); }
+		if($SetRegistration)
+		{
+			$this->session->set_flashdata('success','Task Successfully Insert');
+			redirect('pms/pms/task?menu=pms');
+		}
+	}
+	
+	function DeleteSingleDatatask($id=false)
+	{
+		$DeleteSingleData=$this->pms_model->DeleteSingleData('task',array('task_id'=>$id));
+		if($DeleteSingleData)
+		{
+			$this->session->set_flashdata('success','Task Delete Successfully');
+			redirect('pms/pms/task?menu=pms');
+		}
+	}
+	
 }

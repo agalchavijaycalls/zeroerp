@@ -297,12 +297,12 @@
 								<span class="title">Project</span>
 							</a>
 						</li>
-						<li class="javascript:;">
+						<!--  <li class="javascript:;">
 								<a href="<?php echo base_url(); ?>pms/Pms/task?menu=pms">
 								<i class="linecons-user"></i>
 									<span class="title">Task</span>
 								</a>
-						</li>
+						</li>-->
 							
 					</ul>
 			<?php } ?>	

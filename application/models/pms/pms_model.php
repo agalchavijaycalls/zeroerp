@@ -14,8 +14,15 @@ class Pms_model extends CI_Model
 		return $last_id;
 	}
 	
+	function GetMultipleDataJoin($table1=false,$table2=false,$filter=false)
+	{
+		$qry=$this->db->query("select $table1.*,$table2.* from $table1,$table2 where $table1.$filter=$table2.$filter");//print_r($qry);die;
+		return $qry->result();
+	}
+	
+	
 	function GetMultipleData($table=false)
-	{	
+	{	//echo $this->session->set_userdata('db_name','demoerp');die;
 		$this->load->database('default',TRUE);
 		$this->db->select('*');
 		$qry=$this->db->get($table);//print_r($qry);die;
