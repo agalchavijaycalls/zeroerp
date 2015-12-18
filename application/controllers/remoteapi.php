@@ -254,7 +254,7 @@ class Remoteapi extends CI_Controller{
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami','junction_erp');
 		if($CONNECTION)
 		{
-			$data=json_decode($_POST['projectData']);print_r($data);die;
+			$data=json_decode($_POST['projectData']);//print_r($data);die;
 			$UserId=$data->user_id;//print_r($data->project_List);die;
 			foreach($data->project_List as $ProjectList)
 			{
