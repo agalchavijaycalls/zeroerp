@@ -81,12 +81,6 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label" for="field-1">Status</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control"  name="status" id="field-1" placeholder="Status" value="<?php if(isset($ApplicationProjectList)&& !empty($ApplicationProjectList)) { echo $ApplicationProjectList[0]->status; }?>" required >
-									</div>
-								</div>
-								<div class="form-group">
 									<button type="submit" class="btn btn-success">Submit</button>
 									<button type="reset" class="btn btn-white" onClick="window.history.back();">Cancel</button>
 								</div>
