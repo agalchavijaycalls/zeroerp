@@ -250,7 +250,7 @@ class Remoteapi extends CI_Controller{
 	/* Function for Update Task For Androide Application */
 	function project_update()
 	{
-		$data=json_decode($_POST['projectData']);print_r($data->employeeOrganizationName);die;
+		$data=json_decode($_POST['projectData']);print_r($data);die;
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami','junction_erp');
 		if($CONNECTION)
 		{
