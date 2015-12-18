@@ -158,7 +158,7 @@ class Remoteapi extends CI_Controller{
 	/* Function For Retrive Project List*/
 	function project()
 	{
-		$CONNECTION=mysqli_connect("localhost",'root','bitnami','junction_erp');
+		$CONNECTION=mysqli_connect('localhost','root','bitnami',$_POST['database_name']);
 		if($CONNECTION!=='')
 		{
 			$query= "select * from project";
@@ -198,7 +198,7 @@ class Remoteapi extends CI_Controller{
 			}
 			else
 			{
-				echo 'Project List Found On Server';
+				echo 'Project List Not Found In Server';
 			}
 		}
 		else
@@ -211,7 +211,8 @@ class Remoteapi extends CI_Controller{
 	/* Function for Image Update For Androide Application */
 	function project_image_update()
 	{
-		$CONNECTION=mysqli_connect("localhost",'root','bitnami','junction_erp');
+		//$data=json_decode($_POST['projectData']);
+		$CONNECTION=mysqli_connect("localhost",'root','bitnami',$_POST['database_name']);
 		if($CONNECTION)
 		{
 			$sql="select * from project_image where image='".$_FILES['image_name']['name']."'";
@@ -251,10 +252,10 @@ class Remoteapi extends CI_Controller{
 	function project_update()
 	{
 		$data=json_decode($_POST['projectData']);//print_r($data);die;
-		$CONNECTION=mysqli_connect("localhost",'root','bitnami','junction_erp');
+		$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->database_name);
 		if($CONNECTION)
 		{
-			$data=json_decode($_POST['projectData']);//print_r($data);die;
+			//$data=json_decode($_POST['projectData']);//print_r($data);die;
 			$UserId=$data->user_id;//print_r($data->project_List);die;
 			foreach($data->project_List as $ProjectList)
 			{
@@ -473,37 +474,6 @@ class Remoteapi extends CI_Controller{
 		}
 		die;
 		
-	}
-	
-	function organizationKey()
-	{
-		$data=json_decode($json);
-		if($data)
-		{
-			$CONNECTION=mysqli_connect('localhost','root','',$data->DataBasename);
-			if($CONNECTION)
-			{
-				$query= "select * from approval_track where imei='".$data->imei."' and status=Enable";
-				$sql=mysqli_query($CONNECTION,$query);
-				/*$count=mysqli_num_rows($sqls);
-				if(isset($count) && $count > 0)
-				{
-					while($result_project=mysqli_fetch_assoc($sqls))
-					{
-						$imei[]=$result_project['imei'];
-						$key[]= $result_project['server_key'];
-					}
-					//print_r($imei);die;
-					
-				}
-				$result=array(
-						'imei'=>$imei,
-						'key'=>$key
-				);
-				echo json_encode($result);
-				die;*/
-			}
-		}
 	}
 	
 	function test()//http://junctiondev.cloudapp.net/appmanager/
