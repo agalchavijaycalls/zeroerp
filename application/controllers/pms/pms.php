@@ -360,7 +360,7 @@ class Pms extends CI_Controller
 		if($SetRegistration)
 		{
 			$this->session->set_flashdata('success','Task Successfully Insert');
-			redirect('pms/pms/TaskList?menu=pms');
+			redirect('pms/pms/project?menu=pms');
 		}
 	}
 	
@@ -370,7 +370,7 @@ class Pms extends CI_Controller
 		if($DeleteSingleData)
 		{
 			$this->session->set_flashdata('success','Task Delete Successfully');
-			redirect('pms/pms/TaskList?menu=pms');
+			redirect('pms/pms/project?menu=pms');
 		}
 	}
 	
