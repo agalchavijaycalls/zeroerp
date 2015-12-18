@@ -250,10 +250,11 @@ class Remoteapi extends CI_Controller{
 	/* Function for Update Task For Androide Application */
 	function project_update()
 	{
+		$data=json_decode($_POST['projectData']);print_r($data->employeeOrganizationName);die;
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami','junction_erp');
 		if($CONNECTION)
 		{
-			$data=json_decode($_POST['projectData']);//print_r($data);die;
+			$data=json_decode($_POST['projectData']);print_r($data);die;
 			$UserId=$data->user_id;//print_r($data->project_List);die;
 			foreach($data->project_List as $ProjectList)
 			{
@@ -507,9 +508,13 @@ class Remoteapi extends CI_Controller{
 		if(isset($_GET['result']) && $_GET['result']!=='')
 		{
 			echo $_GET['result'];die;
-		}
+		} ?><div id="ankit">
+		 <?php  echo 'hi ankit i'; ?>
+		 </div><?php
 		 $value= $_POST['json']; //url is http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$value
-		 redirect('http://localhost/appmanager/Appmanagergateway/CheckAuthonticate/demoerp');die;
+		 redirect('http://localhost/appmanager/Appmanagergateway/CheckAuthonticate/demoerp');//die;
+		
+		 
 		//header('location:http://junctiondev.cloudapp.net/appmanager/AppmanagerGateway/CheckAuthonticate/'.$value); 
 		//echo $result;  
 	} 
