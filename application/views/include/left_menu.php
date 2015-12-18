@@ -292,7 +292,7 @@
 							</a>
 						</li>
 						<li class="javascript:;">
-							<a href="<?php echo base_url(); ?>pms/Pms/project?menu=pms">
+							<a href="<?php echo base_url(); ?>pms/pms/project?menu=pms">
 							<i class="linecons-user"></i>
 								<span class="title">Project</span>
 							</a>
