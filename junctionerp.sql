@@ -387,7 +387,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `department_id` int(11) DEFAULT NULL COMMENT 'Department name for a employee for his organization',
   `designation_id` int(11) DEFAULT NULL COMMENT 'Designations name for employee',
   `user_id` varchar(30) DEFAULT NULL COMMENT 'user_id is for login',
-  `imei` varchar(30) NOT NULL,
+  --`imei` varchar(30) NOT NULL,
   `salary_frquency` varchar(10) DEFAULT NULL COMMENT 'frequency for employee payroll',
   `joining_date` varchar(300) DEFAULT NULL COMMENT 'joining date for employee',
   `first_name` varchar(15) DEFAULT NULL COMMENT 'first name for employee',
@@ -400,7 +400,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `father_name` varchar(15) DEFAULT NULL COMMENT 'employee father name',
   `passport` varchar(30) DEFAULT NULL COMMENT 'employee passport',
   `present_address` varchar(250) DEFAULT NULL COMMENT 'employee address',
-  `mobile` varchar(12) DEFAULT NULL COMMENT 'employee mobile',
+  `mobile` varchar(20) DEFAULT NULL COMMENT 'employee mobile',
   `email` varchar(20) DEFAULT NULL COMMENT 'employee email',
   `country` varchar(15) DEFAULT NULL COMMENT 'employee country',
   `state` varchar(15) DEFAULT NULL COMMENT 'employee state',
@@ -515,6 +515,7 @@ INSERT INTO `function` (`function_id`, `function_name`, `created_by`, `created_o
 
 CREATE TABLE IF NOT EXISTS `newregistration` (
   `registration_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `number` varchar(15) NOT NULL,
   `password` varchar(250) NOT NULL,
@@ -577,7 +578,11 @@ CREATE TABLE IF NOT EXISTS `project` (
   `start_date` varchar(15) NOT NULL,
   `completion_date` varchar(15) NOT NULL,
   `picture_folder` varchar(100) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  `created_by` varchar(20) NOT NULL,
+  `created_on` varchar(30) NOT NULL,
+  `updated_by` varchar(20) NOT NULL,
+  `updated_on` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -608,7 +613,8 @@ CREATE TABLE IF NOT EXISTS `reciepts` (
   `reciepts_key` varchar(250) NOT NULL,
   `quantity` varchar(10) NOT NULL,
   `rate` varchar(10) NOT NULL,
-  `unit` varchar(20) NOT NULL
+  `unit` varchar(20) NOT NULL,
+  `description` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -632,7 +638,6 @@ CREATE TABLE IF NOT EXISTS `role` (
 
 INSERT INTO `role` (`role_id`, `role_description`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
 ('admin', 'administrator', NULL, NULL, NULL, NULL),
-('fsaf', 'safas', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -726,6 +731,7 @@ CREATE TABLE IF NOT EXISTS `states` (
 CREATE TABLE IF NOT EXISTS `task` (
   `task_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `task_description` varchar(250) NOT NULL,
   `estimate_cost` varchar(50) NOT NULL,
   `estimate_effort` varchar(100) NOT NULL,
@@ -734,7 +740,11 @@ CREATE TABLE IF NOT EXISTS `task` (
   `estimate_start_date` varchar(20) NOT NULL,
   `actual_start_date` varchar(20) NOT NULL,
   `picture_folder` varchar(100) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  `created_by` varchar(20) NOT NULL,
+  `created_on` varchar(30) NOT NULL,
+  `updated_by` varchar(20) NOT NULL,
+  `updated_on` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -745,6 +755,7 @@ CREATE TABLE IF NOT EXISTS `task` (
 
 CREATE TABLE IF NOT EXISTS `tracking` (
   `imei` varchar(30) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `date` varchar(30) NOT NULL,
   `time` varchar(30) NOT NULL,
   `Latitude` varchar(70) NOT NULL,
