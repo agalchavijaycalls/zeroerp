@@ -425,7 +425,7 @@ class Remoteapi extends CI_Controller{
 									$query=mysqli_query($CONNECTION,$FindRecieptKey);
 									if(!$query->num_rows>0)
 									{
-										$insert="insert into reciepts(project_id,user_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."','".$value->description."')";
+										$insert="insert into reciepts(project_id,user_id,task_id,material,date,reciepts_key,quantity,rate,unit,description) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."','".$value->description."')";
 										$query=mysqli_query($CONNECTION,$insert);
 										if($query)
 										{
