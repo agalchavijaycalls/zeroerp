@@ -328,7 +328,7 @@ class Remoteapi extends CI_Controller{
 						if(!$query->num_rows>0)
 						{
 							$TaskId=NULL;
-							$insert="insert into reciepts(project_id,user_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
+							$insert="insert into reciepts(project_id,user_id,task_id,material,date,reciepts_key,quantity,rate,unit,description) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."','".$value->description."')";
 							$query=mysqli_query($CONNECTION,$insert);
 							if($query)
 							{
@@ -347,7 +347,7 @@ class Remoteapi extends CI_Controller{
 						}
 						else
 						{
-							$Update="update reciepts set project_id='".$ProjectId."',user_id='".$UserId."',task_id='".$TaskId."',material='".$value->material."',date='".$value->date."',quantity='".$value->quantity."',rate='".$value->rate."',unit='".$value->unit."' where reciepts_key='".$value->key."'";
+							$Update="update reciepts set project_id='".$ProjectId."',user_id='".$UserId."',task_id='".$TaskId."',material='".$value->material."',date='".$value->date."',quantity='".$value->quantity."',rate='".$value->rate."',unit='".$value->unit."',description='".$value->description."' where reciepts_key='".$value->key."'";
 							$query=mysqli_query($CONNECTION,$Update);
 							if($query)
 							{
@@ -425,7 +425,7 @@ class Remoteapi extends CI_Controller{
 									$query=mysqli_query($CONNECTION,$FindRecieptKey);
 									if(!$query->num_rows>0)
 									{
-										$insert="insert into reciepts(project_id,user_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."')";
+										$insert="insert into reciepts(project_id,user_id,task_id,material,date,reciepts_key,quantity,rate,unit) values ('".$ProjectId."','".$UserId."','".$TaskId."','".$value->material."','".$value->date."','".$value->key."','".$value->quantity."','".$value->rate."','".$value->unit."','".$value->description."')";
 										$query=mysqli_query($CONNECTION,$insert);
 										if($query)
 										{
@@ -444,7 +444,7 @@ class Remoteapi extends CI_Controller{
 									}
 									else
 									{
-										$Update="update reciepts set project_id='".$ProjectId."',user_id='".$UserId."',task_id='".$TaskId."',material='".$value->material."',date='".$value->date."',quantity='".$value->quantity."',rate='".$value->rate."',unit='".$value->unit."' where reciepts_key='".$value->key."'";
+										$Update="update reciepts set project_id='".$ProjectId."',user_id='".$UserId."',task_id='".$TaskId."',material='".$value->material."',date='".$value->date."',quantity='".$value->quantity."',rate='".$value->rate."',unit='".$value->unit."',description='".$value->description."' where reciepts_key='".$value->key."'";
 										$query=mysqli_query($CONNECTION,$Update);
 										if($query)
 										{
