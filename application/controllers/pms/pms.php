@@ -54,7 +54,7 @@ class Pms extends CI_Controller
 						'department_id'=>NULL,
 						'first_name'=>$RegistrationDetail[0]->name,
 						'mobile'=>$RegistrationDetail[0]->number,
-						'imei'=>$RegistrationDetail[0]->imei,
+					//	'imei'=>$RegistrationDetail[0]->imei,
 						'user_id'=>$InsertUser,
 				);
 				if(!empty($RegistrationDetail[0]->employee_id) && $RegistrationDetail[0]->employee_id!=='')

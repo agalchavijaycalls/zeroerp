@@ -93,7 +93,7 @@
 									<td>
 									<!-- <a href="<?php echo base_url(); ?>pms/pms/AddTask/<?=$list->task_id ?>"  data-toggle="tooltip" title="Create Employee" class="btn btn-secondary btn-sm btn-icon icon-left" ><i class="fa-plus"></i></a>-->
 										<a href="<?php echo base_url(); ?>pms/pms/AddTask/<?=$list->task_id ?><?php if(isset($this->data['ProjectId'])&&!empty($this->data['ProjectId'])){ echo '/'.$this->data['ProjectId']; }?>?menu=pms" data-toggle="tooltip" title="Edit Employee" class="btn btn-danger btn-sm btn-icon icon-left" ><i class="fa-pencil" ></i> </a>
-										<a href="<?php echo base_url(); ?>pms/pms/DeleteSingleDatatask/<?=$list->task_id ?>" data-toggle="tooltip" title="Delete Employee" onClick="return confirm('Are you sure to delete this Employee Data ? This will delete all the related records on this organization as well.')" title="<?=$list->status;?>" class="btn btn-secondary btn-sm btn-icon icon-left"><i class="fa-trash"></i></a>
+										<a href="javascript:;<?php// echo base_url(); ?>pms/pms/DeleteSingleDatatask/<? //=$list->task_id ?>" data-toggle="tooltip" title="Delete Employee" onClick="return confirm('Are you sure to delete this Employee Data ? This will delete all the related records on this organization as well.')" title="<?=$list->status;?>" class="btn btn-secondary btn-sm btn-icon icon-left"><i class="fa-trash"></i></a>
 										
 									</td>
 								</tr>

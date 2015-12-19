@@ -58,14 +58,28 @@
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label" for="field-1">Estimate Cost</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control"  name="estimate_cost" id="field-1" placeholder="Estimate Cost" value="<?php if(isset($ApplicationProjectList)&& !empty($ApplicationProjectList)) { echo $ApplicationProjectList[0]->estimate_cost; }?>" required >
+									<div class="col-sm-4">
+										<div class="input-group input-group-lg spinner" data-step="1">
+											<span class="input-group-btn">
+												<button class="btn btn-info btn-single" data-type="decrement">-</button>
+											</span>
+												<input type="text" name="estimate_cost" class="form-control text-center no-left-border" value="<?php if(isset($ApplicationProjectList)&& !empty($ApplicationProjectList)) { echo $ApplicationProjectList[0]->estimate_cost; }else{ echo '1'; }?>" readonly />
+											<span class="input-group-btn">
+												<button class="btn btn-info btn-single" data-type="increment">+</button>
+											</span>
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
 									<label class="col-sm-2 control-label" for="field-1">Estimate Effort</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control"  name="estimate_effort" id="field-1" placeholder="Estimate Effort" value="<?php if(isset($ApplicationProjectList)&& !empty($ApplicationProjectList)) { echo $ApplicationProjectList[0]->estimate_effort; }?>" required >
+									<div class="col-sm-4">
+										<div class="input-group input-group-lg spinner" data-step="1">
+											<span class="input-group-btn">
+												<button class="btn btn-info btn-single" data-type="decrement">-</button>
+											</span>
+												<input type="text" name="estimate_effort" class="form-control text-center no-left-border" value="<?php if(isset($ApplicationProjectList)&& !empty($ApplicationProjectList)) { echo $ApplicationProjectList[0]->estimate_effort; }else{ echo '1'; }?>" readonly />
+											<span class="input-group-btn">
+												<button class="btn btn-info btn-single" data-type="increment">+</button>
+											</span>
+										</div>
 									</div>
 								</div>
 								<div class="form-group">

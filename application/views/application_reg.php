@@ -96,7 +96,7 @@
 											<a href="<?php echo base_url(); ?>pms/pms/EmployeeTrackStatus/<?=$list->registration_id ?>"  data-toggle="tooltip" title="Disable Employee Track" onClick="return confirm('Are you sure You Want To Disable Tracking For This Employee.')" class="btn btn-secondary btn-sm btn-icon icon-left" ><i class="fa-close"></i></a>
 										<?php } ?>
 										<a href="<?php echo base_url(); ?>pms/pms/NewRegistration/<?=$list->registration_id ?>" data-toggle="tooltip" title="Edit Employee" class="btn btn-danger btn-sm btn-icon icon-left" ><i class="fa-pencil" ></i> </a>
-										<a href="<?php echo base_url(); ?>pms/pms/DeleteSingleData/<?=$list->registration_id ?>" data-toggle="tooltip" title="Delete Employee" onClick="return confirm('Are you sure to delete this Employee Data ? This will delete all the related records on this organization as well.')" title="<?=$list->status;?>" class="btn btn-secondary btn-sm btn-icon icon-left"><i class="fa-trash"></i></a>
+										<a href="javascript:;" data-toggle="tooltip" title="Delete Employee" onClick="return confirm('Are you sure to delete this Employee Data ? This will delete all the related records on this organization as well.')" title="<?=$list->status;?>" class="btn btn-secondary btn-sm btn-icon icon-left"><i class="fa-trash"></i></a>
 										<?php if($list->status!=='new') { $name=str_replace(' ', '_',$list->name);?>
 										<a href="<?php echo base_url(); ?>pms/pms/excell_location/<?=$list->imei ?>/<?php echo $name;?>"  title="Genrate Tracksheat" data-toggle="modal" data-target="#modal-8" class="btn btn-danger btn-sm btn-icon icon-left"><i class="fa-download"></i></a>
 										<a href="<?php echo base_url(); ?>pms/pms/location_map/<?=$list->imei ?>/<?php echo $name;?>?menu=pms" data-toggle="tooltip" title="Last Location" class="btn btn-secondary btn-sm btn-icon icon-left"><i class="fa-map-marker"></i></a>
@@ -114,4 +114,3 @@
 			</div>
 		</div>
 	</div>
-		
