@@ -501,7 +501,56 @@ class Remoteapi extends CI_Controller{
 		 
 		//header('location:http://junctiondev.cloudapp.net/appmanager/AppmanagerGateway/CheckAuthonticate/'.$value); 
 		//echo $result;  
-	} 
+	}
+
+	function loanRegistration()
+	{
+		$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+		if($CONNECTION!=='')
+		{
+			$data=json_decode($_POST['registration_info']);
+			$query= "select * from loan_registration where emailId='".$data->emailId."'";
+			$sql=mysqli_query($CONNECTION,$query);
+			$counts=mysqli_num_rows($sql);
+			if(count($counts<0))
+			{
+				$query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,phoneNumber) VALUES('".$data->emailId."','".$data->name."','".$data->address."','".$data->mobileNo."','".$data->phoneNumber."')"; //echo $query; die;
+				$sql=mysqli_query($CONNECTION,$query);
+				if($sql)
+				{
+					$result=array(
+							'code'=>200,
+							'meassage'=>'Information Registered Successfully',
+					);
+					print_r(json_encode($result));
+				}
+				else
+				{
+					$result=array(
+							'code'=>400,
+							'meassage'=>'Information Not Registered Successfully',
+					);
+					print_r(json_encode($result));
+				}
+			}
+			else
+			{
+				$result=array(
+						'code'=>200,
+						'meassage'=>'Email Id Already Exist',
+				);
+				print_r(json_encode($result));
+			}
+		}
+		else
+		{
+			$result=array(
+					'code'=>400,
+					'meassage'=>'Database Not Error',
+			);
+			print_r(json_encode($result));
+		}
+	}
 		
 }
 /* End of login controller */
