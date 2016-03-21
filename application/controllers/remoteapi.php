@@ -528,7 +528,7 @@ function loanRegistration()
   			
   		 $result=array(
          'code'=>200,
-         'message'=>'Updation Successfully',
+         'message'=>'Updation Successfully'
          );
      print_r(json_encode($result));
     }
@@ -536,7 +536,7 @@ function loanRegistration()
     {
      $result=array(
          'code'=>400,
-         'message'=>'Updation Failed',
+         'message'=>'Updation Failed'
          );
       print_r(json_encode($result));   
     }
@@ -564,7 +564,7 @@ function loanRegistration()
   			{
   				$result=array(
   						'code'=>200,
-  						'message'=>'Registered Successfully',
+  						'message'=>'Registered Successfully'
   				);
   				print_r(json_encode($result));
   			}
@@ -572,7 +572,7 @@ function loanRegistration()
   			{
   				$result=array(
   						'code'=>400,
-  						'message'=>'Registration Failed',
+  						'message'=>'Registration Failed'
   				);
   				print_r(json_encode($result));
   			}
@@ -581,7 +581,7 @@ function loanRegistration()
   		{
   			$result=array(
   					'code'=>300,
-  					'message'=>'Email Id Already Exist',
+  					'message'=>'Email Id Already Exist'
   			);
   			print_r(json_encode($result));
   		}
@@ -590,7 +590,7 @@ function loanRegistration()
   		{
   			$result=array(
   					'code'=>400,
-  					'message'=>'Error',
+  					'message'=>'Error'
   			);
   			print_r(json_encode($result));
   		}
