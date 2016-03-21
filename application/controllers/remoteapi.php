@@ -509,36 +509,26 @@ function loanRegistration()
   $CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
   if($CONNECTION!=='')
   {
-  	$data2=$_POST['insert_update_status'];
-  	
-  	print_r($data2);die;
-  	
-  	
   	$data1=json_decode($_POST['registration_info'],true);
-  //	$data1=json_decode($_POST['registration_info'],true);
-   $data = $data1['mValues']; 
-   
-   $aa = $data['LoanApp_emailId'];
-   $query= "select * from loan_registration where emailId='$aa'";
-   $sql=mysqli_query($CONNECTION,$query);    
-  
-   $counts=mysqli_num_rows($sql);
-  // print $counts;die;
-   if($counts==0)
-   {
-   	$LoanApp_name =$data['LoanApp_name'];
-   	$LoanApp_address = $data['LoanApp_address'];
-   	$LoanApp_mobileNumber = $data['LoanApp_mobileNumber'];
-   	$LoanApp_panNumber = $data['LoanApp_panNumber'];
-   	
-    $query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,panNumber) VALUES('$aa','$LoanApp_name','$LoanApp_address','$LoanApp_mobileNumber','$LoanApp_panNumber')"; //echo $query; die;
-
-    $sql=mysqli_query($CONNECTION,$query);
-    if($sql)
-    {
-     $result=array(
+  	$data = $data1['mValues'];
+  	$aa = $data['LoanApp_emailId'];
+  	
+  	$status=$_POST['insert_update_status']; 	  	
+  	
+  	if ($status==false){  	
+  		
+  		$LoanApp_name =$data['LoanApp_name'];
+  		$LoanApp_address = $data['LoanApp_address'];
+  		$LoanApp_mobileNumber = $data['LoanApp_mobileNumber'];
+  		$LoanApp_panNumber = $data['LoanApp_panNumber'];
+  		
+  		$sql = "UPDATE loan_registration SET name='$LoanApp_name',address='$LoanApp_address',mobileNo='$LoanApp_mobileNumber',panNumber='$LoanApp_panNumber' WHERE emailId='$aa'";
+  		
+  		if (mysqli_query($CONNECTION,$sql)){
+  			
+  		 $result=array(
          'code'=>200,
-         'message'=>'Registered Successfully',
+         'message'=>'Updation Successfully',
          );
      print_r(json_encode($result));
     }
@@ -546,28 +536,69 @@ function loanRegistration()
     {
      $result=array(
          'code'=>400,
-         'message'=>'Registration Failed',
+         'message'=>'Updation Failed',
          );
       print_r(json_encode($result));   
     }
-   }
-   else
-   {
-    $result=array(
-        'code'=>300,    		
-        'message'=>'Email Id Already Exist',
-       );
-   print_r(json_encode($result));
-   }
-  }
-  else 
-  {
-   $result=array(
-        'code'=>400,
-        'message'=>'Error',
-       );
-   print_r(json_encode($result));
-  }
+  		
+  		
+  		
+  	}else {  		
+  	  		 
+  		
+  		$query= "select * from loan_registration where emailId='$aa'";
+  		$sql=mysqli_query($CONNECTION,$query);
+  		
+  		$counts=mysqli_num_rows($sql);
+  		// print $counts;die;
+  		if($counts==0)
+  		{
+  			$LoanApp_name =$data['LoanApp_name'];
+  			$LoanApp_address = $data['LoanApp_address'];
+  			$LoanApp_mobileNumber = $data['LoanApp_mobileNumber'];
+  			$LoanApp_panNumber = $data['LoanApp_panNumber'];
+  		
+  			$query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,panNumber) VALUES('$aa','$LoanApp_name','$LoanApp_address','$LoanApp_mobileNumber','$LoanApp_panNumber')"; //echo $query; die;
+  		
+  			$sql=mysqli_query($CONNECTION,$query);
+  			if($sql)
+  			{
+  				$result=array(
+  						'code'=>200,
+  						'message'=>'Registered Successfully',
+  				);
+  				print_r(json_encode($result));
+  			}
+  			else
+  			{
+  				$result=array(
+  						'code'=>400,
+  						'message'=>'Registration Failed',
+  				);
+  				print_r(json_encode($result));
+  			}
+  		}
+  		else
+  		{
+  			$result=array(
+  					'code'=>300,
+  					'message'=>'Email Id Already Exist',
+  			);
+  			print_r(json_encode($result));
+  		}
+  		}
+  		else
+  		{
+  			$result=array(
+  					'code'=>400,
+  					'message'=>'Error',
+  			);
+  			print_r(json_encode($result));
+  		}
+  		
+  	}
+  	
+ 
  }
 	
 	function loanApplication()
