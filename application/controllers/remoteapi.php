@@ -625,9 +625,13 @@ function loanRegistration()
 			$counts=mysqli_num_rows($sql);
 			if($counts>0)
 			{
+			$querydata =	mysqli_fetch_array($sql);       
+		
+				$reg_data =array('name'=>$querydata['name'],'emailId'=>$querydata['emailId'],'address'=>$querydata['address'],'mobileNo'=>$querydata['mobileNo'],'panNumber'=>$querydata['panNumber']);
 				$result=array(
 						'code'=>200,
 						'message'=>'Login Successfully',
+						'registration_detail'=>$reg_data
 				);
 				print_r(json_encode($result));
 			}
