@@ -517,7 +517,7 @@ function loanRegistration()
    $counts=mysqli_num_rows($sql);
    if(count($counts<0))
    {
-    $query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,phoneNumber,panNumber) VALUES('".$data->LoanApp_emailId."','".$data->LoanApp_name."','".$data->LoanApp_address."','".$data->mobileNo."','".$data->LoanApp_mobileNumber."','".$data->LoanApp_panNumber."')"; //echo $query; die;
+    $query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,phoneNumber,panNumber) VALUES('".$data->LoanApp_emailId."','".$data->LoanApp_name."','".$data->LoanApp_address."','".$data->mobileNo."','".$data->LoanApp_mobileNumber."','".$data->LoanApp_panNumber."')"; echo $query; die;
     $sql=mysqli_query($CONNECTION,$query);
     if($sql)
     {
