@@ -623,11 +623,11 @@ function loanRegistration()
 			$query= "select * from loan_registration where emailId='".$data->emailId."' and mobileNo='".$data->password."'";
 			$sql=mysqli_query($CONNECTION,$query);
 			$counts=mysqli_num_rows($sql);
-			if(count($counts>0))
+			if($counts>0)
 			{
 				$result=array(
 						'code'=>200,
-						'meassage'=>'Login Successfully',
+						'message'=>'Login Successfully',
 				);
 				print_r(json_encode($result));
 			}
@@ -635,7 +635,7 @@ function loanRegistration()
 			{
 				$result=array(
 						'code'=>400,
-						'meassage'=>'userid and password does not match',
+						'message'=>'userid and password does not match',
 				);
 				print_r(json_encode($result));
 			}
@@ -644,7 +644,7 @@ function loanRegistration()
 		{
 			$result=array(
 					'code'=>400,
-					'meassage'=>'Server Not Error',
+					'message'=>'Server Not Error',
 			);
 			print_r(json_encode($result));
 		}
