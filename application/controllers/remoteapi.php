@@ -515,7 +515,7 @@ function loanRegistration()
   	
   	$status=$_POST['insert_update_status']; 	  	
   	
-  	if ($status==false){  	
+  	if ($status=="false"){  	
   		
   		$LoanApp_name =$data['LoanApp_name'];
   		$LoanApp_address = $data['LoanApp_address'];
