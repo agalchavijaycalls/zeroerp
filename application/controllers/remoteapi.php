@@ -509,7 +509,9 @@ function loanRegistration()
   $CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
   if($CONNECTION!=='')
   {
-   $data=json_decode($_POST['registration_info']);
+   $data1=json_decode($_POST['registration_info']);
+   $data = $data1['mValues'];
+   
    $query= "select * from loan_registration where emailId='".$data->LoanApp_emailId."'";
    $sql=mysqli_query($CONNECTION,$query); 
    $counts=mysqli_num_rows($sql);
