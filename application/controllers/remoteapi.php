@@ -682,6 +682,7 @@ function loanRegistration()
 			}
 		}
 		else
+		
 		{
 			$result=array(
 					'code'=>400,
