@@ -510,9 +510,9 @@ function loanRegistration()
   if($CONNECTION!=='')
   {
    $data1=json_decode($_POST['registration_info']);
-   $data = $data1['mValues'];
+  // $data = $data1['mValues'];
    
-   print_r($data);die;
+   print_r($data1);die;
    
    $query= "select * from loan_registration where emailId='".$data->LoanApp_emailId."'";
    $sql=mysqli_query($CONNECTION,$query); 
