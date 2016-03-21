@@ -620,7 +620,7 @@ function loanRegistration()
 		if($CONNECTION!=='')
 		{
 			$data=json_decode($_POST['login_info']);
-			$query= "select * from loan_registration where emailId='".$data->emailId."' and mobileNo='".$data->mobileNo."'";
+			$query= "select * from loan_registration where emailId='".$data->emailId."' and mobileNo='".$data->password."'";
 			$sql=mysqli_query($CONNECTION,$query);
 			$counts=mysqli_num_rows($sql);
 			if(count($counts>0))
