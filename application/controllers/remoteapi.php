@@ -513,7 +513,8 @@ function loanRegistration()
   //	$data1=json_decode($_POST['registration_info'],true);
    $data = $data1['mValues']; 
    
-   $query= "select * from loan_registration where emailId='".$data->LoanApp_emailId."'";
+   $aa = $data['LoanApp_emailId'];
+   $query= "select * from loan_registration where emailId='$aa'";
    $sql=mysqli_query($CONNECTION,$query); 
    $counts=mysqli_num_rows($sql);
    if(count($counts<0))
