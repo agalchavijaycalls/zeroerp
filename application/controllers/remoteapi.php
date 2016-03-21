@@ -516,6 +516,8 @@ function loanRegistration()
    $aa = $data['LoanApp_emailId'];
    $query= "select * from loan_registration where emailId='$aa'";
    $sql=mysqli_query($CONNECTION,$query); 
+   
+   print $query;die;
    $counts=mysqli_num_rows($sql);
    if(count($counts<0))
    {
