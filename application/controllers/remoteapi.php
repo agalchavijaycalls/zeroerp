@@ -511,7 +511,7 @@ function loanRegistration()
   {
   	$data2=$_POST['insert_update_status'];
   	
-  	print_r($data2['insert_update_status']);die;
+  	print_r($data2);die;
   	
   	
   	$data1=json_decode($_POST['registration_info'],true);
