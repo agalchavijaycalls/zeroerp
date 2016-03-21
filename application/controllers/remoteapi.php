@@ -533,7 +533,7 @@ function loanRegistration()
     {
      $result=array(
          'code'=>200,
-         'message'=>'Information Registered Successfully',
+         'message'=>'Registered Successfully',
          );
      print_r(json_encode($result));
     }
@@ -541,7 +541,7 @@ function loanRegistration()
     {
      $result=array(
          'code'=>400,
-         'message'=>'Not Registered Successfully',
+         'message'=>'Registration Failed',
          );
       print_r(json_encode($result));   
     }
