@@ -512,14 +512,14 @@ function loanRegistration()
    $data1=json_decode($_POST['registration_info'],true);
    $data = $data1['mValues'];
    //$data = 
-   print_r($data);die;
+  // print_r($data);die;
    
    $query= "select * from loan_registration where emailId='".$data->LoanApp_emailId."'";
    $sql=mysqli_query($CONNECTION,$query); 
    $counts=mysqli_num_rows($sql);
    if(count($counts<0))
    {
-    $query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,phoneNumber,panNumber) VALUES('".$data->LoanApp_emailId."','".$data->LoanApp_name."','".$data->LoanApp_address."','".$data->mobileNo."','".$data->LoanApp_mobileNumber."','".$data->LoanApp_panNumber."')"; echo $query; die;
+    $query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,phoneNumber,panNumber) VALUES('".$data->LoanApp_emailId."','".$data->LoanApp_name."','".$data->LoanApp_address."','".$data->mobileNo."','".$data->LoanApp_mobileNumber."','".$data->LoanApp_panNumber."')"; //echo $query; die;
 
     $sql=mysqli_query($CONNECTION,$query);
     if($sql)
