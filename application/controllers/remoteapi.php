@@ -510,15 +510,20 @@ function loanRegistration()
   if($CONNECTION!=='')
   {
    $data1=json_decode($_POST['registration_info'],true);
-   $data = json_decode($data1['mValues'],true);
+   $data = $data1['mValues'];
  
-   
-   $query= "select * from loan_registration where emailId='".$data->LoanApp_emailId."'";
+   $LoanApp_emailId = $data['LoanApp_emailId'];
+   $query= "select * from loan_registration where emailId= '$LoanApp_emailId'";
    $sql=mysqli_query($CONNECTION,$query); 
    $counts=mysqli_num_rows($sql);
    if(count($counts<0))
    {
-    $query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,phoneNumber,panNumber) VALUES('".$data->LoanApp_emailId."','".$data->LoanApp_name."','".$data->LoanApp_address."','".$data->mobileNo."','".$data->LoanApp_mobileNumber."','".$data->LoanApp_panNumber."')"; //echo $query; die;
+   	$LoanApp_name = $data['$LoanApp_name'];
+   	$LoanApp_address = $data['$LoanApp_address'];
+    	$LoanApp_name = $data['$LoanApp_name'];
+//    	$LoanApp_name = $data['$LoanApp_name'];
+   	
+    $query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,panNumber) VALUES('$LoanApp_emailId','$LoanApp_name','$LoanApp_address','".$data->LoanApp_mobileNumber."','".$data->LoanApp_panNumber."')"; //echo $query; die;
 
     $sql=mysqli_query($CONNECTION,$query);
     if($sql)
