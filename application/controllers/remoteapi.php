@@ -518,7 +518,7 @@ function loanRegistration()
    $sql=mysqli_query($CONNECTION,$query);    
   
    $counts=mysqli_num_rows($sql);
-   if(count($counts<0))
+   if(count($counts<=0))
    {
    	$LoanApp_name =$data['LoanApp_name'];
    	$LoanApp_address = $data['LoanApp_address'];
@@ -540,7 +540,7 @@ function loanRegistration()
     {
      $result=array(
          'code'=>400,
-         'message'=>' Not Registered Successfully',
+         'message'=>'Not Registered Successfully',
          );
       print_r(json_encode($result));   
     }
