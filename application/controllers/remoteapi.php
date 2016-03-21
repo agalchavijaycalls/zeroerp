@@ -549,8 +549,7 @@ function loanRegistration()
    else
    {
     $result=array(
-        'code'=>300,
-    		
+        'code'=>300,    		
         'message'=>'Email Id Already Exist',
        );
    print_r(json_encode($result));
