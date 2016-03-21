@@ -503,6 +503,7 @@ class Remoteapi extends CI_Controller{
 		//echo $result;  
 	}
 
+	
 	function loanRegistration()
 	{
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
@@ -546,11 +547,97 @@ class Remoteapi extends CI_Controller{
 		{
 			$result=array(
 					'code'=>400,
-					'meassage'=>'Database Not Error',
+					'meassage'=>'Server Not Error',
 			);
 			print_r(json_encode($result));
 		}
 	}
+	
+	function loanApplication()
+	{
+		$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+		if($CONNECTION!=='')
+		{
+			$data=json_decode($_POST['application_info']);
+			$query= "select * from loanApplication where emailId='".$data->emailId."'";
+			$sql=mysqli_query($CONNECTION,$query);
+			$counts=mysqli_num_rows($sql);
+			if(count($counts>0))
+			{
+				$query= "INSERT INTO loanApplication (emailId,likes,dislike,duration,status,ammount,type,date_time) VALUES('".$data->emailId."','".$data->likes."','".$data->dislike."','".$data->duration."','".$data->status."','".$data->ammount."','".$data->type."')"; //echo $query; die;
+				$sql=mysqli_query($CONNECTION,$query);
+				if($sql)
+				{
+					$result=array(
+							'code'=>200,
+							'meassage'=>'Loan Application Registered Successfully',
+					);
+					print_r(json_encode($result));
+				}
+				else
+				{
+					$result=array(
+							'code'=>400,
+							'meassage'=>'Loan Application Not Registered Successfully',
+					);
+					print_r(json_encode($result));
+				}
+			}
+			else
+			{
+				$result=array(
+						'code'=>200,
+						'meassage'=>'Email Id Already Exist',
+				);
+				print_r(json_encode($result));
+			}
+		}
+		else
+		{
+			$result=array(
+					'code'=>400,
+					'meassage'=>'Server Not Error',
+			);
+			print_r(json_encode($result));
+		}
+	}
+	
+	function loanLogin()
+	{
+		$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+		if($CONNECTION!=='')
+		{
+			$data=json_decode($_POST['login_info']);
+			$query= "select * from loan_registration where emailId='".$data->emailId."' and mobileNo='".$data->mobileNo."'";
+			$sql=mysqli_query($CONNECTION,$query);
+			$counts=mysqli_num_rows($sql);
+			if(count($counts>0))
+			{
+				$result=array(
+						'code'=>200,
+						'meassage'=>'Login Successfully',
+				);
+				print_r(json_encode($result));
+			}
+			else
+			{
+				$result=array(
+						'code'=>400,
+						'meassage'=>'userid and password does not match',
+				);
+				print_r(json_encode($result));
+			}
+		}
+		else
+		{
+			$result=array(
+					'code'=>400,
+					'meassage'=>'Server Not Error',
+			);
+			print_r(json_encode($result));
+		}
+	}
+	
 		
 }
 /* End of login controller */
