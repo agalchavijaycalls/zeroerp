@@ -509,6 +509,11 @@ function loanRegistration()
   $CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
   if($CONNECTION!=='')
   {
+  	$data2=json_decode($_POST['insert_update_status'],true);
+  	
+  	print_r($data2['insert_update_status']);die;
+  	
+  	
   	$data1=json_decode($_POST['registration_info'],true);
   //	$data1=json_decode($_POST['registration_info'],true);
    $data = $data1['mValues']; 
