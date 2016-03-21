@@ -543,8 +543,7 @@ function loanRegistration()
   		
   		
   		
-  	}else {  		
-  	  		 
+  	}else {
   		
   		$query= "select * from loan_registration where emailId='$aa'";
   		$sql=mysqli_query($CONNECTION,$query);
