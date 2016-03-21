@@ -518,6 +518,7 @@ function loanRegistration()
    $sql=mysqli_query($CONNECTION,$query);    
   
    $counts=mysqli_num_rows($sql);
+   print $counts;die;
    if(count($counts<=0))
    {
    	$LoanApp_name =$data['LoanApp_name'];
