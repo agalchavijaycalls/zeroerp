@@ -520,7 +520,7 @@ function loanRegistration()
    {
    	$LoanApp_name = $data['$LoanApp_name'];
    	$LoanApp_address = $data['$LoanApp_address'];
-    	$LoanApp_name = $data['$LoanApp_name'];
+    //	$LoanApp_name = $data['$LoanApp_name'];
 //    	$LoanApp_name = $data['$LoanApp_name'];
    	
     $query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,panNumber) VALUES('$LoanApp_emailId','$LoanApp_name','$LoanApp_address','".$data->LoanApp_mobileNumber."','".$data->LoanApp_panNumber."')"; //echo $query; die;
