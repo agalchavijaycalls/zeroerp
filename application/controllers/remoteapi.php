@@ -626,6 +626,54 @@ function loanRegistration()
  
  
  
+
+ function getLoanApplicationData()
+ {
+ 	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+ 	if($CONNECTION!=='')
+ 	{
+ 		$data1=json_decode($_POST['seekReference_info'],true);
+ 		$data = $data1['mValues'];
+ 
+ 		$LoanApp_emailId = $data['LoanApp_emailId'];
+ 		$LoanApp_dateTime = $data['LoanApp_dateTime'];
+ 		$LoanApp_referMobileNumber =$data['LoanApp_referMobileNumber'];
+ 		$LoanApp_referEmailId = $data['LoanApp_referEmailId'];
+ 			
+ 
+ 		$query="INSERT INTO `seek_reference`(`emailId`, `referalEmailId`, `referalMobileNumber`, `date_time`) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_referMobileNumber','$LoanApp_dateTime')";
+ 
+ 		$sql=mysqli_query($CONNECTION,$query);
+ 
+ 		if($sql)
+ 		{
+ 			$result=array(
+ 					'code'=>200,
+ 					'message'=>'Referal Entry Registered Successfully'
+ 			);
+ 			print_r(json_encode($result));
+ 		}
+ 		else
+ 		{
+ 			$result=array(
+ 					'code'=>400,
+ 					'message'=>'Referal Entry failure'
+ 			);
+ 			print_r(json_encode($result));
+ 		}
+ 
+ 	}
+ 	else
+ 	{
+ 		$result=array(
+ 				'code'=>400,
+ 				'message'=>'Server Not Error'
+ 		);
+ 		print_r(json_encode($result));
+ 	}
+ }
+ 
+ 
  
  
  
