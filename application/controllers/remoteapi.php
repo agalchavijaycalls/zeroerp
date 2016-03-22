@@ -622,6 +622,68 @@ function loanRegistration()
   		print_r(json_encode($result));
  }
 	
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ function seekReference()
+ {
+ 	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+ 	if($CONNECTION!=='')
+ 	{
+ 		$data1=json_decode($_POST['seekReference_info'],true);
+ 		$data = $data1['mValues'];
+ 			
+ 		$LoanApp_emailId = $data['LoanApp_emailId'];
+ 		$LoanApp_dateTime = $data['LoanApp_dateTime'];
+ 		$LoanApp_referMobileNumber =$data['LoanApp_referMobileNumber'];
+ 		$LoanApp_referEmailId = $data['LoanApp_referEmailId'];
+ 		
+ 			
+ 		$query="INSERT INTO `seek_reference`(`emailId`, `referalEmailId`, `referalMobileNumber`, `date_time`) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_referMobileNumber','$LoanApp_dateTime')";
+ 
+ 		$sql=mysqli_query($CONNECTION,$query);
+ 			
+ 		if($sql)
+ 		{
+ 			$result=array(
+ 					'code'=>200,
+ 					'message'=>'Referal Entry Registered Successfully'
+ 			);
+ 			print_r(json_encode($result));
+ 		}
+ 		else
+ 		{
+ 			$result=array(
+ 					'code'=>400,
+ 					'message'=>'Referal Entry failure'
+ 			);
+ 			print_r(json_encode($result));
+ 		}
+ 			
+ 	}
+ 	else
+ 	{
+ 		$result=array(
+ 				'code'=>400,
+ 				'message'=>'Server Not Error'
+ 		);
+ 		print_r(json_encode($result));
+ 	}
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 	function loanApplication()
 	{
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
@@ -638,25 +700,11 @@ function loanRegistration()
 			$LoanApp_like = $data['LoanApp_like'];
 			$LoanApp_dislike = $data['LoanApp_dislike'];
 			$LoanApp_dateTime = $data['LoanApp_dateTime'];			
-					
-		//	print_r($LoanApp_dateTime);die;
 			
-			
-			//	$query= "INSERT INTO loanapplication (emailId,like,dislike,duration,status,ammount,type,date_time) VALUES
-				//('$LoanApp_emailId','$LoanApp_like','$LoanApp_dislike','$LoanApp_duration','$LoanApp_status','$LoanApp_ammount','$LoanApp_type','$LoanApp_dateTime')"; //echo $query; die;
-// 				print_r($query);die;
-				
-			//	$query= "INSERT INTO loanapplication (emailId,like,dislike,duration,status,ammount,type,date_time) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_dislike','$LoanApp_duration','$LoanApp_status','$LoanApp_ammount','$LoanApp_type','$LoanApp_dateTime')"; //echo $query; die;
-				
-				
 				$query="INSERT INTO `loanapplication`(`emailId`, `like`, `dislike`, `duration`, `status`, `ammount`, `type`, `date_time`) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_dislike','$LoanApp_duration','$LoanApp_status','$LoanApp_ammount','$LoanApp_type','$LoanApp_dateTime')";
 				
 				$sql=mysqli_query($CONNECTION,$query);
-				
-					//	print_r($query);die;
-						
-				
-				
+							
 				if($sql)
 				{
 					$result=array(
@@ -716,6 +764,7 @@ function loanRegistration()
 								'referalEmailId'=>$seekData['referalEmailId'],
 								'referalMobileNumber'=>$seekData['referalMobileNumber'],
 								'date_time'=>$seekData['date_time']
+								
 						);
 					}
 					
@@ -740,6 +789,7 @@ function loanRegistration()
 				$referenceSought =array();
 				while($referenceData = mysqli_fetch_array($reference_sql)){
 					$referenceSought[] = array(
+							'myEmailId'=>$data['emailId'],
 							'name'=>$referenceData['name'],
 							'emailId'=>$referenceData['emailId'],
 							'type'=>$referenceData['type'],
