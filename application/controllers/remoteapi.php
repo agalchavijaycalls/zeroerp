@@ -707,7 +707,7 @@ function loanRegistration()
  		
  		
  		if (mysqli_query($CONNECTION,$query)){
- 			$query="INSERT INTO `seek_reference`(`emailId`, `referalEmailId`, `referalMobileNumber`, `date_time`) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_referMobileNumber','$LoanApp_dateTime')";
+ 			$query="INSERT INTO `seek_reference`(`emailId`, `referalEmailId`, `referalMobileNumber`, `date_time`) VALUES('$LoanApp_emailId','$LoanApp_referEmailId','$LoanApp_referMobileNumber','$LoanApp_dateTime')";
  			
  			$sql=mysqli_query($CONNECTION,$query);
  			
