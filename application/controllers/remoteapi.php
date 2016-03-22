@@ -656,6 +656,7 @@ function loanRegistration()
 					//	print_r($query);die;
 						
 				
+				
 				if($sql)
 				{
 					$result=array(
