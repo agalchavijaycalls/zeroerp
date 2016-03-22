@@ -627,7 +627,7 @@ function loanRegistration()
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
 		if($CONNECTION!=='')
 		{
-			$data1=json_decode($_POST['loanApplication_info']);
+			$data1=json_decode($_POST['loanApplication_info'],true);
 			$data = $data1['mValues'];
 			
 			$LoanApp_emailId = $data['LoanApp_emailId'];
