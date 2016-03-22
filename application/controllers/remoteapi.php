@@ -691,6 +691,22 @@ function loanRegistration()
 				$loanAppliedDetail =array();
 				
 				while($loanData = mysqli_fetch_array($loanDetail_sql)){
+					
+					$date_time =$loanData['date_time'];
+					$seek_query= "select * from  seek_reference where emailId='".$data->emailId."' AND date_time='$date_time'";
+					$seek_sql=mysqli_query($CONNECTION,$seek_query);
+					$seekRefObj =array();
+					
+					while($seekData = mysqli_fetch_array($seek_sql)){
+						$seekRefObj[] = array(
+								'referalEmailId'=>$seekData['referalEmailId'],
+								'referalMobileNumber'=>$seekData['referalMobileNumber'],
+								'date_time'=>$seekData['date_time']
+								
+						);
+					}
+					
+					
 					$loanAppliedDetail[] =array(
 							'emailId'=>$loanData['emailId'],
 							'ammount'=>$loanData['ammount'],
@@ -699,7 +715,8 @@ function loanRegistration()
 							'status'=>$loanData['status'],
 							'like'=>$loanData['like'],
 							'dislike'=>$loanData['dislike'],
-							'date_time'=>$loanData['date_time']							
+							'date_time'=>$date_time,
+							'seekReference_detail'=>$seekRefObj							
 					);
 				}
 				
