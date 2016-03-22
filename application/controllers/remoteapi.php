@@ -627,19 +627,27 @@ function loanRegistration()
 		$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
 		if($CONNECTION!=='')
 		{
-			$data=json_decode($_POST['application_info']);
-			$query= "select * from loanApplication where emailId='".$data->emailId."'";
-			$sql=mysqli_query($CONNECTION,$query);
-			$counts=mysqli_num_rows($sql);
-			if(count($counts>0))
-			{
-				$query= "INSERT INTO loanApplication (emailId,likes,dislike,duration,status,ammount,type,date_time) VALUES('".$data->emailId."','".$data->likes."','".$data->dislike."','".$data->duration."','".$data->status."','".$data->ammount."','".$data->type."')"; //echo $query; die;
+			$data1=json_decode($_POST['loanApplication_info']);
+			$data = $data1['mValues'];
+			
+			$LoanApp_emailId = $data['LoanApp_emailId'];
+			$LoanApp_ammount =$data['LoanApp_ammount'];
+			$LoanApp_duration = $data['LoanApp_duration'];
+			$LoanApp_type = $data['LoanApp_type'];
+			$LoanApp_status = $data['LoanApp_status'];
+			$LoanApp_like = $data['LoanApp_like'];
+			$LoanApp_dislike = $data['LoanApp_dislike'];
+			$LoanApp_dateTime = $data['LoanApp_dateTime'];
+			
+					
+				
+				$query= "INSERT INTO loanApplication (emailId,like,dislike,duration,status,ammount,type,date_time) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_dislike','$LoanApp_duration','$LoanApp_status','$LoanApp_ammount','$LoanApp_type,'$LoanApp_dateTime')"; //echo $query; die;
 				$sql=mysqli_query($CONNECTION,$query);
 				if($sql)
 				{
 					$result=array(
 							'code'=>200,
-							'message'=>'Loan Application Registered Successfully',
+							'message'=>'Loan Application Registered Successfully'
 					);
 					print_r(json_encode($result));
 				}
@@ -651,15 +659,7 @@ function loanRegistration()
 					);
 					print_r(json_encode($result));
 				}
-			}
-			else
-			{
-				$result=array(
-						'code'=>200,
-						'message'=>'Email Id Already Exist',
-				);
-				print_r(json_encode($result));
-			}
+			
 		}
 		else
 		{
@@ -720,6 +720,9 @@ function loanRegistration()
 				}
 				
 				$reference_query= "select * from  seek_reference,loanapplication,loan_registration where referalEmailId='".$data->emailId."' AND seek_reference.emailId=loanapplication.emailId AND seek_reference.date_time=loanapplication.date_time AND  loan_registration.emailId=seek_reference.emailId";
+				
+				
+				
 				$reference_sql=mysqli_query($CONNECTION,$reference_query);
 				$referenceSought =array();
 				while($referenceData = mysqli_fetch_array($reference_sql)){
