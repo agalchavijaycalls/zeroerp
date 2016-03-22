@@ -836,8 +836,7 @@ function loanRegistration()
 				$reference_sql=mysqli_query($CONNECTION,$reference_query);
 				$referenceSought =array();
 				while($referenceData = mysqli_fetch_array($reference_sql)){
-					$referenceSought[] = array(
-							'myEmailId'=>$data['emailId'],
+					$referenceSought[] = array(							
 							'name'=>$referenceData['name'],
 							'emailId'=>$referenceData['emailId'],
 							'type'=>$referenceData['type'],
