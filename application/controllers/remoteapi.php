@@ -752,8 +752,7 @@ function loanRegistration()
 				print_r(json_encode($result));
 			}
 			else
-			{
-				$result=array(
+			{				$result=array(
 						'code'=>400,
 						'message'=>'userid and password does not match',
 				);
