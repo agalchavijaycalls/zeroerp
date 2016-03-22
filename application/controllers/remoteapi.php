@@ -632,15 +632,23 @@ function loanRegistration()
  	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
  	if($CONNECTION!=='')
  	{
- 		$data1=json_decode($_POST['seekReference_info'],true);
- 		$data = $data1['mValues'];
+ 		$LoanApp_emailId=$_POST['LoanApp_emailId']; 		
+ 		
  
- 		$LoanApp_emailId = $data['LoanApp_emailId'];
- 		$LoanApp_dateTime = $data['LoanApp_dateTime'];
- 		$LoanApp_referMobileNumber =$data['LoanApp_referMobileNumber'];
- 		$LoanApp_referEmailId = $data['LoanApp_referEmailId'];
+ 		$seek_query= "select * from  seek_reference where emailId='$LoanApp_emailId' AND date_time='$date_time'";
+ 		$seek_sql=mysqli_query($CONNECTION,$seek_query);
+ 		$seekRefObj =array();
  			
- 
+ 		while($seekData = mysqli_fetch_array($seek_sql)){
+ 			$seekRefObj[] = array(
+ 					'referalEmailId'=>$seekData['referalEmailId'],
+ 					'referalMobileNumber'=>$seekData['referalMobileNumber'],
+ 					'date_time'=>$seekData['date_time']
+ 		
+ 			);
+ 		}
+ 		
+ 		
  		$reference_query= "select * from  seek_reference,loanapplication,loan_registration where referalEmailId='".$data->emailId."' AND seek_reference.emailId=loanapplication.emailId AND seek_reference.date_time=loanapplication.date_time AND  loan_registration.emailId=seek_reference.emailId";
 							
 				
@@ -704,9 +712,9 @@ function loanRegistration()
  		$LoanApp_referEmailId = $data['LoanApp_referEmailId'];
  		
  		$query= "select * from loan_registration where emailId='$LoanApp_referEmailId'";
+ 		print mysqli_query($CONNECTION,$query);die;
  		
- 		
- 		if (mysqli_query($CONNECTION,$query)){
+ 		if (mysqli_query($CONNECTION,$query)==true){
  			$query="INSERT INTO `seek_reference`(`emailId`, `referalEmailId`, `referalMobileNumber`, `date_time`) VALUES('$LoanApp_emailId','$LoanApp_referEmailId','$LoanApp_referMobileNumber','$LoanApp_dateTime')";
  			
  			$sql=mysqli_query($CONNECTION,$query);
