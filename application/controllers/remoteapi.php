@@ -685,10 +685,31 @@ function loanRegistration()
 			$querydata =	mysqli_fetch_array($sql);       
 		
 				$reg_data =array('name'=>$querydata['name'],'emailId'=>$querydata['emailId'],'address'=>$querydata['address'],'mobileNo'=>$querydata['mobileNo'],'panNumber'=>$querydata['panNumber']);
+				
+				$loanDetail_query= "select * from  loanapplication where emailId='".$data->emailId."'";
+				$loanDetail_sql=mysqli_query($CONNECTION,$loanDetail_query);				
+				$loanAppliedDetail =array();
+				
+				while($loanData = mysqli_fetch_array($loanDetail_sql)){
+					$loanAppliedDetail[] =array(
+							'emailId'=>$loanData['emailId'],
+							'ammount'=>$loanData['ammount'],
+							'duration'=>$loanData['duration'],
+							'type'=>$loanData['type'],
+							'status'=>$loanData['status'],
+							'like'=>$loanData['like'],
+							'dislike'=>$loanData['dislike'],
+							'date_time'=>$loanData['date_time']							
+					);
+				}
+				
+				
 				$result=array(
 						'code'=>200,
 						'message'=>'Login Successfully',
-						'registration_detail'=>$reg_data
+						'registration_detail'=>$reg_data,
+				'loanApplied_detail'=>$loanAppliedDetail
+						
 				);
 				print_r(json_encode($result));
 			}
