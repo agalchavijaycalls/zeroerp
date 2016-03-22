@@ -760,8 +760,7 @@ function loanRegistration()
 				print_r(json_encode($result));
 			}
 		}
-		else
-		
+		else		
 		{
 			$result=array(
 					'code'=>400,
