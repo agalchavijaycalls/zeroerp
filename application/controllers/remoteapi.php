@@ -641,9 +641,22 @@ function loanRegistration()
  		$LoanApp_referEmailId = $data['LoanApp_referEmailId'];
  			
  
- 		$query="INSERT INTO `seek_reference`(`emailId`, `referalEmailId`, `referalMobileNumber`, `date_time`) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_referMobileNumber','$LoanApp_dateTime')";
- 
- 		$sql=mysqli_query($CONNECTION,$query);
+ 		$reference_query= "select * from  seek_reference,loanapplication,loan_registration where referalEmailId='".$data->emailId."' AND seek_reference.emailId=loanapplication.emailId AND seek_reference.date_time=loanapplication.date_time AND  loan_registration.emailId=seek_reference.emailId";
+							
+				
+				$reference_sql=mysqli_query($CONNECTION,$reference_query);
+				$referenceSought =array();
+				while($referenceData = mysqli_fetch_array($reference_sql)){
+					$referenceSought[] = array(							
+							'name'=>$referenceData['name'],
+							'emailId'=>$referenceData['emailId'],
+							'type'=>$referenceData['type'],
+							'date_time'=>$referenceData['date_time'],
+							'ammount'=>$referenceData['ammount'],
+							'like_dislike_status'=>$referenceData['like_dislike_status']
+					);
+				}
+				
  
  		if($sql)
  		{
@@ -690,27 +703,39 @@ function loanRegistration()
  		$LoanApp_referMobileNumber =$data['LoanApp_referMobileNumber'];
  		$LoanApp_referEmailId = $data['LoanApp_referEmailId'];
  		
+ 		$query= "select * from loan_registration where emailId='$LoanApp_referEmailId'";
+ 		
+ 		
+ 		if (mysqli_query($CONNECTION,$query)){
+ 			$query="INSERT INTO `seek_reference`(`emailId`, `referalEmailId`, `referalMobileNumber`, `date_time`) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_referMobileNumber','$LoanApp_dateTime')";
  			
- 		$query="INSERT INTO `seek_reference`(`emailId`, `referalEmailId`, `referalMobileNumber`, `date_time`) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_referMobileNumber','$LoanApp_dateTime')";
- 
- 		$sql=mysqli_query($CONNECTION,$query);
+ 			$sql=mysqli_query($CONNECTION,$query);
  			
- 		if($sql)
- 		{
- 			$result=array(
- 					'code'=>200,
- 					'message'=>'Referal Entry Registered Successfully'
- 			);
- 			print_r(json_encode($result));
- 		}
- 		else
- 		{
+ 			if($sql)
+ 			{
+ 				$result=array(
+ 						'code'=>200,
+ 						'message'=>'Referal Entry Registered Successfully'
+ 				);
+ 				print_r(json_encode($result));
+ 			}
+ 			else
+ 			{
+ 				$result=array(
+ 						'code'=>400,
+ 						'message'=>'Referal Entry failure'
+ 				);
+ 				print_r(json_encode($result));
+ 			}
+ 		}else {
  			$result=array(
  					'code'=>400,
- 					'message'=>'Referal Entry failure'
+ 					'message'=>'User does not exist'
  			);
  			print_r(json_encode($result));
  		}
+ 		
+ 		
  			
  	}
  	else
