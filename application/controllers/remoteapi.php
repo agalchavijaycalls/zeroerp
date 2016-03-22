@@ -712,9 +712,10 @@ function loanRegistration()
  		$LoanApp_referEmailId = $data['LoanApp_referEmailId'];
  		
  		$query= "select * from loan_registration where emailId='$LoanApp_referEmailId'";
- 		print_r(mysqli_query($CONNECTION,$query));die;
+ 		//print_r(mysqli_query($CONNECTION,$query));die;
+ 		$res = mysqli_query($CONNECTION,$query);
  		
- 		if (mysqli_query($CONNECTION,$query)==true){
+ 		if ($res){
  			$query="INSERT INTO `seek_reference`(`emailId`, `referalEmailId`, `referalMobileNumber`, `date_time`) VALUES('$LoanApp_emailId','$LoanApp_referEmailId','$LoanApp_referMobileNumber','$LoanApp_dateTime')";
  			
  			$sql=mysqli_query($CONNECTION,$query);
