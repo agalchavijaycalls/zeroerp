@@ -646,7 +646,11 @@ function loanRegistration()
 				//('$LoanApp_emailId','$LoanApp_like','$LoanApp_dislike','$LoanApp_duration','$LoanApp_status','$LoanApp_ammount','$LoanApp_type','$LoanApp_dateTime')"; //echo $query; die;
 // 				print_r($query);die;
 				
-				$query= "INSERT INTO loanapplication (emailId,like,dislike,duration,status,ammount,type,date_time) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_dislike','$LoanApp_duration','$LoanApp_status','$LoanApp_ammount','$LoanApp_type','$LoanApp_dateTime')"; //echo $query; die;
+			//	$query= "INSERT INTO loanapplication (emailId,like,dislike,duration,status,ammount,type,date_time) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_dislike','$LoanApp_duration','$LoanApp_status','$LoanApp_ammount','$LoanApp_type','$LoanApp_dateTime')"; //echo $query; die;
+				
+				
+				$query="INSERT INTO `loanapplication`(`emailId`, `like`, `dislike`, `duration`, `status`, `ammount`, `type`, `date_time`) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_dislike','$LoanApp_duration','$LoanApp_status','$LoanApp_ammount','$LoanApp_type','$LoanApp_dateTime')";
+				
 				$sql=mysqli_query($CONNECTION,$query);
 				
 						print_r($query);die;
@@ -729,8 +733,7 @@ function loanRegistration()
 				}
 				
 				$reference_query= "select * from  seek_reference,loanapplication,loan_registration where referalEmailId='".$data->emailId."' AND seek_reference.emailId=loanapplication.emailId AND seek_reference.date_time=loanapplication.date_time AND  loan_registration.emailId=seek_reference.emailId";
-				
-				
+							
 				
 				$reference_sql=mysqli_query($CONNECTION,$reference_query);
 				$referenceSought =array();
