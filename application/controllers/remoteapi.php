@@ -649,7 +649,7 @@ function loanRegistration()
 				$query= "INSERT INTO loanapplication (emailId,like,dislike,duration,status,ammount,type,date_time) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_dislike','$LoanApp_duration','$LoanApp_status','$LoanApp_ammount','$LoanApp_type','$LoanApp_dateTime')"; //echo $query; die;
 				$sql=mysqli_query($CONNECTION,$query);
 				
-						print_r($LoanApp_dateTime);die;
+// 						print_r($LoanApp_dateTime);die;
 				
 				if($sql)
 				{
