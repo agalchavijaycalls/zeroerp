@@ -511,95 +511,115 @@ function loanRegistration()
   {
   	$data1=json_decode($_POST['registration_info'],true);
   	$data = $data1['mValues'];
-  	$aa = $data['LoanApp_emailId'];
+  	
+  	$LoanApp_emailId = $data['LoanApp_emailId'];
+  	$LoanApp_name =$data['LoanApp_name'];
+  	$LoanApp_address = $data['LoanApp_address'];
+  	$LoanApp_mobileNumber = $data['LoanApp_mobileNumber'];
+  	$LoanApp_panNumber = $data['LoanApp_panNumber'];
+  	$code = "";
+  	$message ="";
+  	$result =array();
   	
   	$status=$_POST['insert_update_status']; 	  	
   	
-  	if ($status=="false"){  	
+  	if ($status=="false"){  	  		
   		
-  		$LoanApp_name =$data['LoanApp_name'];
-  		$LoanApp_address = $data['LoanApp_address'];
-  		$LoanApp_mobileNumber = $data['LoanApp_mobileNumber'];
-  		$LoanApp_panNumber = $data['LoanApp_panNumber'];
   		
-  		$sql = "UPDATE loan_registration SET name='$LoanApp_name',address='$LoanApp_address',mobileNo='$LoanApp_mobileNumber',panNumber='$LoanApp_panNumber' WHERE emailId='$aa'";
+  		$sql = "UPDATE loan_registration SET name='$LoanApp_name',address='$LoanApp_address',mobileNo='$LoanApp_mobileNumber',panNumber='$LoanApp_panNumber' WHERE emailId='$LoanApp_emailId'";
   		
   		if (mysqli_query($CONNECTION,$sql)){
   			
-  		 $result=array(
-         'code'=>200,
-         'message'=>'Updation Successfully',
-         );
-     print_r(json_encode($result));
+  			$code = "200";
+  			$message ="Updation Successfully";
+  			
+//   		 $result=array(
+//          'code'=>200,
+//          'message'=>'Updation Successfully',
+//          );
+//      print_r(json_encode($result));
     }
     else
     {
-     $result=array(
-         'code'=>400,
-         'message'=>'Updation Failed',
-         );
-      print_r(json_encode($result));   
+    	$code = "400";
+    	$message ="Updation Failed";
+    	
+//      $result=array(
+//          'code'=>400,
+//          'message'=>'Updation Failed',
+//          );
+//       print_r(json_encode($result));   
     }
   		
   		
   		
-  	}else { 		
-  	  		
-  		
-  		$query= "select * from loan_registration where emailId='$aa'";
+  	}else { 
+  	  	
+  		$query= "select * from loan_registration where emailId='$LoanApp_emailId'";
   		$sql=mysqli_query($CONNECTION,$query);
   		
   		$counts=mysqli_num_rows($sql);
   		// print $counts;die;
   		if($counts==0)
-  		{
-  			$LoanApp_name =$data['LoanApp_name'];
-  			$LoanApp_address = $data['LoanApp_address'];
-  			$LoanApp_mobileNumber = $data['LoanApp_mobileNumber'];
-  			$LoanApp_panNumber = $data['LoanApp_panNumber'];
+  		{  			
   		
-  			$query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,panNumber) VALUES('$aa','$LoanApp_name','$LoanApp_address','$LoanApp_mobileNumber','$LoanApp_panNumber')"; //echo $query; die;
+  			$query= "INSERT INTO loan_registration (emailId,name,address,mobileNo,panNumber) VALUES('$LoanApp_emailId','$LoanApp_name','$LoanApp_address','$LoanApp_mobileNumber','$LoanApp_panNumber')"; //echo $query; die;
   		
   			$sql=mysqli_query($CONNECTION,$query);
   			if($sql)
   			{
-  				$result=array(
-  						'code'=>200,
-  						'message'=>'Registered Successfully',
-  				);
-  				print_r(json_encode($result));
+  				$code = "200";
+  				$message ="Registered Successfully";
+  				
+//   				$result=array(
+//   						'code'=>200,
+//   						'message'=>'Registered Successfully',
+//   				);
+//   				print_r(json_encode($result));
   			}
   			else
   			{
-  				$result=array(
-  						'code'=>400,
-  						'message'=>'Registration Failed',
-  				);
-  				print_r(json_encode($result));
+  				$code = "400";
+  				$message ="Registered Failed";
+  				
+//   				$result=array(
+//   						'code'=>400,
+//   						'message'=>'Registration Failed',
+//   				);
+//   				print_r(json_encode($result));
   			}
   		}
   		else
   		{
-  			$result=array(
-  					'code'=>300,
-  					'message'=>'Email Id Already Exist',
-  			);
-  			print_r(json_encode($result));
+  			$code = "300";
+  			$message ="Email Id Already Exist";
+  			
+//   			$result=array(
+//   					'code'=>300,
+//   					'message'=>'Email Id Already Exist',
+//   			);
+//   			print_r(json_encode($result));
   			
   		}
   		}
   		
   	}else
   		{
-  			$result=array(
-  					'code'=>400,
-  					'message'=>'Error',
-  			);
-  			print_r(json_encode($result));
+  			$code = "400";
+  			$message ="Error";
+  			
+//   			$result=array(
+//   					'code'=>400,
+//   					'message'=>'Error',
+//   			);
+//   			print_r(json_encode($result));
   		}
   		
-  	
- 
+  		$result=array(
+  				'code'=>$code,
+  				'message'=>$message,
+  		);
+  		print_r(json_encode($result));
  }
 	
 	function loanApplication()
