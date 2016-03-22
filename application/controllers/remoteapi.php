@@ -650,6 +650,7 @@ function loanRegistration()
 				$sql=mysqli_query($CONNECTION,$query);
 				
 						print_r($sql);die;
+						
 				
 				if($sql)
 				{
