@@ -641,6 +641,7 @@ function loanRegistration()
 					
 			//print_r($LoanApp_dateTime);die;
 			
+			
 				$query= "INSERT INTO loanApplication (emailId,like,dislike,duration,status,ammount,type,date_time) VALUES('$LoanApp_emailId','$LoanApp_like','$LoanApp_dislike','$LoanApp_duration','$LoanApp_status','$LoanApp_ammount','$LoanApp_type,'$LoanApp_dateTime')"; //echo $query; die;
 				print_r($query);die;
 				
