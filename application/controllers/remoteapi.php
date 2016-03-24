@@ -669,7 +669,7 @@ function loanRegistration()
  					
  				if (mysqli_query($CONNECTION,$Update_seek_reference) ){
  					$res = "seek";
- 				//	print $result;
+ 			
  				}
  				 if (mysqli_query($CONNECTION,$Update_loanapplication)) 
  				 	$res ="loan application";				 	
