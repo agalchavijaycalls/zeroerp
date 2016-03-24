@@ -632,58 +632,51 @@ function loanRegistration()
  	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
  	if($CONNECTION!=='')
  	{
- 		$LoanApp_emailId=$_POST['LoanApp_emailId']; 		
+ 		$emailId=json_decode($_POST['emailId']);
  		
- 
- 		$seek_query= "select * from  seek_reference where emailId='$LoanApp_emailId' AND date_time='$date_time'";
- 		$seek_sql=mysqli_query($CONNECTION,$seek_query);
- 		$seekRefObj =array();
- 			
- 		while($seekData = mysqli_fetch_array($seek_sql)){
- 			$seekRefObj[] = array(
- 					'referalEmailId'=>$seekData['referalEmailId'],
- 					'referalMobileNumber'=>$seekData['referalMobileNumber'],
- 					'date_time'=>$seekData['date_time']
- 		
- 			);
- 		}
- 		
- 		
- 		$reference_query= "select * from  seek_reference,loanapplication,loan_registration where referalEmailId='".$data->emailId."' AND seek_reference.emailId=loanapplication.emailId AND seek_reference.date_time=loanapplication.date_time AND  loan_registration.emailId=seek_reference.emailId";
-							
+ 		$loanDetail_query= "select * from  loanapplication where emailId='$emailId'";
+				$loanDetail_sql=mysqli_query($CONNECTION,$loanDetail_query);				
+				$loanAppliedDetail =array();
 				
-				$reference_sql=mysqli_query($CONNECTION,$reference_query);
-				$referenceSought =array();
-				while($referenceData = mysqli_fetch_array($reference_sql)){
-					$referenceSought[] = array(							
-							'name'=>$referenceData['name'],
-							'emailId'=>$referenceData['emailId'],
-							'type'=>$referenceData['type'],
-							'date_time'=>$referenceData['date_time'],
-							'ammount'=>$referenceData['ammount'],
-							'like_dislike_status'=>$referenceData['like_dislike_status']
-					);
+				while($loanData = mysqli_fetch_array($loanDetail_sql)){
+					
+					$date_time =$loanData['date_time'];
+					$seek_query= "select * from  seek_reference where emailId='$emailId' AND date_time='$date_time'";
+					$seek_sql=mysqli_query($CONNECTION,$seek_query);
+					$seekRefObj =array();
+					
+					while($seekData = mysqli_fetch_array($seek_sql)){
+						$seekRefObj[] = array(
+								'referalEmailId'=>$seekData['referalEmailId'],
+								'referalMobileNumber'=>$seekData['referalMobileNumber'],
+								'date_time'=>$seekData['date_time']
+								
+						);
+					}
+					
+					$loanAppliedDetail[] =array(
+							'emailId'=>$loanData['emailId'],
+							'ammount'=>$loanData['ammount'],
+							'duration'=>$loanData['duration'],
+							'type'=>$loanData['type'],
+							'status'=>$loanData['status'],
+							'like'=>$loanData['like'],
+							'dislike'=>$loanData['dislike'],
+							'date_time'=>$date_time,
+							'seekReference_detail1'=>$seekRefObj							
+					);				
+					
 				}
+				$result=array(
+						'code'=>200,
+						'message'=>'Login Successfully',						
+						'loanApplied_detail'=>$loanAppliedDetail,						
 				
- 
- 		if($sql)
- 		{
- 			$result=array(
- 					'code'=>200,
- 					'message'=>'Referal Entry Registered Successfully'
- 			);
- 			print_r(json_encode($result));
- 		}
- 		else
- 		{
- 			$result=array(
- 					'code'=>400,
- 					'message'=>'Referal Entry failure'
- 			);
- 			print_r(json_encode($result));
- 		}
- 
+				);
+				print_r(json_encode($result));
+ 	
  	}
+ 	
  	else
  	{
  		$result=array(
