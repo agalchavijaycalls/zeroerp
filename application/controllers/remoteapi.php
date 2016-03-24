@@ -623,6 +623,27 @@ function loanRegistration()
  }
 	
  
+ function saveReferenceSoughtData(){
+ 	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+ 	if($CONNECTION!=='')
+ 	{
+ 		
+ 		
+ 		
+ 		
+ 		
+ 	}
+ 	else
+ 	{
+ 		$result=array(
+ 				'code'=>400,
+ 				'message'=>'Server Not Error'
+ 		);
+ 		print_r(json_encode($result));
+ 	}
+ }
+ 
+ 
  function getReferenceSoughtData(){
  	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
  	if($CONNECTION!=='')
@@ -630,8 +651,7 @@ function loanRegistration()
  		$emailId = $_POST['emailId'];
  			
  		$reference_query= "select * from  seek_reference,loanapplication,loan_registration where referalEmailId='$emailId' AND seek_reference.emailId=loanapplication.emailId AND seek_reference.date_time=loanapplication.date_time AND  loan_registration.emailId=seek_reference.emailId";
- 			
- 		
+ 			 		
  		$reference_sql=mysqli_query($CONNECTION,$reference_query);
  		$referenceSought =array();
  		while($referenceData = mysqli_fetch_array($reference_sql)){
@@ -647,6 +667,7 @@ function loanRegistration()
  		
  		$result=array(
  				'code'=>200,
+ 				'message'=>'Reference sought updated successfully',
  				'referenceSought_detail'=>$referenceSought
  		);
  		print_r(json_encode($result));
