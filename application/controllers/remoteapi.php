@@ -626,12 +626,24 @@ function loanRegistration()
  function saveReferenceSoughtData(){
  	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
  	if($CONNECTION!=='')
- 	{
+ 	{ 		
+ 		$emailId = $_POST['emailId'];
+ 		$referralEmailId = $_POST['referralEmailId'];
+ 		$dateTime = $_POST['dateTime'];
+ 		$like_dislike_status = $_POST['like_dislike_status'];
  		
- 		
- 		
- 		
- 		
+ 		$Update="update seek_reference set like_dislike_status='$like_dislike_status' where emailId = '$referralEmailId' and referalEmailId='$emailId' and date_time='$dateTime'";
+ 		 		
+ 		if (mysqli_query($CONNECTION,$Update)){
+ 			$result=array(
+ 					'code'=>200,
+ 					'message'=>'Status updated successfully'
+ 			);
+ 		}else  		
+ 		$result=array(
+ 				'code'=>200,
+ 				'message'=>'Status updation failed'
+ 		);
  	}
  	else
  	{
