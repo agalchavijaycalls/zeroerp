@@ -656,27 +656,28 @@ function loanRegistration()
  					}
  				}else {
  					if ($like_dislike_status=="like")
- 						$totalLike++;
- 					else $totalDislike++;
+ 						$totalLike=1;
+ 					else $totalDislike=1;
  				}
  					
  				
  					
  				$Update_seek_reference ="update seek_reference set like_dislike_status='$like_dislike_status' where emailId = '$referralEmailId' and referalEmailId='$emailId' and date_time='$dateTime'";
  			
- 				$Update_loanapplication ="update loanapplication set like='$totalLike', dislike= '$totalDislike' where emailId = '$referralEmailId' and date_time='$dateTime'";
+ 				$Update_loanapplication ="update loanapplication set like='$totalLike' , dislike= '$totalDislike' where emailId = '$referralEmailId' and date_time='$dateTime'";
  			
  					
-//  				if (mysqli_query($CONNECTION,$Update_seek_reference) ){
-//  					$result = "seek";
-//  				//	print $result;
-//  				}
-//  				 if (mysqli_query($CONNECTION,$Update_loanapplication)) 				 	
+ 				if (mysqli_query($CONNECTION,$Update_seek_reference) ){
+ 					$res = "seek";
+ 				//	print $result;
+ 				}
+ 				 if (mysqli_query($CONNECTION,$Update_loanapplication)) 
+ 				 	$res ="loan application";				 	
 
  				 	if (mysqli_query($CONNECTION,$Update_seek_reference))
  				 	$result=array(
  							'code'=>200,
- 							'message'=>'Status updated successfully'
+ 							'message'=>$res
  					);
  				else
  					$result=array(
