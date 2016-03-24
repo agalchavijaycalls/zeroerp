@@ -630,11 +630,40 @@ function loanRegistration()
  		$emailId = $_POST['emailId'];
  		$referralEmailId = $_POST['referralEmailId'];
  		$dateTime = $_POST['dateTime'];
- 		$like_dislike_status = $_POST['like_dislike_status'];
+ 		$like_dislike_status = $_POST['like_dislike_status'];		
+
+ 		$query= "select * from seek_reference,loanapplication where emailId='$referralEmailId' and date_time='$dateTime' and loanapplication.emailId=seek_reference.emailId";
+ 		$sql=mysqli_query($CONNECTION,$query);
  		
- 		$Update="update seek_reference set like_dislike_status='$like_dislike_status' where emailId = '$referralEmailId' and referalEmailId='$emailId' and date_time='$dateTime'";
- 		 		
- 		if (mysqli_query($CONNECTION,$Update)){
+ 		$fetchRes = mysqli_fetch_array($sql);
+ 		
+ 		$Previous_like_dislike_status = $fetchRes['like_dislike_status'];		
+ 		$totalLike = $fetchRes['like'];
+ 		$totalDislike = $fetchRes['dislike'];
+ 		
+ 		if ($Previous_like_dislike_status=="like"){ 		
+ 			if ($like_dislike_status=="dislike"){
+ 				 				$totalDislike++;
+ 				 				$totalLike--;
+ 		}else if ($Previous_like_dislike_status=="dislike"){ 
+ 			if ($like_dislike_status=="like"){ 			
+ 				$totalLike++;
+ 				$totalDislike--;
+ 			}
+ 		}else {
+ 			if ($like_dislike_status=="like")
+ 				$totalLike++;
+ 			else $totalDislike++;
+ 		}
+ 		
+ 		
+ 		
+ 		$Update_seek_reference ="update seek_reference set like_dislike_status='$like_dislike_status' where emailId = '$referralEmailId' and referalEmailId='$emailId' and date_time='$dateTime'";
+
+ 		$Update_loanapplication ="update loanapplication set like='$totalLike', dislike= '$totalDislike' where emailId = '$emailId' and date_time='$dateTime'";
+ 			
+ 		
+ 		if (mysqli_query($CONNECTION,$Update_seek_reference) && mysqli_query($CONNECTION,$Update_loanapplication)){
  			$result=array(
  					'code'=>200,
  					'message'=>'Status updated successfully'
@@ -653,6 +682,7 @@ function loanRegistration()
  				'message'=>'Server Not Error'
  		);
  		print_r(json_encode($result));
+ 	}
  	}
  }
  
