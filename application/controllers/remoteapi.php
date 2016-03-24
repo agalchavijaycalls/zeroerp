@@ -644,6 +644,7 @@ function loanRegistration()
  				'code'=>200,
  				'message'=>'Status updation failed'
  		);
+ 		print_r(json_encode($result));
  	}
  	else
  	{
