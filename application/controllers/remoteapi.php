@@ -644,7 +644,12 @@ function loanRegistration()
  			$totalLike = $fetchRes['like'];
  			$totalDislike = $fetchRes['dislike'];
  				
- 			if ($Previous_like_dislike_status=="like"){
+ 			
+ 			if ($Previous_like_dislike_status=="0"){
+ 				if ($like_dislike_status=="like")
+ 					$totalLike++;
+ 				else $totalDislike++;
+ 			}else if ($Previous_like_dislike_status=="like"){
  				if ($like_dislike_status=="dislike"){
  					$totalDislike++;
  					$totalLike--;
@@ -654,11 +659,8 @@ function loanRegistration()
  						$totalLike++;
  						$totalDislike--;
  					}
- 				}else {
- 					if ($like_dislike_status=="like")
- 						$totalLike=1;
- 					else $totalDislike=1;
  				}
+ 			
  					
  				
  					
