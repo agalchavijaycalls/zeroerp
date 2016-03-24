@@ -636,6 +636,7 @@ function loanRegistration()
  		$sql=mysqli_query($CONNECTION,$query);
  		
  		$fetchRes = mysqli_fetch_array($sql);
+ 		print_r($fetchRes);die;
  		
  		$Previous_like_dislike_status = $fetchRes['like_dislike_status'];		
  		$totalLike = $fetchRes['like'];
