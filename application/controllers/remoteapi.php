@@ -667,22 +667,23 @@ function loanRegistration()
  				$Update_loanapplication ="update loanapplication set like='$totalLike', dislike= '$totalDislike' where emailId = '$referralEmailId' and date_time='$dateTime'";
  			
  					
- 				if (mysqli_query($CONNECTION,$Update_seek_reference) ){
- 					$result = "seek";
- 					print $result;
- 				}
- 				 if (mysqli_query($CONNECTION,$Update_loanapplication))
- 				 	print "loan application";
-//  					$result=array(
-//  							'code'=>200,
-//  							'message'=>'Status updated successfully'
-//  					);
-//  				else
-//  					$result=array(
-//  							'code'=>200,
-//  							'message'=>'Status updation failed'
-//  					);
- 			//	print_r(json_encode($result));
+//  				if (mysqli_query($CONNECTION,$Update_seek_reference) ){
+//  					$result = "seek";
+//  				//	print $result;
+//  				}
+//  				 if (mysqli_query($CONNECTION,$Update_loanapplication)) 				 	
+
+ 				 	if (mysqli_query($CONNECTION,$Update_seek_reference))
+ 				 	$result=array(
+ 							'code'=>200,
+ 							'message'=>'Status updated successfully'
+ 					);
+ 				else
+ 					$result=array(
+ 							'code'=>200,
+ 							'message'=>'Status updation failed'
+ 					);
+ 				print_r(json_encode($result));
  		}
  		
  	
