@@ -669,8 +669,8 @@ function loanRegistration()
 				}
 				$result=array(
 						'code'=>200,
-						'message'=>'Login Successfully',						
-						'loanApplied_detail'=>$loanAppliedDetail,						
+						'message'=>'Loan detail updated successfully',						
+						'loanApplied_detail'=>$loanAppliedDetail						
 				
 				);
 				print_r(json_encode($result));
