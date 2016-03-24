@@ -635,8 +635,10 @@ function loanRegistration()
  		$query= "select * from seek_reference,loanapplication where emailId='$referralEmailId' and date_time='$dateTime' and loanapplication.emailId=seek_reference.emailId";
  		$sql=mysqli_query($CONNECTION,$query);
  		
- 		if ($fetchRes = mysql_fetch_row($sql)){
- 			print_r($fetchRes);die;
+ 		$counts=mysqli_num_rows($sql);
+ 		if ($counts==1)
+ 		{
+ 			print_r($counts);die;
  				
  			$Previous_like_dislike_status = $fetchRes['like_dislike_status'];
  			$totalLike = $fetchRes['like'];
@@ -679,6 +681,8 @@ function loanRegistration()
  		
  	
  	}
+ 	
+ 	}
  	else
  	{
  		$result=array(
@@ -686,7 +690,6 @@ function loanRegistration()
  				'message'=>'Server Not Error'
  		);
  		print_r(json_encode($result));
- 	}
  	}
  }
  
