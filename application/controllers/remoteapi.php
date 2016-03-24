@@ -664,7 +664,7 @@ function loanRegistration()
  					
  				$Update_seek_reference ="update seek_reference set like_dislike_status='$like_dislike_status' where emailId = '$referralEmailId' and referalEmailId='$emailId' and date_time='$dateTime'";
  			
- 				$Update_loanapplication ="update loanapplication set like='$totalLike', dislike= '$totalDislike' where emailId = '$emailId' and date_time='$dateTime'";
+ 				$Update_loanapplication ="update loanapplication set like='$totalLike', dislike= '$totalDislike' where emailId = '$referralEmailId' and date_time='$dateTime'";
  			
  					
  				if (mysqli_query($CONNECTION,$Update_seek_reference) ){
