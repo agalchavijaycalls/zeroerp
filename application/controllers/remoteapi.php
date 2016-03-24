@@ -648,7 +648,8 @@ function loanRegistration()
  				if ($like_dislike_status=="dislike"){
  					$totalDislike++;
  					$totalLike--;
- 				}else if ($Previous_like_dislike_status=="dislike"){
+ 				}
+ 			}else if ($Previous_like_dislike_status=="dislike"){
  					if ($like_dislike_status=="like"){
  						$totalLike++;
  						$totalDislike--;
@@ -659,7 +660,7 @@ function loanRegistration()
  					else $totalDislike++;
  				}
  					
- 					
+ 				
  					
  				$Update_seek_reference ="update seek_reference set like_dislike_status='$like_dislike_status' where emailId = '$referralEmailId' and referalEmailId='$emailId' and date_time='$dateTime'";
  			
@@ -681,11 +682,11 @@ function loanRegistration()
 //  							'code'=>200,
 //  							'message'=>'Status updation failed'
 //  					);
- 				print_r(json_encode($result));
+ 			//	print_r(json_encode($result));
  		}
  		
  	
- 	}
+ 	
  	
  	}
  	else
