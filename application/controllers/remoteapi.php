@@ -635,7 +635,7 @@ function loanRegistration()
  		$query= "select * from seek_reference,loanapplication where emailId='$referralEmailId' and date_time='$dateTime' and loanapplication.emailId=seek_reference.emailId";
  		$sql=mysqli_query($CONNECTION,$query);
  		
- 		$fetchRes = mysqli_fetch_array($sql);
+ 		$fetchRes = mysql_fetch_row($sql);
  		print_r($fetchRes);die;
  		
  		$Previous_like_dislike_status = $fetchRes['like_dislike_status'];		
