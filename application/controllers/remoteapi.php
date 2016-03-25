@@ -663,6 +663,7 @@ function loanRegistration()
  						$totalDislike--;
  						$totalLike++;
  							
+ 						
  					}
  				}
  			
