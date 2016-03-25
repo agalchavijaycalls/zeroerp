@@ -748,7 +748,53 @@ function loanRegistration()
  	}
  }
  
+function getAdminData(){
+	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+	if($CONNECTION!=='')
+	{
+		$emailId=$_POST['emailId'];
+if ($emailId == "admin@gmail.com"){
 
+	$loanDetail_query= "select * from  loanapplication";
+	$loanDetail_sql=mysqli_query($CONNECTION,$loanDetail_query);
+	$loanAppliedDetail =array();
+	
+	while($loanData = mysqli_fetch_array($loanDetail_sql)){
+		
+		$loanAppliedDetail[] =array(
+				'emailId'=>$loanData['emailId'],
+				'ammount'=>$loanData['ammount'],
+				'duration'=>$loanData['duration'],
+				'type'=>$loanData['type'],
+				'status'=>$loanData['status'],
+				'like'=>$loanData['like'],
+				'dislike'=>$loanData['dislike'],
+				'date_time'=>$loanData['date_time']
+				
+		);
+	
+	}
+	$result=array(
+			'code'=>200,
+			'message'=>'Loan detail fetched successfully',
+			'loanApplied_detail'=>$loanAppliedDetail
+	
+	);
+	print_r(json_encode($result));
+}
+		
+	
+	}
+	
+	else
+	{
+		$result=array(
+				'code'=>400,
+				'message'=>'Server Not Error'
+		);
+		print_r(json_encode($result));
+	}
+}
 
  function getLoanApplicationData()
  {
