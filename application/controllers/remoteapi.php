@@ -648,15 +648,19 @@ function loanRegistration()
  			if ($Previous_like_dislike_status=="0"||$Previous_like_dislike_status=="" ){
  				if ($like_dislike_status=="like")
  					$totalLike++;
- 				else $totalDislike++;
+ 				else if ($like_dislike_status=="dislike")
+ 					$totalDislike++;
+ 			
  			}else if ($Previous_like_dislike_status=="like"){
  				if ($like_dislike_status=="dislike"){
  					$totalDislike++;
+ 					if ($totalLik!="0")
  					$totalLike--;
  				}
  			}else if ($Previous_like_dislike_status=="dislike"){
  					if ($like_dislike_status=="like"){
  						$totalLike++;
+ 						if ($totalDislike!="0")
  						$totalDislike--;
  					}
  				}
