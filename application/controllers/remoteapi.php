@@ -644,26 +644,23 @@ function loanRegistration()
  			$totalLike = $fetchRes['like'];
  			$totalDislike = $fetchRes['dislike'];
  				
- 			if ($Previous_like_dislike_status=="like" || $Previous_like_dislike_status=="dislike"){
- 				if ($like_dislike_status =="like" && $Previous_like_dislike_status=="like");
- 				else if ($like_dislike_status =="like" && $Previous_like_dislike_status=="dislike"){
- 					$totalDislike= $totalDislike-1;
- 					$totalLike =$totalLike+1;
- 				}elseif ($like_dislike_status =="dislike" && $Previous_like_dislike_status=="dislike");
- 				else if ($like_dislike_status =="dislike" && $Previous_like_dislike_status=="like"){
- 					$totalLike =$totalLike-1;
- 					$totalDislike= $totalDislike+1;
- 					
- 				}
+ 			$like ="like";
+ 			$dislike ="dislike";
  			
- 			}else {
- 				if ($like_dislike_status =="like")
- 					$totalLike=1;
- 				else if ($like_dislike_status =="dislike")
- 					$totalDislike =1;
- 			}
- 			
+ 			if (strcmp($like_dislike_status, $like==0) && strcmp($Previous_like_dislike_status, $like==0));
+ 			elseif (strcmp($like_dislike_status, $like==0) && strcmp($Previous_like_dislike_status, $dislike==0)){
+ 				$totalLike++;
+ 				$totalDislike--;
+ 			}elseif (strcmp($like_dislike_status, $dislike==0) && strcmp($Previous_like_dislike_status, $dislike==0));
+ 			elseif (strcmp($like_dislike_status, $dislike==0) && strcmp($Previous_like_dislike_status, $like==0)){
+ 				$totalLike--;
+ 				$totalDislike++;
+ 			}elseif (strcmp($like_dislike_status, $like==0))
+ 					$totalLike++;
+ 			elseif (strcmp($like_dislike_status, $dislike==0))
+ 					$totalDislike++;
  		
+ 			
 //  			if ($Previous_like_dislike_status=="0"||$Previous_like_dislike_status=="" ){
 //  				if ($like_dislike_status=="like")
 //  					$totalLike++;
