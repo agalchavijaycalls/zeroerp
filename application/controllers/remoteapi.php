@@ -649,7 +649,7 @@ function loanRegistration()
  			$like ="like";
  			$dislike ="dislike";
  			
- 			print_r($fetchRes);die;
+ 		//	print_r($fetchRes);die;
  			
  			if (strcmp($like_dislike_status, $like==0)){
 //  				print_r($Previous_like_dislike_status);die;
