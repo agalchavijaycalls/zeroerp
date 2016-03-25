@@ -634,10 +634,8 @@ function loanRegistration()
 
  		$query= "select * from seek_reference,loanapplication where seek_reference.emailId='$referralEmailId' and 	seek_reference.referalEmailId ='$emailId' and seek_reference.date_time='$dateTime' and seek_reference.emailId=loanapplication.emailId and seek_reference.date_time=loanapplication.date_time";
  		$sql=mysqli_query($CONNECTION,$query);
- 		
- 		
- 		
- 		
+ 			
+ 		 		
  		if ($sql)
  		{
  		$fetchRes =	mysqli_fetch_array($sql);
@@ -651,18 +649,18 @@ function loanRegistration()
  			
  		//	print_r($fetchRes);die;
  			
- 			if (strcmp($like_dislike_status, $like==0)){
-//  				print_r($Previous_like_dislike_status);die;
- 				if (strcmp($Previous_like_dislike_status, $like==0));
- 				else if (strcmp($Previous_like_dislike_status, $dislike==0)){
+ 			if (strcmp($like_dislike_status, $like)==0){
+ 				
+ 				if (strcmp($Previous_like_dislike_status, $like)==0);
+ 				else if (strcmp($Previous_like_dislike_status, $dislike)==0){
  					$totalLike++;
  					$totalDislike--;
  				}
  				else $totalLike++;
- 			}else if (strcmp($like_dislike_status, $dislike==0)){
-//  				print_r($Previous_like_dislike_status);die;
- 				if (strcmp($Previous_like_dislike_status, $dislike==0));
- 				else if (strcmp($Previous_like_dislike_status, $like==0)){
+ 			}else if (strcmp($like_dislike_status, $dislike)==0){
+  		//		print_r($Previous_like_dislike_status);die;
+ 				if (strcmp($Previous_like_dislike_status, $dislike)==0);
+ 				else if (strcmp($Previous_like_dislike_status, $like)==0){
  					$totalLike--;
  					$totalDislike++;
  				}
