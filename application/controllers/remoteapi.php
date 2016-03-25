@@ -647,18 +647,37 @@ function loanRegistration()
  			$like ="like";
  			$dislike ="dislike";
  			
- 			if (strcmp($like_dislike_status, $like==0) && strcmp($Previous_like_dislike_status, $like==0));
- 			elseif (strcmp($like_dislike_status, $like==0) && strcmp($Previous_like_dislike_status, $dislike==0)){
- 				$totalLike++;
- 				$totalDislike--;
- 			}elseif (strcmp($like_dislike_status, $dislike==0) && strcmp($Previous_like_dislike_status, $dislike==0));
- 			elseif (strcmp($like_dislike_status, $dislike==0) && strcmp($Previous_like_dislike_status, $like==0)){
- 				$totalLike--;
- 				$totalDislike++;
- 			}elseif (strcmp($like_dislike_status, $like==0))
+ 			
+ 			if (strcmp($like_dislike_status, $like==0)){
+ 				if (strcmp($Previous_like_dislike_status, $like==0));
+ 				else if (strcmp($Previous_like_dislike_status, $dislike==0)){
  					$totalLike++;
- 			elseif (strcmp($like_dislike_status, $dislike==0))
+ 					$totalDislike--;
+ 				}
+ 				else $totalLike++;
+ 			}else if (strcmp($like_dislike_status, $dislike==0)){
+ 				if (strcmp($Previous_like_dislike_status, $dislike==0));
+ 				else if (strcmp($Previous_like_dislike_status, $like==0)){
+ 					$totalLike--;
  					$totalDislike++;
+ 				}
+ 				else $totalDislike++;
+ 			}
+ 			
+ 			
+ 			
+//  			if (strcmp($like_dislike_status, $like==0) && strcmp($Previous_like_dislike_status, $like==0));
+//  			elseif (strcmp($like_dislike_status, $like==0) && strcmp($Previous_like_dislike_status, $dislike==0)){
+//  				$totalLike++;
+//  				$totalDislike--;
+//  			}elseif (strcmp($like_dislike_status, $dislike==0) && strcmp($Previous_like_dislike_status, $dislike==0));
+//  			elseif (strcmp($like_dislike_status, $dislike==0) && strcmp($Previous_like_dislike_status, $like==0)){
+//  				$totalLike--;
+//  				$totalDislike++;
+//  			}elseif (strcmp($like_dislike_status, $like==0))
+//  					$totalLike++;
+//  			elseif (strcmp($like_dislike_status, $dislike==0))
+//  					$totalDislike++;
  		
  			
 //  			if ($Previous_like_dislike_status=="0"||$Previous_like_dislike_status=="" ){
