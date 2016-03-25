@@ -632,7 +632,7 @@ function loanRegistration()
  		$dateTime = $_POST['dateTime'];
  		$like_dislike_status = $_POST['like_dislike_status'];		
 
- 		$query= "select * from seek_reference,loanapplication where seek_reference.emailId='$referralEmailId' and 	seek_reference.referalEmailId ='$emailId' and seek_reference.date_time='$dateTime' and loanapplication.emailId=seek_reference.emailId and seek_reference.date_time=loanapplication.date_time";
+ 		$query= "select * from seek_reference,loanapplication where seek_reference.emailId='$referralEmailId' and 	seek_reference.referalEmailId ='$emailId' and seek_reference.date_time='$dateTime' and seek_reference.emailId=loanapplication.emailId and seek_reference.date_time=loanapplication.date_time";
  		$sql=mysqli_query($CONNECTION,$query);
  		
  		
@@ -649,7 +649,7 @@ function loanRegistration()
  			$like ="like";
  			$dislike ="dislike";
  			
- 			print_r($Previous_like_dislike_status);die;
+ 			print_r($fetchRes);die;
  			
  			if (strcmp($like_dislike_status, $like==0)){
 //  				print_r($Previous_like_dislike_status);die;
