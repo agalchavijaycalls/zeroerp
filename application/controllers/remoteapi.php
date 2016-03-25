@@ -649,6 +649,7 @@ function loanRegistration()
  			
  			
  			if (strcmp($like_dislike_status, $like==0)){
+ 				print_r($Previous_like_dislike_status);die;
  				if (strcmp($Previous_like_dislike_status, $like==0));
  				else if (strcmp($Previous_like_dislike_status, $dislike==0)){
  					$totalLike++;
@@ -656,6 +657,7 @@ function loanRegistration()
  				}
  				else $totalLike++;
  			}else if (strcmp($like_dislike_status, $dislike==0)){
+ 				print_r($Previous_like_dislike_status);die;
  				if (strcmp($Previous_like_dislike_status, $dislike==0));
  				else if (strcmp($Previous_like_dislike_status, $like==0)){
  					$totalLike--;
