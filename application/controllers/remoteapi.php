@@ -657,6 +657,7 @@ function loanRegistration()
  					$totalLike--;
  				}
  			}else if ($Previous_like_dislike_status=="dislike"){
+ 				
  					if ($like_dislike_status=="like"){
  						$totalLike++;
  							$totalDislike--;
