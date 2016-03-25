@@ -644,28 +644,47 @@ function loanRegistration()
  			$totalLike = $fetchRes['like'];
  			$totalDislike = $fetchRes['dislike'];
  				
- 			print_r($Previous_like_dislike_status);die;
- 			if ($Previous_like_dislike_status=="0"||$Previous_like_dislike_status=="" ){
- 				if ($like_dislike_status=="like")
- 					$totalLike++;
- 				else if ($like_dislike_status=="dislike")
- 					$totalDislike++;
- 			
- 			}else if ($Previous_like_dislike_status=="like"){
- 				if ($like_dislike_status=="dislike"){
- 					$totalLike--;
- 					$totalDislike++; 			
+ 			if ($Previous_like_dislike_status=="like" || $Previous_like_dislike_status=="dislike"){
+ 				if ($like_dislike_status =="like" && $Previous_like_dislike_status=="like");
+ 				else if ($like_dislike_status =="like" && $Previous_like_dislike_status=="dislike"){
+ 					$totalDislike= $totalDislike-1;
+ 					$totalLike =$totalLike+1;
+ 				}elseif ($like_dislike_status =="dislike" && $Previous_like_dislike_status=="dislike");
+ 				else if ($like_dislike_status =="dislike" && $Previous_like_dislike_status=="like"){
+ 					$totalLike =$totalLike-1;
+ 					$totalDislike= $totalDislike+1;
  					
  				}
- 			}else if ($Previous_like_dislike_status=="dislike"){
+ 			
+ 			}else {
+ 				if ($like_dislike_status =="like")
+ 					$totalLike=1;
+ 				else if ($like_dislike_status =="dislike")
+ 					$totalDislike =1;
+ 			}
+ 			
+ 		
+//  			if ($Previous_like_dislike_status=="0"||$Previous_like_dislike_status=="" ){
+//  				if ($like_dislike_status=="like")
+//  					$totalLike++;
+//  				else if ($like_dislike_status=="dislike")
+//  					$totalDislike++;
+ 			
+//  			}else if ($Previous_like_dislike_status=="like"){
+//  				if ($like_dislike_status=="dislike"){
+//  					$totalLike--;
+//  					$totalDislike++; 			
+ 					
+//  				}
+//  			}else if ($Previous_like_dislike_status=="dislike"){
  				
- 					if ($like_dislike_status=="like"){
- 						$totalDislike--;
- 						$totalLike++;
+//  					if ($like_dislike_status=="like"){
+//  						$totalDislike--;
+//  						$totalLike++;
  							
  						
- 					}
- 				}
+//  					}
+//  				}
  			
  					
  				
