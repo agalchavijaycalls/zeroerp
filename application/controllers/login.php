@@ -8,13 +8,7 @@ class Login extends CI_Controller {
 		$this->data[]="";
 		$this->data['user_data']="";
 		$this->data['url'] = base_url();
-		$this->load->model('login_model');
-		$this->load->model('organization_model');
-		$this->load->library('parser');
-		$this->load->helper('url');
-		$this->load->library('form_validation');
-		$this->data['base_url']=base_url();
-		$this->load->library('session');
+		
 	}
 	
 	
