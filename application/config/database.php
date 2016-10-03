@@ -57,6 +57,7 @@ $password="";
 $username="root";
 }
 if($_SERVER['HTTP_HOST']=="192.168.1.151"){
+	print_r($_SERVER['HTTP_HOST']);die;
 $dbname='junction_erp';
 $password="initial1$";
 $username="root";	
