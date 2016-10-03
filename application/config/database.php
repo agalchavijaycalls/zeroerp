@@ -62,7 +62,7 @@ $password="initial1$";
 $username="root";	
 }
 
-	
+print_r("hello");die;
 $active_group = 'default';
 $active_record = TRUE;
 
