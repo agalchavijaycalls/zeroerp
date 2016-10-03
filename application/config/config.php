@@ -16,10 +16,10 @@
 */
 if($_SERVER['HTTP_HOST']=="localhost"){
 	$port=$_SERVER['SERVER_PORT'];
-	$config['base_url']	= "http://localhost:$port/zeroerp/";
+	$config['base_url']	= "http://localhost/zeroerp/";
 }
-if($_SERVER['HTTP_HOST']=="junctiondev.cloudapp.net"){
-	$config['base_url']	= 'http://junctiondev.cloudapp.net/zeroerp/';
+if($_SERVER['HTTP_HOST']=="192.168.1.151"){
+	$config['base_url']	= 'http://192.168.1.151/zeroerp/';
 }
 
 

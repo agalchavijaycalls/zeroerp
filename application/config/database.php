@@ -52,13 +52,13 @@
 	//$CI->session->sess_destroy();
 	//echo $database_name;die;
 if($_SERVER['HTTP_HOST']=="localhost"){
-$dbname=$database_name;
+$dbname='junction_erp';
 $password="";
 $username="root";
 }
-if($_SERVER['HTTP_HOST']=="junctiondev.cloudapp.net"){
-$dbname=$database_name;
-$password="bitnami";
+if($_SERVER['HTTP_HOST']=="192.168.1.151"){
+$dbname='junction_erp';
+$password="initial1$";
 $username="root";	
 }
 if($_SERVER['HTTP_HOST']=="junctionerp.com"){
