@@ -45,31 +45,16 @@
 | the active record class
 */
 	
-   /* $CI =& get_instance();
-    $CI->load->library('session'); //if it's not autoloaded in your CI setup
-	$database_name=$CI->session->userdata('db_name');
-	//$CI->session->unset_userdata($database_name);
-	//$CI->session->sess_destroy();
-	//echo $database_name;die;*/
-if($_SERVER['HTTP_HOST']=="localhost"){
-$dbname='junction_erp';
-$password="";
-$username="root";
-}
-if($_SERVER['HTTP_HOST']=="192.168.1.151"){
-$dbname='junction_erp';
-$password="initial1$";
-$username="root";	
-}
+
 
 
 $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = $username;
-$db['default']['password'] = $password;
-$db['default']['database'] = $dbname;
+$db['default']['username'] = 'root';
+$db['default']['password'] = 'initial1$';
+$db['default']['database'] = 'junction_erp';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
