@@ -14,6 +14,8 @@
 | path to your installation.
 |
 */
+print_r("hello");die;
+
 if($_SERVER['HTTP_HOST']=="localhost"){
 	$port=$_SERVER['SERVER_PORT'];
 	$config['base_url']	= "http://localhost/zeroerp/";
