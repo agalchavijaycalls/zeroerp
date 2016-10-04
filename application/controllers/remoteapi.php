@@ -145,6 +145,8 @@ class Remoteapi extends CI_Controller{
 					if($sql)
 					{
 						echo 'Information Registered Successfully';
+					}else{
+						echo mysqli_error($sql);
 					}
 				}
 				else
