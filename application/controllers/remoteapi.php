@@ -171,7 +171,7 @@ class Remoteapi extends CI_Controller{
 	/* Function For Retrive Project List*/
 	function project()
 	{
-		$CONNECTION=mysqli_connect('localhost','root','bitnami',$_POST['database_name']);
+		$CONNECTION=mysqli_connect('localhost','root','initial1$',$_POST['database_name']);
 		if($CONNECTION!=='')
 		{
 			$query= "select * from project";
@@ -225,7 +225,7 @@ class Remoteapi extends CI_Controller{
 	function project_image_update()
 	{
 		//$data=json_decode($_POST['projectData']);
-		$CONNECTION=mysqli_connect("localhost",'root','bitnami',$_POST['database_name']);
+		$CONNECTION=mysqli_connect("localhost",'root','initial1$',$_POST['database_name']);
 		if($CONNECTION)
 		{
 			$sql="select * from project_image where image='".$_FILES['image_name']['name']."'";
@@ -265,7 +265,7 @@ class Remoteapi extends CI_Controller{
 	function project_update()
 	{
 		$data=json_decode($_POST['projectData']);//print_r($data);die;
-		$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->database_name);
+		$CONNECTION=mysqli_connect("localhost",'root','initial1$',$data->database_name);
 		if($CONNECTION)
 		{
 			//$data=json_decode($_POST['projectData']);//print_r($data);die;
@@ -508,7 +508,7 @@ class Remoteapi extends CI_Controller{
 	
 function loanRegistration()
  {
-  $CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+  $CONNECTION=mysqli_connect("localhost",'root','initial1$','appmanager');
   if($CONNECTION!=='')
   {
   	$data1=json_decode($_POST['registration_info'],true);
@@ -626,7 +626,7 @@ function loanRegistration()
 	
  
  function saveReferenceSoughtData(){
- 	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+ 	$CONNECTION=mysqli_connect("localhost",'root','initial1$','appmanager');
  	if($CONNECTION!=='')
  	{ 		
  		$emailId = $_POST['emailId'];
@@ -751,7 +751,7 @@ function loanRegistration()
  
  
  function getReferenceSoughtData(){
- 	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+ 	$CONNECTION=mysqli_connect("localhost",'root','initial1$','appmanager');
  	if($CONNECTION!=='')
  	{
  		$emailId = $_POST['emailId'];
@@ -791,7 +791,7 @@ function loanRegistration()
  }
  
 function getAdminData(){
-	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+	$CONNECTION=mysqli_connect("localhost",'root','initial1$','appmanager');
 	if($CONNECTION!=='')
 	{
 		$emailId=$_POST['emailId'];
@@ -840,7 +840,7 @@ if ($emailId == "admin@gmail.com"){
 
  function getLoanApplicationData()
  {
- 	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+ 	$CONNECTION=mysqli_connect("localhost",'root','initial1$','appmanager');
  	if($CONNECTION!=='')
  	{
  		$emailId=$_POST['emailId'];
@@ -904,7 +904,7 @@ if ($emailId == "admin@gmail.com"){
  
  function seekReference()
  {
- 	$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+ 	$CONNECTION=mysqli_connect("localhost",'root','initial1$','appmanager');
  	if($CONNECTION!=='')
  	{
  		$data1=json_decode($_POST['seekReference_info'],true);
@@ -973,7 +973,7 @@ if ($emailId == "admin@gmail.com"){
  
 	function loanApplication()
 	{
-		$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+		$CONNECTION=mysqli_connect("localhost",'root','initial1$','appmanager');
 		if($CONNECTION!=='')
 		{
 			$data1=json_decode($_POST['loanApplication_info'],true);
@@ -1022,7 +1022,7 @@ if ($emailId == "admin@gmail.com"){
 	
 	function loanLogin()
 	{
-		$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+		$CONNECTION=mysqli_connect("localhost",'root','initial1$','appmanager');
 		if($CONNECTION!=='')
 		{
 			$data=json_decode($_POST['login_info']);
