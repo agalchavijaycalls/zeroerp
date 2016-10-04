@@ -134,7 +134,7 @@ class Remoteapi extends CI_Controller{
 			$count=mysqli_num_rows($sql);
 			if(isset($count) && $count > 0 )
 			{
-				$new_connection=mysqli_connect("localhost",'root','bitnami',$data->employeeOrganizationName);
+				$new_connection=mysqli_connect("localhost",'root','initial1$',$data->employeeOrganizationName);
 				$CheckImeiStatus="select * from newregistration where imei='".$data->employeeIMEI."'";
 				$result=mysqli_query($new_connection,$CheckImeiStatus);
 				$count=mysqli_num_rows($result);
