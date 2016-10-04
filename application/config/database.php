@@ -47,22 +47,27 @@
 	
    /* $CI =& get_instance();
     $CI->load->library('session'); //if it's not autoloaded in your CI setup
-	$database_name=$CI->session->userdata('db_name');
+	$database_name=$CI->session->userdata('db_name');*/
+	$database_name='junction_erp';
 	//$CI->session->unset_userdata($database_name);
 	//$CI->session->sess_destroy();
-	//echo $database_name;die;*/
+	//echo $database_name;die;
 if($_SERVER['HTTP_HOST']=="localhost"){
-$dbname='junction_erp';
+$dbname=$database_name;
 $password="";
 $username="root";
 }
 if($_SERVER['HTTP_HOST']=="192.168.1.151"){
-$dbname='junction_erp';
+$dbname=$database_name;
 $password="initial1$";
 $username="root";	
 }
-
-
+if($_SERVER['HTTP_HOST']=="junctionerp.com"){
+$dbname=$database_name;
+$password="initial";
+$username="junctionerp";
+}
+	
 $active_group = 'default';
 $active_record = TRUE;
 
