@@ -125,7 +125,7 @@ class Remoteapi extends CI_Controller{
 
 	function employeeRegister()
 	{
-		$CONNECTION=mysqli_connect("localhost",'root','bitnami','appmanager');
+		$CONNECTION=mysqli_connect("localhost",'root','initial1$','appmanager');
 		if($CONNECTION!=='')
 		{
 			$data=json_decode($_POST['registration_info']);
