@@ -17,7 +17,7 @@ class Remoteapi extends CI_Controller{
 		{   //print_r($_POST['employeeData']);die;
 			//	redirect('http://junctiondev.cloudapp.net/appmanager/Appmanagergateway/CheckAuthonticate/'.$_POST['employeeData']);
 			//echo 'error';die;
-			$TempConnection=mysqli_connect("localhost",'root','bitnami','appmanager');
+			$TempConnection=mysqli_connect("localhost",'root','initial1$','appmanager');
 			if($TempConnection)
 			{
 				$DatabaseName="select db_name from registered_application where db_name='".$data->employeeOrganizationName."'";
@@ -25,7 +25,7 @@ class Remoteapi extends CI_Controller{
 				$count=mysqli_num_rows($sql); //print_r($count);die;
 				if(isset($count) && $count > 0)
 				{
-					$CONNECTION=mysqli_connect("localhost",'root','bitnami',$data->employeeOrganizationName);
+					$CONNECTION=mysqli_connect("localhost",'root','initial1$',$data->employeeOrganizationName);
 					if($CONNECTION)
 					{
 						foreach ($data->employeeLocationList as $list)
